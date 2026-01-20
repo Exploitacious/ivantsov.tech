@@ -3,22 +3,58 @@ import Layout from "../layouts/Layout.astro";
 
 // This area between the dashes is "Server Side JavaScript".
 // You can fetch data or import components here.
-const socialLinks = [
-	{ title: "GitHub", url: "https://github.com/Exploitacious", icon: "code" },
+const icons = {
+	github: "M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22",
+	briefcase: "M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16 M2 7h20v14H2z",
+	"book-open":
+		"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
+	server: "M2 2h20v8H2z M2 14h20v8H2z M6 6h.01 M6 18h.01",
+	umbrella: "M12 2v20 M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z",
+	heart: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z",
+};
+
+type IconKey = keyof typeof icons;
+
+const donationLink = {
+	title: "Iliana's College Fund",
+	url: "https://www.ugift529.com/gifttpl/ugift/create/viewGiftCodeDetails.cs?ugiftcode=X9V-A82",
+	icon: "heart" as IconKey,
+	subtitle: "Gift a Future. Code: X9V-A82",
+	image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=400",
+};
+
+const familyLink = {
+	title: "Family Media",
+	url: "https://family.ivantsov.tech",
+	icon: "book-open" as IconKey,
+	subtitle: "Photos & Memories",
+	image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=400",
+};
+
+const otherLinks = [
+	{
+		title: "Umbrella IT Group",
+		url: "https://umbrellaitgroup.com",
+		icon: "umbrella" as IconKey,
+		subtitle: "Where to find me",
+	},
+	{
+		title: "GitHub",
+		url: "https://github.com/Exploitacious",
+		icon: "github" as IconKey,
+		subtitle: "Code & Projects",
+	},
 	{
 		title: "LinkedIn",
 		url: "https://www.linkedin.com/in/alex-ivantsov-551a08154/",
-		icon: "briefcase",
-	},
-	{
-		title: "Family Media",
-		url: "https://family.ivantsov.tech",
-		icon: "book-open",
+		icon: "briefcase" as IconKey,
+		subtitle: "Professional Profile",
 	},
 	{
 		title: "Status Page",
 		url: "https://status.ivantsov.tech",
-		icon: "server",
+		icon: "server" as IconKey,
+		subtitle: "System Uptime",
 	},
 ];
 ---
@@ -44,33 +80,154 @@ const socialLinks = [
 				Alex Ivantsov
 			</h1>
 			<p class="text-lg text-slate-400 font-mono">
-				SysAdmin | Operations Manager | Builder
+				SysAdmin | Operations Manager | Father | Builder
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
-			{
-				socialLinks.map((link) => (
-					<a
-						href={link.url}
-						class="group relative overflow-hidden p-6 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20 hover:-translate-y-1"
-					>
-						<div class="flex items-center space-x-4">
-							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-cyan-900/30 transition-colors text-cyan-400">
-								<span class="font-mono text-xl">#</span>
+		<div class="w-full max-w-2xl space-y-8">
+			<!-- Section 1: Donation (Image Left) -->
+			<a
+				href={donationLink.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group relative block"
+			>
+				<div
+					class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"
+				>
+				</div>
+				<div
+					class="relative flex items-center bg-slate-900 rounded-2xl p-4 border border-slate-800 overflow-hidden"
+				>
+					<img
+						src={donationLink.image}
+						alt={donationLink.title}
+						class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover mr-6 shadow-lg"
+					/>
+					<div class="flex-1">
+						<div class="flex items-center gap-3 mb-2">
+							<div
+								class="p-2 rounded-lg bg-slate-800 text-pink-400"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									><path d={icons[donationLink.icon]}
+									></path></svg
+								>
+							</div>
+							<h2
+								class="text-xl md:text-2xl font-bold text-slate-100 group-hover:text-pink-400 transition-colors"
+							>
+								{donationLink.title}
+							</h2>
+						</div>
+						<p
+							class="text-sm md:text-base text-slate-400 leading-relaxed"
+						>
+							{donationLink.subtitle}
+						</p>
+					</div>
+				</div>
+			</a>
+
+			<!-- Section 2: Family (Image Right) -->
+			<a
+				href={familyLink.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group relative block"
+			>
+				<div
+					class="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"
+				>
+				</div>
+				<div
+					class="relative flex items-center bg-slate-900 rounded-2xl p-4 border border-slate-800 overflow-hidden"
+				>
+					<div class="flex-1">
+						<div class="flex items-center gap-3 mb-2">
+							<div
+								class="p-2 rounded-lg bg-slate-800 text-cyan-400"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									><path d={icons[familyLink.icon]}
+									></path></svg
+								>
+							</div>
+							<h2
+								class="text-xl md:text-2xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors"
+							>
+								{familyLink.title}
+							</h2>
+						</div>
+						<p
+							class="text-sm md:text-base text-slate-400 leading-relaxed"
+						>
+							{familyLink.subtitle}
+						</p>
+					</div>
+					<img
+						src={familyLink.image}
+						alt={familyLink.title}
+						class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover ml-6 shadow-lg"
+					/>
+				</div>
+			</a>
+
+			<!-- Section 3: Grid of Other Links -->
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				{
+					otherLinks.map((link) => (
+						<a
+							href={link.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group relative flex items-center p-4 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.15)] hover:-translate-y-1"
+						>
+							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-cyan-950 text-cyan-400 transition-colors mr-4">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path d={icons[link.icon]} />
+								</svg>
 							</div>
 							<div>
-								<h2 class="text-xl font-semibold text-slate-100 group-hover:text-cyan-400 transition-colors">
+								<h2 class="text-lg font-semibold text-slate-100 group-hover:text-cyan-400 transition-colors">
 									{link.title}
 								</h2>
-								<p class="text-sm text-slate-500">
-									Click to visit &rarr;
+								<p class="text-xs text-slate-500 font-mono">
+									{link.subtitle}
 								</p>
 							</div>
-						</div>
-					</a>
-				))
-			}
+						</a>
+					))
+				}
+			</div>
 		</div>
 
 		<footer class="mt-16 text-slate-600 text-sm font-mono">

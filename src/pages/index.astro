@@ -67,7 +67,7 @@ const otherLinks = [
 	>
 		<div class="text-center space-y-4 mb-12 animate-fade-in-down">
 			<div
-				class="relative w-75 h-75 mx-auto rounded-full overflow-hidden border-4 border-slate-800 shadow-xl shadow-cyan-900/20"
+				class="relative w-64 h-64 md:w-72 md:h-72 mx-auto rounded-full overflow-hidden border-4 border-slate-800 shadow-xl shadow-cyan-900/20"
 			>
 				<img
 					src="https://media.licdn.com/dms/image/v2/D4E03AQGZtGkOChCdMw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720008229617?e=1770249600&v=beta&t=kw0zGkRpQK2AUeNYACZYwbebmFTDDDoYpDG8AF0tBMo"
@@ -99,12 +99,12 @@ const otherLinks = [
 				>
 				</div>
 				<div
-					class="relative flex items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
+					class="relative flex flex-col md:flex-row items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
 				>
 					<img
 						src={donationLink.image.src}
 						alt={donationLink.title}
-						class="w-50 h-50 md:w-60 md:h-60 rounded-lg object-cover mr-8 shadow-lg"
+						class="w-48 h-48 md:w-60 md:h-60 rounded-lg object-cover mb-6 md:mb-0 md:mr-8 shadow-lg"
 					/>
 					<div class="flex-1">
 						<div class="flex items-center gap-3 mb-2">
@@ -134,7 +134,7 @@ const otherLinks = [
 				>
 				</div>
 				<div
-					class="relative flex items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
+					class="relative flex flex-col-reverse md:flex-row items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
 				>
 					<div class="flex-1">
 						<div class="flex items-center gap-3 mb-2">
@@ -152,7 +152,7 @@ const otherLinks = [
 					<img
 						src={familyLink.image.src}
 						alt={familyLink.title}
-						class="w-50 h-50 md:w-60 md:h-60 rounded-lg object-cover ml-8 shadow-lg"
+						class="w-48 h-48 md:w-60 md:h-60 rounded-lg object-cover mb-6 md:mb-0 md:ml-8 shadow-lg"
 					/>
 				</div>
 			</a>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ilianaImage from "../assets/images/Iliana.jpg";
 import familyImage from "../assets/images/Family.jpg";
+import profileImage from "../assets/images/Alex.jpg";
 
 // This area between the dashes is "Server Side JavaScript".
 // You can fetch data or import components here.
@@ -21,7 +22,7 @@ const donationLink = {
 	title: "Iliana's College Fund",
 	url: "https://www.ugift529.com/gifttpl/ugift/create/viewGiftCodeDetails.cs?ugiftcode=X9V-A82",
 	subtitle:
-		"Code: <b>X9V-A82</b><br/>Help Iliana reach her dreams! This is a Schwab 529 Education plan and is strictly controlled to only be spent on education-related expenses. We appreciate your generosity and support!",
+		"Code: <b>X9V-A82</b><br/>This is a <b>Schwab 529 Education Plan</b> and it is strictly controlled to only be spent on education-related expenses. Help Iliana reach her dreams! We appreciate your generosity and support!",
 	image: ilianaImage,
 };
 
@@ -29,7 +30,7 @@ const familyLink = {
 	title: "Our Family Media",
 	url: "https://family.ivantsov.tech",
 	subtitle:
-		"Our family's collection of pictures, videos, and memories all in one place. This application is called 'Jellyfin' and you must have a login to access it. If you are a family member and need help accessing, please reach out to me directly.",
+		"Our family's collection of pictures, videos, and memories all in one place. This application is called <b>Jellyfin</b> and you must have a login. If you are a family member and need help, please reach out to me directly.",
 	image: familyImage,
 };
 
@@ -48,7 +49,7 @@ const otherLinks = [
 	},
 	{
 		title: "LinkedIn",
-		url: "https://www.linkedin.com/in/alex-ivantsov-551a08154/",
+		url: "https://www.linkedin.com/in/alex-ivan-sov/",
 		icon: "briefcase" as IconKey,
 		subtitle: "Professional Profile",
 	},
@@ -70,7 +71,7 @@ const otherLinks = [
 				class="relative w-64 h-64 md:w-72 md:h-72 mx-auto rounded-full overflow-hidden border-4 border-slate-800 shadow-xl shadow-cyan-900/20"
 			>
 				<img
-					src="https://media.licdn.com/dms/image/v2/D4E03AQGZtGkOChCdMw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720008229617?e=1770249600&v=beta&t=kw0zGkRpQK2AUeNYACZYwbebmFTDDDoYpDG8AF0tBMo"
+					src={profileImage.src}
 					alt="Profile"
 					class="w-full h-full object-cover"
 				/>
@@ -82,7 +83,7 @@ const otherLinks = [
 				Alex Ivantsov
 			</h1>
 			<p class="text-lg text-slate-400 font-mono">
-				SysAdmin | Operations Manager | Father | Builder
+				Father | Operations Manager | SysAdmin | Builder
 			</p>
 		</div>
 

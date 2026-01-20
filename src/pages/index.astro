@@ -35,7 +35,7 @@ const familyLink = {
 
 const otherLinks = [
 	{
-		title: "Umbrella IT Group",
+		title: "Umbrella IT Solutions",
 		url: "https://umbrellaitgroup.com",
 		icon: "umbrella" as IconKey,
 		subtitle: "Where to find me for work",
@@ -86,16 +86,16 @@ const otherLinks = [
 			</p>
 		</div>
 
-		<div class="w-full max-w-2xl space-y-8">
+		<div class="w-full max-w-2xl space-y-12">
 			<!-- Section 1: Donation (Image Left) -->
 			<a
 				href={donationLink.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="group relative block"
+				class="group relative block transition-transform duration-300 hover:-translate-y-1"
 			>
 				<div
-					class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"
+					class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200"
 				>
 				</div>
 				<div
@@ -109,7 +109,7 @@ const otherLinks = [
 					<div class="flex-1">
 						<div class="flex items-center gap-3 mb-2">
 							<h2
-								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-pink-400 transition-colors"
+								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-purple-400 transition-colors"
 							>
 								{donationLink.title}
 							</h2>
@@ -127,10 +127,10 @@ const otherLinks = [
 				href={familyLink.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="group relative block"
+				class="group relative block transition-transform duration-300 hover:-translate-y-1"
 			>
 				<div
-					class="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500"
+					class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200"
 				>
 				</div>
 				<div
@@ -139,7 +139,7 @@ const otherLinks = [
 					<div class="flex-1">
 						<div class="flex items-center gap-3 mb-2">
 							<h2
-								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors"
+								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-purple-400 transition-colors"
 							>
 								{familyLink.title}
 							</h2>
@@ -165,9 +165,9 @@ const otherLinks = [
 							href={link.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group relative flex items-center p-4 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.15)] hover:-translate-y-1"
+							class="group relative flex items-center p-4 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(168,85,247,0.15)] hover:-translate-y-1"
 						>
-							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-cyan-950 text-cyan-400 transition-colors mr-4">
+							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-purple-950 text-slate-400 group-hover:text-purple-400 transition-colors mr-4">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="20"
@@ -183,7 +183,7 @@ const otherLinks = [
 								</svg>
 							</div>
 							<div>
-								<h2 class="text-lg font-semibold text-slate-100 group-hover:text-cyan-400 transition-colors">
+								<h2 class="text-lg font-semibold text-slate-100 group-hover:text-purple-400 transition-colors">
 									{link.title}
 								</h2>
 								<p class="text-xs text-slate-500 font-mono">

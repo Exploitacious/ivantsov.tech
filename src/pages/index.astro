@@ -165,30 +165,33 @@ const otherLinks = [
 							href={link.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group relative flex items-center p-4 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(168,85,247,0.15)] hover:-translate-y-1"
+							class="group relative block transition-transform duration-300 hover:-translate-y-1"
 						>
-							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-purple-950 text-cyan-400 group-hover:text-purple-400 transition-colors mr-4">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="28"
-									height="28"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d={icons[link.icon]} />
-								</svg>
-							</div>
-							<div>
-								<h2 class="text-lg font-semibold text-slate-100 group-hover:text-purple-400 transition-colors">
-									{link.title}
-								</h2>
-								<p class="text-xs text-slate-500 font-mono">
-									{link.subtitle}
-								</p>
+							<div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200" />
+							<div class="relative flex items-center p-4 rounded-xl bg-slate-900 border border-slate-800">
+								<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-purple-950 text-cyan-400 group-hover:text-purple-400 transition-colors mr-4">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="28"
+										height="28"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path d={icons[link.icon]} />
+									</svg>
+								</div>
+								<div>
+									<h2 class="text-lg font-semibold text-slate-100 group-hover:text-purple-400 transition-colors">
+										{link.title}
+									</h2>
+									<p class="text-xs text-slate-500 font-mono">
+										{link.subtitle}
+									</p>
+								</div>
 							</div>
 						</a>
 					))

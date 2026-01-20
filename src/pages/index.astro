@@ -1,11 +1,97 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// This area between the dashes is "Server Side JavaScript".
+// You can fetch data or import components here.
+const socialLinks = [
+	{ title: "GitHub", url: "https://github.com/Exploitacious", icon: "code" },
+	{
+		title: "LinkedIn",
+		url: "https://www.linkedin.com/in/alex-ivantsov-551a08154/",
+		icon: "briefcase",
+	},
+	{
+		title: "Family Media",
+		url: "https://family.ivantsov.tech",
+		icon: "book-open",
+	},
+	{
+		title: "Status Page",
+		url: "https://status.ivantsov.tech",
+		icon: "server",
+	},
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Ivantsov.tech">
+	<main
+		class="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 font-sans text-slate-200"
+	>
+		<div class="text-center space-y-4 mb-12 animate-fade-in-down">
+			<div
+				class="relative w-75 h-75 mx-auto rounded-full overflow-hidden border-4 border-slate-800 shadow-xl shadow-cyan-900/20"
+			>
+				<img
+					src="https://media.licdn.com/dms/image/v2/D4E03AQGZtGkOChCdMw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720008229617?e=1770249600&v=beta&t=kw0zGkRpQK2AUeNYACZYwbebmFTDDDoYpDG8AF0tBMo"
+					alt="Profile"
+					class="w-full h-full object-cover"
+				/>
+			</div>
+
+			<h1
+				class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600"
+			>
+				Alex Ivantsov
+			</h1>
+			<p class="text-lg text-slate-400 font-mono">
+				SysAdmin | Operations Manager | Builder
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+			{
+				socialLinks.map((link) => (
+					<a
+						href={link.url}
+						class="group relative overflow-hidden p-6 rounded-xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20 hover:-translate-y-1"
+					>
+						<div class="flex items-center space-x-4">
+							<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-cyan-900/30 transition-colors text-cyan-400">
+								<span class="font-mono text-xl">#</span>
+							</div>
+							<div>
+								<h2 class="text-xl font-semibold text-slate-100 group-hover:text-cyan-400 transition-colors">
+									{link.title}
+								</h2>
+								<p class="text-sm text-slate-500">
+									Click to visit &rarr;
+								</p>
+							</div>
+						</div>
+					</a>
+				))
+			}
+		</div>
+
+		<footer class="mt-16 text-slate-600 text-sm font-mono">
+			&copy; {new Date().getFullYear()} Ivantsov.tech
+		</footer>
+	</main>
 </Layout>
+
+<style>
+	/* Simple animation for the load-in */
+	.animate-fade-in-down {
+		animation: fadeInDown 0.8s ease-out;
+	}
+	@keyframes fadeInDown {
+		from {
+			opacity: 0;
+			transform: translateY(-20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>

@@ -1,0 +1,604 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import profileImage from "../assets/images/Alex.jpg";
+
+// ── What I Do cards ──
+const roles = [
+	{
+		title: "Automation & Integration Engineering",
+		body: "I design and build the connective tissue between business tools. Webhook-driven workflows, API integrations, AI-augmented processes, whatever it takes to eliminate manual handoffs and make systems talk to each other. My primary platform is N8n, backed by PowerShell scripting and REST APIs across the entire MSP stack.",
+	},
+	{
+		title: "IT Strategy & Client Engagement",
+		body: "I serve as the strategic IT advisor for our clients, running quarterly business reviews, building technology roadmaps, and translating business goals into actionable IT plans. I also design our sales process, build proposals, and create client-facing materials. The approach is always the same: start with the client's constraints and goals, then draw a direct line from IT to outcomes.",
+	},
+	{
+		title: "Cybersecurity & Compliance",
+		body: "I build and manage compliance programs grounded in real security, not checkbox exercises. My work spans CMMC frameworks, incident response planning, secure configuration management, and security tooling deployment. I care about red team / blue team thinking and making compliance meaningful rather than performative.",
+	},
+	{
+		title: "Operations & Process Design",
+		body: "I architect internal operations from dispatch workflows to change management processes, drawing on Theory of Constraints and continuous improvement principles. The goal is always the same: make the work visible, eliminate bottlenecks, and build systems the team actually follows.",
+	},
+];
+
+// ── Technical Expertise ──
+const skillCategories = [
+	{
+		name: "MSP & Business Stack",
+		sme: [
+			"Autotask PSA",
+			"IT Glue",
+			"ThreatLocker",
+			"Blackpoint SNAP",
+			"Blackpoint Cloud Defense",
+			"Bitdefender EDR",
+			"DNSFilter",
+			"Datto RMM",
+			"CloudFlare DNS",
+			"KnowBe4",
+			"Domotz",
+			"Compliance GRC",
+			"N8n Automations",
+			"NinjaRMM",
+			"Cloud Radial",
+			"Nodeware",
+		],
+		advanced: [
+			"Nerdio Manager",
+			"Proxmox",
+			"ConnectBooster",
+			"VPS/VPC Management",
+		],
+	},
+	{
+		name: "Microsoft 365 & Entra",
+		sme: [
+			"Defender P2 / ATP / Entra ID P2",
+			"Conditional Access",
+			"Entra Domain Services",
+			"Entra ID Administration",
+			"Intune / Endpoint Manager",
+			"Intune MDM",
+			"Exchange Online",
+			"SharePoint / OneDrive",
+			"Teams Administration",
+			"Enterprise App Registration",
+		],
+		advanced: [
+			"Information Protection / DLP",
+		],
+	},
+	{
+		name: "Core Infrastructure",
+		sme: [
+			"Windows Server (2016+)",
+			"Firewall & Gateway Configuration",
+			"DNS Administration",
+			"Hyper-V & Azure Virtualization",
+			"AVD & OnPrem Virtualization",
+			"Active Directory / Group Policy",
+			"Active Directory Hybrid / AADC",
+			"File System & Share Administration (NTFS)",
+			"Windows 10/11 Core SysAdmin",
+			"Unifi Networking",
+			"Meraki Networking",
+		],
+		advanced: [
+			"Linux SysAdmin (Ubuntu / Debian / Major Distros)",
+			"Database Administration",
+		],
+	},
+	{
+		name: "Security & Compliance",
+		sme: [
+			"App Whitelisting & Auto Elevation",
+			"Endpoint Detection & Response",
+			"Compliance Frameworks",
+			"Web Content Filtering",
+			"Incident Response",
+			"Security Hardening",
+		],
+		advanced: [
+			"Security Incident Investigation",
+			"Penetration Testing",
+			"Reverse Engineering",
+			"Threat Hunting",
+		],
+	},
+	{
+		name: "Backup & Disaster Recovery",
+		sme: [
+			"VM Backup & Replication (Altaro/Hornet)",
+			"Cloud Hot Storage (Wasabi)",
+			"SAS Cloud Backup (DropSuite)",
+			"Cloud DR / Replication (Axcient)",
+			"Altaro VM Backup",
+		],
+		advanced: [
+			"Proxmox Backup Server",
+			"Veeam",
+		],
+	},
+	{
+		name: "Voice, Video & Other Verticals",
+		sme: [] as string[],
+		advanced: [
+			"NetSapiens Cloud",
+			"NetSapiens / Yealink Hardware",
+			"Unifi Protect Camera Systems",
+			"UNV NVR Camera Systems",
+			"Teams Voice Integration",
+		],
+	},
+	{
+		name: "Hardware",
+		sme: [
+			"Dell Servers",
+			"Synology & QNAP NAS",
+			"Unifi / Meraki / Networking Hardware",
+			"APC / UPS Systems",
+		],
+		advanced: [] as string[],
+	},
+	{
+		name: "Sales & Client Engagement",
+		sme: [
+			"Quarterly Client Engagement and Retention",
+			"New Client Sales and Onboarding",
+			"Account Management",
+		],
+		advanced: [] as string[],
+	},
+	{
+		name: "AI & Misc",
+		sme: [] as string[],
+		advanced: [
+			"Claude Code",
+			"Cowork",
+			"Gemini",
+			"Chat GPT",
+			"N8n Automations",
+			"OpenCode",
+			"OpenClaw",
+		],
+	},
+];
+
+// ── How I Think ──
+const philosophy = [
+	{
+		headline: "Find the constraint first.",
+		body: "Every system has a bottleneck. The Theory of Constraints teaches that unless you're directly addressing the thing that's actually limiting throughput, every other improvement is an illusion. I apply this to everything: client IT strategy, internal operations, sales conversations, and my own prioritization. The first question is always the same. What's the one thing holding this back?",
+	},
+	{
+		headline: "Make the work visible.",
+		body: "Unplanned work is the silent killer of IT operations. I'm influenced heavily by The Phoenix Project and improvement kata, the idea that every task should be visible, tracked, and intentional. When work is invisible, priorities are imaginary. I build systems and processes that force clarity: what are we doing, why, and what's blocked.",
+	},
+	{
+		headline: "Build when it gives you control. Buy when it saves your sanity.",
+		body: "I'm not dogmatic about building everything in-house. If a vendor solves the problem well and shifts the maintenance burden off my team, that's often the right call. But when control and long-term ROI matter, when the integration layer is the product, I build it myself. The automation platform I've built on N8n exists because no off-the-shelf tool could tie our stack together the way we needed. Knowing when to build and when to buy is one of the most important judgment calls in operations.",
+	},
+];
+
+// ── Highlighted Work ──
+const highlights = [
+	{
+		label: "The Automation Layer",
+		title: "Built an automation platform that replaced our entire integration stack.",
+		body: "I designed and built a workflow engine on N8n that processes PSA ticket webhooks, routes security alerts through conditional logic based on JSON payload structure, enriches ticket data with AI, and syncs billing information across systems. It replaced multiple Zapier workflows, reduced manual intervention, and gave us full control over how our tools communicate. It's not pretty code. It's effective code, and it runs every day without complaint.",
+	},
+	{
+		label: "Constraint-Based Sales",
+		title: "Redesigned our entire sales approach around one question: what's your constraint?",
+		body: 'I rebuilt our sales deck and discovery process around three core business metrics: financial accuracy, operational efficiency, and legal compliance, all anchored by the Theory of Constraints. Instead of leading with a feature list and hoping something sticks, we ask prospects about their business goals and constraints, then draw a direct line from IT to outcomes. It repositioned us from "IT support company" to "strategic business partner" in every conversation.',
+	},
+	{
+		label: "Full-Stack Operations Buildout",
+		title: "Built the operational backbone of a growing MSP from scratch.",
+		body: "SOPs for helpdesk, dispatch, escalation, and project management. Legal frameworks including MSA and services guide. Vendor stack evaluation and deployment, from RMM to PSA to compliance tooling. Technical documentation library. Engineer training programs. Sales process. I didn't inherit a playbook. I wrote one, and then trained the team to run it. Most of it was built solo, under pressure, with shifting priorities. And it works.",
+	},
+];
+---
+
+<Layout
+	title="About — Alex Ivantsov | Operations Manager & Systems Engineer"
+	description="Operations Manager and Systems Engineer specializing in MSP operations, automation, cybersecurity, and IT strategy. Building systems that make technology serve the people who depend on it."
+>
+	<Nav currentPath="/about" />
+
+	<main class="px-6 pt-32 pb-12">
+		<!-- ═══ 1. Hero ═══ -->
+		<section class="max-w-4xl mx-auto mb-16 text-center">
+			<div class="about-fade" style="--delay: 0">
+				<div
+					class="w-44 h-44 mx-auto mb-6 rounded-full overflow-hidden border-2 border-white/10 shadow-lg shadow-cyan-900/10"
+				>
+					<img
+						src={profileImage.src}
+						alt="Alex Ivantsov"
+						class="w-full h-full object-cover"
+					/>
+				</div>
+			</div>
+
+			<div class="about-fade" style="--delay: 80">
+				<h1
+					class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3"
+				>
+					<span class="font-sans text-white">Alex </span><span
+						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400"
+						>Ivantsov</span
+					>
+				</h1>
+			</div>
+
+			<div class="about-fade" style="--delay: 160">
+				<p
+					class="text-lg md:text-xl font-bold text-white/50"
+				>
+					Operations Manager. Systems Engineer. Builder of Things
+					That Work.
+				</p>
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 2. About Me ═══ -->
+		<section class="max-w-3xl mx-auto mb-16">
+			<div class="scroll-reveal">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em] mb-6"
+				>
+					About Me
+				</h2>
+			</div>
+
+			<div class="space-y-5">
+				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+					I've spent my career in the managed services space,
+					where IT meets real business operations. Started out
+					as an engineer solving technical problems, and
+					somewhere along the way I became the person solving
+					business problems with technology.
+				</p>
+				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+					Today I lead operations at a growing MSP. My role
+					crosses engineering, sales, compliance, and strategy,
+					often in the same afternoon. I build the automation
+					workflows that connect our tools, run the client
+					relationships, design the compliance programs, and
+					train the team that delivers it all.
+				</p>
+				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+					I'm not a specialist who goes deep on one thing. I'm
+					a generalist who goes deep on whatever matters most at
+					the time. I've gotten comfortable operating where
+					technical execution meets business strategy, and the
+					work I care about most is finding the constraint: the
+					one thing actually holding an operation back, and
+					solving that before anything else.
+				</p>
+				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+					I think the MSP model is underrated. We sit at the
+					workflow layer, not the feature layer. We see the whole
+					picture: finance, operations, compliance, IT. We can
+					draw direct lines between technology decisions and
+					business outcomes. That perspective shapes everything
+					I do.
+				</p>
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 3. What I Do ═══ -->
+		<section class="max-w-5xl mx-auto mb-16">
+			<div class="scroll-reveal mb-8">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em]"
+				>
+					What I Do
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				{
+					roles.map((role, i) => (
+						<div
+							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6`}
+							style={`--stagger: ${i + 1}`}
+						>
+							<div class="w-8 h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent rounded-full mb-4" />
+							<h3 class="text-sm font-bold text-white/85 mb-3">
+								{role.title}
+							</h3>
+							<p class="text-sm text-white/30 leading-relaxed">
+								{role.body}
+							</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 4. Technical Expertise ═══ -->
+		<section class="max-w-5xl mx-auto mb-16">
+			<div class="scroll-reveal mb-4">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em]"
+				>
+					Technical Expertise
+				</h2>
+			</div>
+
+			<div class="scroll-reveal mb-6">
+				<p class="text-sm text-white/30 mb-3">
+					I operate across a wide technical surface area. Here's
+					where I go deepest.
+				</p>
+				<div
+					class="flex items-center gap-4 text-[0.65rem] text-white/25 font-mono"
+				>
+					<span class="flex items-center gap-1.5">
+						<span
+							class="inline-block w-2.5 h-2.5 rounded-sm bg-cyan-500/20 border border-cyan-500/30"
+						></span>
+						Subject Matter Expert
+					</span>
+					<span class="flex items-center gap-1.5">
+						<span
+							class="inline-block w-2.5 h-2.5 rounded-sm border border-white/15"
+						></span>
+						Advanced
+					</span>
+				</div>
+			</div>
+
+			<div class="space-y-5">
+				{
+					skillCategories.map((cat, i) => (
+						<div
+							class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-5"
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
+						>
+							<h3 class="text-xs font-semibold text-white/50 mb-3">
+								{cat.name}
+							</h3>
+							<div class="flex flex-wrap gap-1.5">
+								{cat.sme.map((skill) => (
+									<span class="px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80">
+										{skill}
+									</span>
+								))}
+								{cat.advanced.map((skill) => (
+									<span class="px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/35">
+										{skill}
+									</span>
+								))}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 5. How I Think ═══ -->
+		<section class="max-w-4xl mx-auto mb-16">
+			<div class="scroll-reveal mb-8">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em]"
+				>
+					How I Think
+				</h2>
+			</div>
+
+			<div class="space-y-8">
+				{
+					philosophy.map((block, i) => (
+						<div
+							class="scroll-reveal from-left border-l-2 border-cyan-500/20 pl-6"
+							style={`--stagger: ${i + 1}`}
+						>
+							<p class="text-lg md:text-xl font-bold text-white/80 mb-3">
+								"{block.headline}"
+							</p>
+							<p class="text-sm text-white/30 leading-relaxed max-w-[42rem]">
+								{block.body}
+							</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 6. Highlighted Work ═══ -->
+		<section class="max-w-4xl mx-auto mb-16">
+			<div class="scroll-reveal mb-8">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em]"
+				>
+					Work I'm Proud Of
+				</h2>
+			</div>
+
+			<div class="space-y-5">
+				{
+					highlights.map((item, i) => (
+						<div
+							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
+							style={`--stagger: ${i + 1}`}
+						>
+							<p class="text-[0.65rem] font-mono text-cyan-400/30 uppercase tracking-[0.2em] mb-2">
+								{item.label}
+							</p>
+							<h3 class="text-base md:text-lg font-bold text-white/80 mb-3">
+								{item.title}
+							</h3>
+							<p class="text-sm text-white/30 leading-relaxed">
+								{item.body}
+							</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
+		></div>
+
+		<!-- ═══ 7. Beyond Work ═══ -->
+		<section class="max-w-4xl mx-auto mb-16">
+			<div class="scroll-reveal mb-6">
+				<h2
+					class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em]"
+				>
+					Beyond Work
+				</h2>
+			</div>
+
+			<div
+				class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6"
+			>
+				<p class="text-sm text-white/35 leading-relaxed">
+					Father first, engineer second. When I'm not building
+					systems or chasing constraints, I'm spending time with
+					my family, tinkering in my home lab, or finding
+					something new to learn. I run a Proxmox server with 18+
+					services because I genuinely enjoy the problem-solving —
+					it doesn't stop being fun just because the workday ends.
+					I'm a lifelong tech nerd who still gets excited about
+					cool hardware, clever automation, and elegant solutions
+					to messy problems.
+				</p>
+			</div>
+		</section>
+
+		<!-- ═══ 8. CTA ═══ -->
+		<section class="scroll-reveal max-w-4xl mx-auto text-center pb-4">
+			<div class="section-divider w-full mb-12"></div>
+			<p class="text-sm text-white/25 mb-5">
+				Want to work together, talk shop, or just say hello?
+			</p>
+			<div class="flex justify-center gap-3 flex-wrap">
+				<a
+					href="mailto:alex@ivantsov.tech"
+					class="btn-magnetic text-sm font-medium bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full"
+				>
+					Get in Touch
+				</a>
+				<a
+					href="/"
+					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/70 hover:text-white px-6 py-2.5 rounded-full"
+				>
+					Back Home
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer
+		class="mt-8 rounded-t-[2.5rem] bg-[#080b11] border-t border-white/[0.03] px-6 py-12"
+	>
+		<div class="max-w-4xl mx-auto">
+			<div
+				class="flex flex-col md:flex-row items-center justify-between gap-6"
+			>
+				<div class="text-center md:text-left">
+					<a
+						href="/"
+						class="text-base font-bold tracking-tight text-white/70 hover:text-white/90 transition-colors"
+						>ivantsov.tech</a
+					>
+					<p class="text-[0.65rem] font-mono text-white/20">
+						&copy; {new Date().getFullYear()} Alex Ivantsov
+					</p>
+				</div>
+				<div
+					class="flex items-center gap-5 text-[0.65rem] font-mono"
+				>
+					<a
+						href="https://github.com/Exploitacious"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-white/20 hover:text-white/50 transition-colors"
+						>GitHub</a
+					>
+					<a
+						href="https://www.linkedin.com/in/alex-ivan-sov/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-white/20 hover:text-white/50 transition-colors"
+						>LinkedIn</a
+					>
+					<span class="text-white/10">|</span>
+					<a
+						href="https://status.ivantsov.tech"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center gap-1.5 text-white/25 hover:text-white/50 transition-colors"
+					>
+						<span class="relative flex h-1.5 w-1.5">
+							<span
+								class="status-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+							></span>
+							<span
+								class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+							></span>
+						</span>
+						Operational
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	.about-fade {
+		opacity: 0;
+		transform: translateY(16px);
+		animation: aboutIn 0.6s ease-out forwards;
+		animation-delay: calc(var(--delay, 0) * 1ms);
+	}
+
+	@keyframes aboutIn {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>
+
+<script>
+	const revealObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("visible");
+				}
+			});
+		},
+		{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
+	);
+
+	document
+		.querySelectorAll(".scroll-reveal, .divider-reveal")
+		.forEach((el) => {
+			revealObserver.observe(el);
+		});
+</script>

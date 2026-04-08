@@ -1,19 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
 import ilianaImage from "../assets/images/Iliana.jpg";
 import familyImage from "../assets/images/Family.jpg";
 import profileImage from "../assets/images/Alex.jpg";
 
-// This area between the dashes is "Server Side JavaScript".
-// You can fetch data or import components here.
 const icons = {
 	github: "M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22",
-	briefcase: "M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16 M2 7h20v14H2z",
+	briefcase:
+		"M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16 M2 7h20v14H2z",
 	"book-open":
 		"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
 	server: "M2 2h20v8H2z M2 14h20v8H2z M6 6h.01 M6 18h.01",
-	umbrella: "M12 2v20 M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z",
+	umbrella:
+		"M12 2v20 M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z",
 	heart: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z",
+	arrowUpRight: "M7 17L17 7M17 7H7M17 7V17",
+	chevronDown: "M6 9l6 6 6-6",
+	mail: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
 };
 
 type IconKey = keyof typeof icons;
@@ -22,7 +26,7 @@ const donationLink = {
 	title: "Iliana's College Fund",
 	url: "https://www.ugift529.com/gifttpl/ugift/create/viewGiftCodeDetails.cs?ugiftcode=X9V-A82",
 	subtitle:
-		"Code: <b>X9V-A82</b><br/>This is a <b>Schwab 529 Education Plan</b> and it is strictly controlled to only be spent on education-related expenses. Help Iliana reach her dreams! We appreciate your generosity and support!",
+		'Code: <b>X9V-A82</b><br/>This is a <b>Schwab 529 Education Plan</b> and it is strictly controlled to only be spent on education-related expenses. Help Iliana reach her dreams! We appreciate your generosity and support!',
 	image: ilianaImage,
 };
 
@@ -34,191 +38,587 @@ const familyLink = {
 	image: familyImage,
 };
 
-const otherLinks = [
+const connectLinks = [
 	{
 		title: "Umbrella IT Solutions",
 		url: "https://umbrellaitgroup.com",
 		icon: "umbrella" as IconKey,
 		subtitle: "Where to find me for work",
+		domain: "umbrellaitgroup.com",
 	},
 	{
 		title: "My GitHub",
 		url: "https://github.com/Exploitacious",
 		icon: "github" as IconKey,
-		subtitle: "MSP Resources and Personal Projects",
+		subtitle: "MSP Resources & Personal Projects",
+		domain: "github.com/Exploitacious",
 	},
 	{
 		title: "LinkedIn",
 		url: "https://www.linkedin.com/in/alex-ivan-sov/",
 		icon: "briefcase" as IconKey,
 		subtitle: "Professional Profile",
+		domain: "linkedin.com",
 	},
 	{
 		title: "Current Status",
 		url: "https://status.ivantsov.tech",
 		icon: "server" as IconKey,
 		subtitle: "Ivantsov.tech Status & Uptime",
+		domain: "status.ivantsov.tech",
 	},
 ];
 ---
 
 <Layout title="Ivantsov.tech">
-	<main
-		class="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 font-sans text-slate-200"
-	>
-		<div class="text-center space-y-4 mb-12 animate-fade-in-down">
+	<Nav currentPath="/" />
+
+	<main>
+		<!-- ─── Hero ─── -->
+		<section
+			id="hero"
+			class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden"
+		>
+			<!-- Animated gradient orbs -->
 			<div
-				class="relative w-64 h-64 md:w-72 md:h-72 mx-auto rounded-full overflow-hidden border-4 border-slate-800 shadow-xl shadow-cyan-900/20"
+				class="orb absolute top-[15%] left-[20%] w-[28rem] h-[28rem] rounded-full bg-cyan-500/[0.05] blur-[100px]"
 			>
-				<img
-					src={profileImage.src}
-					alt="Profile"
-					class="w-full h-full object-cover"
-				/>
+			</div>
+			<div
+				class="orb absolute bottom-[20%] right-[15%] w-[22rem] h-[22rem] rounded-full bg-blue-500/[0.04] blur-[80px]"
+				style="animation-delay: -7s"
+			>
 			</div>
 
-			<h1
-				class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600"
+			<div
+				class="relative z-10 flex flex-col items-center text-center max-w-3xl"
 			>
-				Alex Ivantsov
-			</h1>
-			<p class="text-lg text-slate-400 font-mono">
-				Father | Operations Manager | SysAdmin | Builder
-			</p>
+				<!-- Profile -->
+				<div class="hero-animate mb-5" style="--delay: 200">
+					<div
+						class="relative w-56 h-56 md:w-64 md:h-64 rounded-full glow-ring overflow-hidden"
+					>
+						<div
+							class="absolute -inset-3 rounded-full bg-gradient-to-br from-cyan-500/15 to-blue-600/8 blur-2xl"
+						>
+						</div>
+						<img
+							src={profileImage.src}
+							alt="Alex Ivantsov"
+							class="relative w-full h-full rounded-full object-cover border-2 border-white/10 shadow-2xl"
+						/>
+					</div>
+				</div>
+
+				<!-- Currently pill -->
+				<div class="hero-animate mb-6" style="--delay: 350">
+					<div
+						class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06]"
+					>
+						<span class="relative flex h-1.5 w-1.5">
+							<span
+								class="status-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+							></span>
+							<span
+								class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+							></span>
+						</span>
+						<span
+							class="text-[0.65rem] font-mono text-white/35"
+							>Operations Manager @ Umbrella IT</span
+						>
+					</div>
+				</div>
+
+				<!-- Name -->
+				<div class="hero-animate" style="--delay: 500">
+					<h1
+						class="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[0.95] mb-4"
+					>
+						<span class="font-sans text-white">Alex</span>
+						<br />
+						<span
+							class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400"
+						>
+							Ivantsov
+						</span>
+					</h1>
+				</div>
+
+				<!-- Tagline -->
+				<div class="hero-animate mb-8" style="--delay: 650">
+					<p
+						class="text-[0.7rem] md:text-xs font-mono text-white/30 tracking-[0.25em] uppercase"
+					>
+						Father &middot; Operations Manager &middot; SysAdmin
+						&middot; Builder
+					</p>
+				</div>
+
+				<!-- CTAs -->
+				<div class="hero-animate flex gap-3" style="--delay: 800">
+					<a
+						href="#featured"
+						class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/70 hover:text-white px-6 py-2.5 rounded-full"
+					>
+						Explore
+					</a>
+					<a
+						href="mailto:alex@ivantsov.tech"
+						class="btn-magnetic text-sm font-medium bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full inline-flex items-center gap-2"
+					>
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d={icons.mail}></path>
+						</svg>
+						Get in Touch
+					</a>
+				</div>
+			</div>
+
+			<!-- Scroll hint -->
+			<div
+				class="absolute bottom-6 left-1/2 -translate-x-1/2 hero-animate"
+				style="--delay: 1200"
+			>
+				<div class="scroll-indicator text-white/20">
+					<svg
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d={icons.chevronDown}></path>
+					</svg>
+				</div>
+			</div>
+		</section>
+
+		<div
+			class="section-divider divider-reveal mx-auto w-full max-w-5xl"
+		>
 		</div>
 
-		<div class="w-full max-w-2xl space-y-12">
-			<!-- Section 1: Donation (Image Left) -->
-			<a
-				href={donationLink.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="group relative block transition-transform duration-300 hover:-translate-y-1"
-			>
-				<div
-					class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200"
-				>
+		<!-- ─── Featured ─── -->
+		<section id="featured" class="relative py-12 md:py-16 px-6">
+			<div class="max-w-4xl mx-auto">
+				<div class="scroll-reveal mb-8">
+					<p
+						class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em] mb-3"
+					>
+						Featured
+					</p>
+					<h2
+						class="text-3xl md:text-4xl font-bold tracking-tight"
+					>
+						What <span
+							class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+							>matters</span
+						> most.
+					</h2>
 				</div>
-				<div
-					class="relative flex flex-col md:flex-row items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
-				>
-					<img
-						src={donationLink.image.src}
-						alt={donationLink.title}
-						class="w-48 h-48 md:w-60 md:h-60 rounded-lg object-cover mb-6 md:mb-0 md:mr-8 shadow-lg"
-					/>
-					<div class="flex-1">
-						<div class="flex items-center gap-3 mb-2">
-							<h2
-								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-purple-400 transition-colors"
-							>
-								{donationLink.title}
-							</h2>
-						</div>
-						<p
-							class="text-base md:text-lg text-slate-400 leading-relaxed"
-							set:html={donationLink.subtitle}
-						/>
-					</div>
-				</div>
-			</a>
 
-			<!-- Section 2: Family (Image Right) -->
-			<a
-				href={familyLink.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="group relative block transition-transform duration-300 hover:-translate-y-1"
-			>
-				<div
-					class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200"
-				>
-				</div>
-				<div
-					class="relative flex flex-col-reverse md:flex-row items-center bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-800 overflow-hidden"
-				>
-					<div class="flex-1">
-						<div class="flex items-center gap-3 mb-2">
-							<h2
-								class="text-2xl md:text-3xl font-bold text-slate-100 group-hover:text-purple-400 transition-colors"
-							>
-								{familyLink.title}
-							</h2>
-						</div>
-						<p
-							class="text-base md:text-lg text-slate-400 leading-relaxed"
-							set:html={familyLink.subtitle}
-						/>
-					</div>
-					<img
-						src={familyLink.image.src}
-						alt={familyLink.title}
-						class="w-48 h-48 md:w-60 md:h-60 rounded-lg object-cover mb-6 md:mb-0 md:ml-8 shadow-lg"
-					/>
-				</div>
-			</a>
-
-			<!-- Section 3: Grid of Other Links -->
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-				{
-					otherLinks.map((link) => (
-						<a
-							href={link.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="group relative block transition-transform duration-300 hover:-translate-y-1"
+				<div class="space-y-5">
+					<!-- Iliana's College Fund -->
+					<a
+						href={donationLink.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="scroll-reveal from-left card-hover card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						style="--stagger: 1"
+					>
+						<div
+							class="flex flex-col md:flex-row items-center p-5 md:p-8 gap-5 md:gap-8"
 						>
-							<div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-xl blur opacity-20 group-hover:opacity-75 transition duration-500 group-hover:duration-200" />
-							<div class="relative flex items-center p-4 rounded-xl bg-slate-900 border border-slate-800">
-								<div class="p-3 rounded-lg bg-slate-800 group-hover:bg-purple-950 text-cyan-400 group-hover:text-purple-400 transition-colors mr-4">
+							<div
+								class="relative w-full md:w-56 lg:w-64 h-52 md:h-60 shrink-0 rounded-2xl overflow-hidden"
+							>
+								<img
+									src={donationLink.image.src}
+									alt={donationLink.title}
+									data-parallax="0.04"
+									class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+								/>
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-[#0f1420]/50 to-transparent"
+								>
+								</div>
+							</div>
+							<div class="flex-1 min-w-0">
+								<div
+									class="flex items-center gap-2.5 mb-3"
+								>
+									<div
+										class="w-7 h-7 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"
+									>
+										<svg
+											width="13"
+											height="13"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="text-cyan-400"
+										>
+											<path d={icons.heart}
+											></path>
+										</svg>
+									</div>
+									<h3
+										class="text-lg md:text-xl font-bold text-white/90 group-hover:text-cyan-300 transition-colors truncate"
+									>
+										{donationLink.title}
+									</h3>
 									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="28"
-										height="28"
+										width="15"
+										height="15"
 										viewBox="0 0 24 24"
 										fill="none"
 										stroke="currentColor"
 										stroke-width="2"
 										stroke-linecap="round"
 										stroke-linejoin="round"
+										class="shrink-0 text-white/15 group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+									>
+										<path
+											d={icons.arrowUpRight}
+										></path>
+									</svg>
+								</div>
+								<p
+									class="text-sm text-white/35 leading-relaxed [&_b]:text-white/60 [&_b]:font-medium"
+									set:html={donationLink.subtitle}
+								/>
+							</div>
+						</div>
+					</a>
+
+					<!-- Family Media -->
+					<a
+						href={familyLink.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="scroll-reveal from-right card-hover card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						style="--stagger: 2"
+					>
+						<div
+							class="flex flex-col-reverse md:flex-row items-center p-5 md:p-8 gap-5 md:gap-8"
+						>
+							<div class="flex-1 min-w-0">
+								<div
+									class="flex items-center gap-2.5 mb-3"
+								>
+									<div
+										class="w-7 h-7 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"
+									>
+										<svg
+											width="13"
+											height="13"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="text-cyan-400"
+										>
+											<path
+												d={icons["book-open"]}
+											></path>
+										</svg>
+									</div>
+									<h3
+										class="text-lg md:text-xl font-bold text-white/90 group-hover:text-cyan-300 transition-colors truncate"
+									>
+										{familyLink.title}
+									</h3>
+									<svg
+										width="15"
+										height="15"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="shrink-0 text-white/15 group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+									>
+										<path
+											d={icons.arrowUpRight}
+										></path>
+									</svg>
+								</div>
+								<p
+									class="text-sm text-white/35 leading-relaxed [&_b]:text-white/60 [&_b]:font-medium"
+									set:html={familyLink.subtitle}
+								/>
+							</div>
+							<div
+								class="relative w-full md:w-56 lg:w-64 h-52 md:h-60 shrink-0 rounded-2xl overflow-hidden"
+							>
+								<img
+									src={familyLink.image.src}
+									alt={familyLink.title}
+									data-parallax="0.04"
+									class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+								/>
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-[#0f1420]/50 to-transparent"
+								>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ─── Manifesto ─── -->
+		<section class="relative py-10 md:py-14 px-6 overflow-hidden">
+			<div
+				class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(6,182,212,0.03),transparent_60%)]"
+			>
+			</div>
+			<div class="relative max-w-4xl mx-auto text-center">
+				<div class="scroll-reveal from-scale">
+					<p
+						class="text-base md:text-lg text-white/20 font-light mb-3"
+					>
+						Most people manage systems.
+					</p>
+					<p
+						class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
+					>
+						I build <span
+							class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400"
+							>foundations.</span
+						>
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<div
+			class="section-divider divider-reveal mx-auto w-full max-w-5xl"
+		>
+		</div>
+
+		<!-- ─── Connect ─── -->
+		<section id="connect" class="relative py-12 md:py-16 px-6">
+			<div class="max-w-4xl mx-auto">
+				<div class="scroll-reveal mb-8">
+					<p
+						class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em] mb-3"
+					>
+						Connect
+					</p>
+					<h2
+						class="text-3xl md:text-4xl font-bold tracking-tight"
+					>
+						Find me <span
+							class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+							>everywhere.</span
+						>
+					</h2>
+				</div>
+
+				<div class="space-y-3">
+					{
+						connectLinks.map((link, i) => (
+							<a
+								href={link.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-hover card-glow group flex items-center gap-5 rounded-2xl bg-[#0f1420] border border-white/[0.05] hover:border-cyan-500/15 p-5 md:p-6`}
+								style={`--stagger: ${i + 1}`}
+							>
+								<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/[0.08] to-blue-500/[0.04] group-hover:from-cyan-500/[0.15] group-hover:to-blue-500/[0.08] flex items-center justify-center transition-all duration-300 shrink-0">
+									<svg
+										width="22"
+										height="22"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.8"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="text-white/25 group-hover:text-cyan-400 transition-colors duration-300"
 									>
 										<path d={icons[link.icon]} />
 									</svg>
 								</div>
-								<div>
-									<h2 class="text-lg font-semibold text-slate-100 group-hover:text-purple-400 transition-colors">
+
+								<div class="flex-1 min-w-0">
+									<h3 class="text-[0.95rem] font-semibold text-white/85 group-hover:text-cyan-300 transition-colors">
 										{link.title}
-									</h2>
-									<p class="text-xs text-slate-500 font-mono">
+									</h3>
+									<p class="text-sm text-white/30 mt-0.5">
 										{link.subtitle}
 									</p>
 								</div>
-							</div>
-						</a>
-					))
-				}
-			</div>
-		</div>
 
-		<footer class="mt-16 text-slate-600 text-sm font-mono">
-			&copy; {new Date().getFullYear()} Ivantsov.tech
+								<div class="hidden md:flex items-center gap-3 shrink-0">
+									<span class="text-xs font-mono text-white/15 group-hover:text-white/30 transition-colors">
+										{link.domain}
+									</span>
+								</div>
+
+								<svg
+									width="18"
+									height="18"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="shrink-0 text-white/10 group-hover:text-cyan-400/60 transition-all duration-300 group-hover:translate-x-1"
+								>
+									<path d={icons.arrowUpRight} />
+								</svg>
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ─── Footer ─── -->
+		<footer
+			class="relative mt-4 rounded-t-[2.5rem] bg-[#080b11] border-t border-white/[0.03] px-6 py-12 md:py-14"
+		>
+			<div class="max-w-4xl mx-auto">
+				<div
+					class="flex flex-col md:flex-row items-center justify-between gap-6"
+				>
+					<div class="text-center md:text-left">
+						<p
+							class="text-base font-bold tracking-tight text-white/70 mb-1"
+						>
+							ivantsov.tech
+						</p>
+						<p
+							class="text-[0.65rem] font-mono text-white/20"
+						>
+							&copy; {new Date().getFullYear()} Alex Ivantsov
+						</p>
+					</div>
+
+					<div
+						class="flex items-center gap-5 text-[0.65rem] font-mono"
+					>
+						<a
+							href="/about"
+							class="text-white/20 hover:text-white/50 transition-colors"
+							>About</a
+						>
+						<a
+							href="https://github.com/Exploitacious"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-white/20 hover:text-white/50 transition-colors"
+							>GitHub</a
+						>
+						<a
+							href="https://www.linkedin.com/in/alex-ivan-sov/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-white/20 hover:text-white/50 transition-colors"
+							>LinkedIn</a
+						>
+						<span class="text-white/10">|</span>
+						<a
+							href="https://status.ivantsov.tech"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex items-center gap-1.5 text-white/25 hover:text-white/50 transition-colors"
+						>
+							<span class="relative flex h-1.5 w-1.5">
+								<span
+									class="status-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+								></span>
+								<span
+									class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+								></span>
+							</span>
+							Operational
+						</a>
+					</div>
+				</div>
+			</div>
 		</footer>
 	</main>
 </Layout>
 
-<style>
-	/* Simple animation for the load-in */
-	.animate-fade-in-down {
-		animation: fadeInDown 0.8s ease-out;
+<script>
+	// Scroll reveal (handles all variants + dividers)
+	const revealObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("visible");
+				}
+			});
+		},
+		{ threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+	);
+
+	document
+		.querySelectorAll(".scroll-reveal, .divider-reveal")
+		.forEach((el) => {
+			revealObserver.observe(el);
+		});
+
+	// Navbar morph
+	const navbar = document.getElementById("navbar");
+	const hero = document.getElementById("hero");
+
+	if (navbar && hero) {
+		const heroObserver = new IntersectionObserver(
+			([entry]) => {
+				navbar.classList.toggle(
+					"scrolled",
+					!entry.isIntersecting
+				);
+			},
+			{ threshold: 0.05 }
+		);
+		heroObserver.observe(hero);
 	}
-	@keyframes fadeInDown {
-		from {
-			opacity: 0;
-			transform: translateY(-20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+
+	// Parallax on featured images
+	const parallaxEls = document.querySelectorAll<HTMLElement>(
+		"[data-parallax]"
+	);
+
+	if (parallaxEls.length > 0) {
+		const onScroll = () => {
+			for (const el of parallaxEls) {
+				const rect = el.getBoundingClientRect();
+				const speed = parseFloat(
+					el.dataset.parallax || "0.04"
+				);
+				const center =
+					rect.top + rect.height / 2 - window.innerHeight / 2;
+				el.style.transform = `translateY(${center * speed * -1}px)`;
+			}
+		};
+
+		window.addEventListener("scroll", onScroll, { passive: true });
+		onScroll();
 	}
-</style>
+</script>

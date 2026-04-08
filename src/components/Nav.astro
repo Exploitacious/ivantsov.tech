@@ -1,0 +1,58 @@
+---
+interface Props {
+	currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navLinks = [
+	{ label: "Home", href: "/" },
+	{ label: "About", href: "/about" },
+];
+---
+
+<nav
+	id="navbar"
+	class:list={[
+		"fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-500",
+		currentPath !== "/" && "scrolled",
+	]}
+>
+	<div
+		class="flex items-center gap-5 md:gap-7 rounded-full border border-white/[0.06] bg-[#0a0d14]/40 px-5 py-2.5 backdrop-blur-xl"
+	>
+		<a
+			href="/"
+			class="text-sm font-semibold tracking-tight text-white/90 hover:text-white transition-colors whitespace-nowrap"
+		>
+			ivantsov.tech
+		</a>
+
+		<div class="hidden md:flex items-center gap-5">
+			{
+				navLinks.map((link) => (
+					<a
+						href={link.href}
+						class:list={[
+							"text-[0.65rem] font-medium transition-colors uppercase tracking-[0.18em]",
+							currentPath === link.href
+								? "text-cyan-400/70"
+								: "text-white/40 hover:text-white/80",
+						]}
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</div>
+
+		<a
+			href="https://umbrellaitgroup.com/contact-us/"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="btn-magnetic text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1.5 rounded-full whitespace-nowrap"
+		>
+			Work With Me
+		</a>
+	</div>
+</nav>

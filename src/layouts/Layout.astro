@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
 	title?: string;
@@ -29,8 +30,17 @@ const {
 		/>
 
 		<title>{title}</title>
+		<ClientRouter />
 	</head>
 	<body class="bg-[#0a0d14] text-[#f0eff4] antialiased overflow-x-hidden">
+		<!-- Scroll progress bar -->
+		<div
+			id="scroll-progress"
+			class="fixed top-0 left-0 h-[2px] z-[60] bg-gradient-to-r from-cyan-500 to-blue-500"
+			style="width: 0%"
+		>
+		</div>
+
 		<!-- Film-grain noise -->
 		<svg
 			class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03]"
@@ -48,5 +58,33 @@ const {
 		</svg>
 
 		<slot />
+
+		<script>
+			function initScrollProgress() {
+				const bar = document.getElementById("scroll-progress");
+				if (!bar) return;
+
+				function update() {
+					const max =
+						document.documentElement.scrollHeight -
+						window.innerHeight;
+					bar.style.width =
+						max > 0
+							? Math.min(
+									(window.scrollY / max) * 100,
+									100
+								) + "%"
+							: "0%";
+				}
+
+				window.addEventListener("scroll", update, {
+					passive: true,
+				});
+				update();
+			}
+
+			initScrollProgress();
+			document.addEventListener("astro:page-load", initScrollProgress);
+		</script>
 	</body>
 </html>

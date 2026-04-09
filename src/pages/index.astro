@@ -77,7 +77,7 @@ const connectLinks = [
 		<!-- ─── Hero ─── -->
 		<section
 			id="hero"
-			class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden"
+			class="relative min-h-[85vh] pt-20 flex flex-col items-center justify-center px-6 overflow-hidden"
 		>
 			<!-- Animated gradient orbs -->
 			<div
@@ -105,6 +105,7 @@ const connectLinks = [
 						<img
 							src={profileImage.src}
 							alt="Alex Ivantsov"
+							transition:name="profile"
 							class="relative w-full h-full rounded-full object-cover border-2 border-white/10 shadow-2xl"
 						/>
 					</div>
@@ -138,7 +139,8 @@ const connectLinks = [
 						<span class="font-sans text-white">Alex</span>
 						<br />
 						<span
-							class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400"
+							class="font-serif italic text-shimmer"
+							transition:name="name-accent"
 						>
 							Ivantsov
 						</span>
@@ -236,7 +238,8 @@ const connectLinks = [
 						href={donationLink.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="scroll-reveal from-left card-hover card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						class="scroll-reveal from-left card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						data-tilt
 						style="--stagger: 1"
 					>
 						<div
@@ -312,7 +315,8 @@ const connectLinks = [
 						href={familyLink.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="scroll-reveal from-right card-hover card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						class="scroll-reveal from-right card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+						data-tilt
 						style="--stagger: 2"
 					>
 						<div
@@ -565,60 +569,89 @@ const connectLinks = [
 </Layout>
 
 <script>
-	// Scroll reveal (handles all variants + dividers)
-	const revealObserver = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add("visible");
-				}
-			});
-		},
-		{ threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
-	);
-
-	document
-		.querySelectorAll(".scroll-reveal, .divider-reveal")
-		.forEach((el) => {
-			revealObserver.observe(el);
-		});
-
-	// Navbar morph
-	const navbar = document.getElementById("navbar");
-	const hero = document.getElementById("hero");
-
-	if (navbar && hero) {
-		const heroObserver = new IntersectionObserver(
-			([entry]) => {
-				navbar.classList.toggle(
-					"scrolled",
-					!entry.isIntersecting
-				);
+	function initPage() {
+		// Scroll reveal (handles all variants + dividers)
+		const revealObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("visible");
+					}
+				});
 			},
-			{ threshold: 0.05 }
+			{ threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
 		);
-		heroObserver.observe(hero);
+
+		document
+			.querySelectorAll(".scroll-reveal, .divider-reveal")
+			.forEach((el) => {
+				revealObserver.observe(el);
+			});
+
+		// Navbar morph
+		const navbar = document.getElementById("navbar");
+		const hero = document.getElementById("hero");
+
+		if (navbar && hero) {
+			const heroObserver = new IntersectionObserver(
+				([entry]) => {
+					navbar.classList.toggle(
+						"scrolled",
+						!entry.isIntersecting
+					);
+				},
+				{ threshold: 0.05 }
+			);
+			heroObserver.observe(hero);
+		}
+
+		// Parallax on featured images
+		const parallaxEls =
+			document.querySelectorAll<HTMLElement>("[data-parallax]");
+
+		if (parallaxEls.length > 0) {
+			const onScroll = () => {
+				for (const el of parallaxEls) {
+					const rect = el.getBoundingClientRect();
+					const speed = parseFloat(
+						el.dataset.parallax || "0.04"
+					);
+					const center =
+						rect.top +
+						rect.height / 2 -
+						window.innerHeight / 2;
+					el.style.transform = `translateY(${center * speed * -1}px)`;
+				}
+			};
+
+			window.addEventListener("scroll", onScroll, {
+				passive: true,
+			});
+			onScroll();
+		}
+
+		// Card 3D tilt (desktop only)
+		if (window.matchMedia("(hover: hover)").matches) {
+			document
+				.querySelectorAll<HTMLElement>("[data-tilt]")
+				.forEach((el) => {
+					el.addEventListener("mousemove", (e) => {
+						const rect = el.getBoundingClientRect();
+						const x =
+							(e.clientX - rect.left) / rect.width -
+							0.5;
+						const y =
+							(e.clientY - rect.top) / rect.height -
+							0.5;
+						el.style.transform = `perspective(800px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-3px)`;
+					});
+					el.addEventListener("mouseleave", () => {
+						el.style.transform = "";
+					});
+				});
+		}
 	}
 
-	// Parallax on featured images
-	const parallaxEls = document.querySelectorAll<HTMLElement>(
-		"[data-parallax]"
-	);
-
-	if (parallaxEls.length > 0) {
-		const onScroll = () => {
-			for (const el of parallaxEls) {
-				const rect = el.getBoundingClientRect();
-				const speed = parseFloat(
-					el.dataset.parallax || "0.04"
-				);
-				const center =
-					rect.top + rect.height / 2 - window.innerHeight / 2;
-				el.style.transform = `translateY(${center * speed * -1}px)`;
-			}
-		};
-
-		window.addEventListener("scroll", onScroll, { passive: true });
-		onScroll();
-	}
+	initPage();
+	document.addEventListener("astro:page-load", initPage);
 </script>

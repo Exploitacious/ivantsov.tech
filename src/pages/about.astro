@@ -208,7 +208,7 @@ const highlights = [
 >
 	<Nav currentPath="/about" />
 
-	<main class="px-6 pt-32 pb-12">
+	<main class="px-6 pt-24 md:pt-36 pb-12">
 		<!-- ═══ 1. Hero ═══ -->
 		<section class="max-w-4xl mx-auto mb-16 text-center">
 			<div class="about-fade" style="--delay: 0">
@@ -219,6 +219,7 @@ const highlights = [
 						src={profileImage.src}
 						alt="Alex Ivantsov"
 						class="w-full h-full object-cover"
+					transition:name="profile"
 					/>
 				</div>
 			</div>
@@ -228,7 +229,8 @@ const highlights = [
 					class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3"
 				>
 					<span class="font-sans text-white">Alex </span><span
-						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400"
+						class="font-serif italic text-shimmer"
+						transition:name="name-accent"
 						>Ivantsov</span
 					>
 				</h1>
@@ -373,13 +375,13 @@ const highlights = [
 								{cat.name}
 							</h3>
 							<div class="flex flex-wrap gap-1.5">
-								{cat.sme.map((skill) => (
-									<span class="px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80">
+								{cat.sme.map((skill, j) => (
+									<span class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80" style={`--pill-i: ${j}`}>
 										{skill}
 									</span>
 								))}
-								{cat.advanced.map((skill) => (
-									<span class="px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/35">
+								{cat.advanced.map((skill, j) => (
+									<span class="skill-pill px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/35" style={`--pill-i: ${cat.sme.length + j}`}>
 										{skill}
 									</span>
 								))}
@@ -585,20 +587,25 @@ const highlights = [
 </style>
 
 <script>
-	const revealObserver = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add("visible");
-				}
-			});
-		},
-		{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
-	);
+	function initAbout() {
+		const revealObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("visible");
+					}
+				});
+			},
+			{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
+		);
 
-	document
-		.querySelectorAll(".scroll-reveal, .divider-reveal")
-		.forEach((el) => {
-			revealObserver.observe(el);
-		});
+		document
+			.querySelectorAll(".scroll-reveal, .divider-reveal")
+			.forEach((el) => {
+				revealObserver.observe(el);
+			});
+	}
+
+	initAbout();
+	document.addEventListener("astro:page-load", initAbout);
 </script>

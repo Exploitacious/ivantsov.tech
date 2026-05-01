@@ -1,0 +1,28 @@
+name: CI — Lint, Typecheck, Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Astro check (TypeScript + content collections)
+        run: npx astro check
+
+      - name: Build (smoke)
+        run: npm run build

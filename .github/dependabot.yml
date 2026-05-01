@@ -4,8 +4,22 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "javascript"
+    ignore:
+      - dependency-name: "astro"
+        update-types: ["version-update:semver-major"]
     groups:
       runtime-deps:
+        applies-to: version-updates
         patterns:
           - "*"
         exclude-patterns:
@@ -14,17 +28,36 @@ updates:
           - "prettier*"
           - "vitest*"
       dev-deps:
+        applies-to: version-updates
         patterns:
           - "@types/*"
           - "eslint*"
           - "prettier*"
           - "vitest*"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
     groups:
       github-actions:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
         patterns:
           - "*"

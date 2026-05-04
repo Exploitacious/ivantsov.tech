@@ -17,9 +17,31 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Enable auto-merge for patch + minor bumps
-        if: steps.meta.outputs.update-type == 'version-update:semver-patch' || steps.meta.outputs.update-type == 'version-update:semver-minor'
+      # Block auto-merge when ANY dep in the PR is a major bump.
+      # `dependency-major-versions-changed` is non-empty when ANY dep in
+      # a grouped PR has a major bump, even if `update-type` (which only
+      # reflects the first dep in the group) says "minor".
+      #
+      # Incident reference (2026-05-04): grouped runtime-deps PR in
+      # Operational-Dashboard included astro 5→6, tailwind 3→4, TS 5→6.
+      # Old check evaluated `semver-minor` true on the first entry and
+      # merged the whole batch. CF Workers Build then rejected the tree.
+      - name: Enable auto-merge for non-major bumps only
+        if: |
+          (steps.meta.outputs.update-type == 'version-update:semver-patch'
+           || steps.meta.outputs.update-type == 'version-update:semver-minor')
+          && steps.meta.outputs.dependency-major-versions-changed == ''
         run: gh pr merge --squash --auto "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Major bumps need hand review. Label so they don't sit silently.
+      # `|| true` because the label may not exist in the repo yet — that
+      # shouldn't fail the workflow, the auto-merge skip already protects.
+      - name: Label major-version PRs for hand review
+        if: steps.meta.outputs.dependency-major-versions-changed != ''
+        run: gh pr edit "$PR_URL" --add-label "needs-review,major-version" || true
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

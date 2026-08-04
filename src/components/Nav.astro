@@ -38,7 +38,7 @@ const navLinks = [
 							"text-[0.65rem] font-medium transition-colors uppercase tracking-[0.18em]",
 							currentPath === link.href
 								? "text-cyan-400/70"
-								: "text-white/40 hover:text-white/80",
+								: "text-white/[0.56] hover:text-white/[0.78]",
 						]}
 					>
 						{link.label}
@@ -67,7 +67,7 @@ const navLinks = [
 		</a>
 		<button
 			id="menu-toggle"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/50 active:text-white/80 transition-colors"
+			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
 			aria-label="Open menu"
 		>
 			<svg
@@ -97,7 +97,7 @@ const navLinks = [
 		</a>
 		<button
 			id="menu-close"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/50 active:text-white/80 transition-colors"
+			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
 			aria-label="Close menu"
 		>
 			<svg
@@ -126,7 +126,7 @@ const navLinks = [
 						"text-2xl font-semibold transition-colors",
 						currentPath === link.href
 							? "text-cyan-400"
-							: "text-white/70",
+							: "text-white/[0.78]",
 					]}
 				>
 					{link.label}
@@ -144,7 +144,7 @@ const navLinks = [
 		</a>
 		<a
 			href="mailto:alex@ivantsov.tech"
-			class="text-sm text-white/25 transition-colors"
+			class="text-sm text-white/[0.38] transition-colors"
 		>
 			alex@ivantsov.tech
 		</a>

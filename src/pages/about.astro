@@ -239,7 +239,7 @@ const highlights = [
 
 			<div class="about-fade" style="--delay: 160">
 				<p
-					class="text-lg md:text-xl font-bold text-white/50"
+					class="text-lg md:text-xl font-bold text-white/[0.64]"
 				>
 					Operations Manager. Systems Engineer. Builder of Things
 					That Work.
@@ -261,14 +261,14 @@ const highlights = [
 			</div>
 
 			<div class="space-y-5">
-				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
 					I've spent my career in the managed services space,
 					where IT meets real business operations. Started out
 					as an engineer solving technical problems, and
 					somewhere along the way I became the person solving
 					business problems with technology.
 				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
 					Today I lead operations at a growing MSP. My role
 					crosses engineering, sales, compliance, and strategy,
 					often in the same afternoon. I build the automation
@@ -276,7 +276,7 @@ const highlights = [
 					relationships, design the compliance programs, and
 					train the team that delivers it all.
 				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
 					I'm not a specialist who goes deep on one thing. I'm
 					a generalist who goes deep on whatever matters most at
 					the time. I've gotten comfortable operating where
@@ -285,7 +285,7 @@ const highlights = [
 					one thing actually holding an operation back, and
 					solving that before anything else.
 				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/40 leading-relaxed">
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
 					I think the MSP model is underrated. We sit at the
 					workflow layer, not the feature layer. We see the whole
 					picture: finance, operations, compliance, IT. We can
@@ -317,10 +317,10 @@ const highlights = [
 							style={`--stagger: ${i + 1}`}
 						>
 							<div class="w-8 h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent rounded-full mb-4" />
-							<h3 class="text-sm font-bold text-white/85 mb-3">
+							<h3 class="text-sm font-bold text-white/[0.88] mb-3">
 								{role.title}
 							</h3>
-							<p class="text-sm text-white/30 leading-relaxed">
+							<p class="text-sm text-white/[0.45] leading-relaxed">
 								{role.body}
 							</p>
 						</div>
@@ -343,12 +343,12 @@ const highlights = [
 			</div>
 
 			<div class="scroll-reveal mb-6">
-				<p class="text-sm text-white/30 mb-3">
+				<p class="text-sm text-white/[0.45] mb-3">
 					I operate across a wide technical surface area. Here's
 					where I go deepest.
 				</p>
 				<div
-					class="flex items-center gap-4 text-[0.65rem] text-white/25 font-mono"
+					class="flex items-center gap-4 text-[0.65rem] text-white/[0.38] font-mono"
 				>
 					<span class="flex items-center gap-1.5">
 						<span
@@ -372,7 +372,7 @@ const highlights = [
 							class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-5"
 							style={`--stagger: ${Math.min(i + 1, 4)}`}
 						>
-							<h3 class="text-xs font-semibold text-white/50 mb-3">
+							<h3 class="text-xs font-semibold text-white/[0.64] mb-3">
 								{cat.name}
 							</h3>
 							<div class="flex flex-wrap gap-1.5">
@@ -382,7 +382,7 @@ const highlights = [
 									</span>
 								))}
 								{cat.advanced.map((skill, j) => (
-									<span class="skill-pill px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/35" style={`--pill-i: ${cat.sme.length + j}`}>
+									<span class="skill-pill px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/[0.50]" style={`--pill-i: ${cat.sme.length + j}`}>
 										{skill}
 									</span>
 								))}
@@ -413,10 +413,10 @@ const highlights = [
 							class="scroll-reveal from-left border-l-2 border-cyan-500/20 pl-6"
 							style={`--stagger: ${i + 1}`}
 						>
-							<p class="text-lg md:text-xl font-bold text-white/80 mb-3">
+							<p class="text-lg md:text-xl font-bold text-white/[0.78] mb-3">
 								"{block.headline}"
 							</p>
-							<p class="text-sm text-white/30 leading-relaxed max-w-[42rem]">
+							<p class="text-sm text-white/[0.45] leading-relaxed max-w-[42rem]">
 								{block.body}
 							</p>
 						</div>
@@ -448,10 +448,10 @@ const highlights = [
 							<p class="text-[0.65rem] font-mono text-cyan-400/30 uppercase tracking-[0.2em] mb-2">
 								{item.label}
 							</p>
-							<h3 class="text-base md:text-lg font-bold text-white/80 mb-3">
+							<h3 class="text-base md:text-lg font-bold text-white/[0.78] mb-3">
 								{item.title}
 							</h3>
-							<p class="text-sm text-white/30 leading-relaxed">
+							<p class="text-sm text-white/[0.45] leading-relaxed">
 								{item.body}
 							</p>
 						</div>
@@ -476,7 +476,7 @@ const highlights = [
 			<div
 				class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6"
 			>
-				<p class="text-sm text-white/35 leading-relaxed">
+				<p class="text-sm text-white/[0.50] leading-relaxed">
 					Father first, engineer second. When I'm not building
 					systems or chasing constraints, I'm spending time with
 					my family, tinkering in my home lab, or finding
@@ -493,7 +493,7 @@ const highlights = [
 		<!-- ═══ 8. CTA ═══ -->
 		<section class="scroll-reveal max-w-4xl mx-auto text-center pb-4">
 			<div class="section-divider w-full mb-12"></div>
-			<p class="text-sm text-white/25 mb-5">
+			<p class="text-sm text-white/[0.38] mb-5">
 				Want to work together, talk shop, or just say hello?
 			</p>
 			<div class="flex justify-center gap-3 flex-wrap">
@@ -505,7 +505,7 @@ const highlights = [
 				</a>
 				<a
 					href="/"
-					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/70 hover:text-white px-6 py-2.5 rounded-full"
+					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/[0.78] hover:text-white px-6 py-2.5 rounded-full"
 				>
 					Back Home
 				</a>
@@ -525,7 +525,7 @@ const highlights = [
 					<a href="/" aria-label="ivantsov.tech">
 						<Brand markId="footer" class="mb-1.5" />
 					</a>
-					<p class="text-[0.65rem] font-mono text-white/20">
+					<p class="text-[0.65rem] font-mono text-white/[0.32]">
 						&copy; {new Date().getFullYear()} Alex Ivantsov
 					</p>
 				</div>
@@ -536,22 +536,22 @@ const highlights = [
 						href="https://github.com/Exploitacious"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-white/20 hover:text-white/50 transition-colors"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
 						>GitHub</a
 					>
 					<a
 						href="https://www.linkedin.com/in/alex-ivan-sov/"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-white/20 hover:text-white/50 transition-colors"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
 						>LinkedIn</a
 					>
-					<span class="text-white/10">|</span>
+					<span class="text-white/[0.16]">|</span>
 					<a
 						href="https://status.ivantsov.tech"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center gap-1.5 text-white/25 hover:text-white/50 transition-colors"
+						class="flex items-center gap-1.5 text-white/[0.38] hover:text-white/[0.64] transition-colors"
 					>
 						<span class="relative flex h-1.5 w-1.5">
 							<span

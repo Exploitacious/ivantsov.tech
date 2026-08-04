@@ -12,9 +12,11 @@ manifesto, and a longer about page. Live at <https://ivantsov.tech>.
 | [Tailwind CSS 4](https://tailwindcss.com) | Styling, wired through `@tailwindcss/vite` in `astro.config.mjs`. |
 | Google Fonts | Inter, Playfair Display and JetBrains Mono, loaded in `src/layouts/Layout.astro`. |
 
-There is no UI framework integration and no runtime JavaScript beyond the
-small inline scripts in `Layout.astro`, `Nav.astro` and the two main pages.
-Keep it that way — new npm dependencies need a real reason.
+There is no UI framework integration. The only shipped JavaScript is Astro's
+`ClientRouter` (view transitions, pulled in by `Layout.astro`), which builds
+to a ~15 KB bundle in `dist/_astro/`, plus the small inline scripts in
+`Layout.astro`, `Nav.astro` and the two main pages. Keep it that way — new
+npm dependencies need a real reason.
 
 ## Pages
 
@@ -64,8 +66,8 @@ the ten most recent tagged images).
 The visual language — the IVA mark, the `IVANTSOV · TECH` lockup, the colour
 ramp, the white-alpha text ladder, the motion curve — is specified in the
 `Exploitacious/design-system` project. That project is the source of truth;
-this repo consumes it. It is not published anywhere yet, so no link is given
-here — a URL written before the repo exists is a dead link on a public site.
+this repo consumes it. It is a private repository, so no link is given here —
+a private-repo URL 404s for every public visitor of this site.
 
 What that means in practice:
 

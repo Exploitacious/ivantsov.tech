@@ -8,7 +8,7 @@ import profileImage from "../assets/images/Alex.jpg";
 const roles = [
 	{
 		title: "Automation & Integration Engineering",
-		body: "I design and build the connective tissue between business tools. Webhook-driven workflows, API integrations, AI-augmented processes, whatever it takes to eliminate manual handoffs and make systems talk to each other. My primary platform is N8n, backed by PowerShell scripting and REST APIs across the entire MSP stack.",
+		body: "I design and build the connective tissue between business tools. Webhook-driven workflows, API integrations, AI-augmented processes, whatever it takes to eliminate manual handoffs and make systems talk to each other. My primary platform is N8n, backed by PowerShell scripting and REST APIs across the entire MSP stack. These days I also build MCP servers, the layer that gives AI agents direct, governed access to that same stack.",
 	},
 	{
 		title: "IT Strategy & Client Engagement",
@@ -45,10 +45,14 @@ const skillCategories = [
 			"NinjaRMM",
 			"Cloud Radial",
 			"Nodeware",
+			"CIPP",
+			"ScreenConnect",
+			"Pax8",
+			"Datagate",
+			"Nutshell CRM",
 		],
 		advanced: [
 			"Nerdio Manager",
-			"Proxmox",
 			"ConnectBooster",
 			"VPS/VPC Management",
 		],
@@ -85,10 +89,16 @@ const skillCategories = [
 			"Windows 10/11 Core SysAdmin",
 			"Unifi Networking",
 			"Meraki Networking",
+			"Proxmox",
+			"Docker & GitOps Deployment (GHCR)",
+			"Cloudflare Tunnels & Access",
+			"SOPS / age Secrets Management",
 		],
 		advanced: [
 			"Linux SysAdmin (Ubuntu / Debian / Major Distros)",
 			"Database Administration",
+			"Terraform",
+			"PostgreSQL",
 		],
 	},
 	{
@@ -153,16 +163,19 @@ const skillCategories = [
 		advanced: [] as string[],
 	},
 	{
-		name: "AI & Misc",
-		sme: [] as string[],
+		name: "AI Engineering & Automation",
+		sme: [
+			"MCP Server Development (Python / FastMCP)",
+			"Claude Code & Multi-Agent Orchestration",
+			"Production AI Agents (Teams + Homelab Fleet)",
+			"AI-Augmented Automation Pipelines",
+			"Claude API / LLM Integration",
+		],
 		advanced: [
-			"Claude Code",
-			"Cowork",
+			"OpenCode Zen",
 			"Gemini",
-			"Chat GPT",
-			"N8n Automations",
-			"OpenCode",
-			"OpenClaw",
+			"ChatGPT",
+			"Ollama / Local Models",
 		],
 	},
 ];
@@ -199,6 +212,11 @@ const highlights = [
 		label: "Full-Stack Operations Buildout",
 		title: "Built the operational backbone of a growing MSP from scratch.",
 		body: "SOPs for helpdesk, dispatch, escalation, and project management. Legal frameworks including MSA and services guide. Vendor stack evaluation and deployment, from RMM to PSA to compliance tooling. Technical documentation library. Engineer training programs. Sales process. I didn't inherit a playbook. I wrote one, and then trained the team to run it. Most of it was built solo, under pressure, with shifting priorities. And it works.",
+	},
+	{
+		label: "AI Operations",
+		title: "Gave AI real hands on the MSP stack, then put it to work.",
+		body: "I built MCP servers across our PSA, RMM, documentation, M365, and voice systems, then unified them behind a white-labeled gateway with scoped access keys. On top of that: a production AI teammate that lives in Teams, and a multi-agent orchestration harness that runs my daily operations. The AI doesn't advise from the sidelines. It reads tickets, files documentation, and executes runbooks. Governed, logged, and reviewed.",
 	},
 ];
 ---
@@ -274,7 +292,10 @@ const highlights = [
 					often in the same afternoon. I build the automation
 					workflows that connect our tools, run the client
 					relationships, design the compliance programs, and
-					train the team that delivers it all.
+					train the team that delivers it all. Lately I've
+					been building the AI layer that works alongside
+					them: agents with real access to our tools, doing
+					real work under real governance.
 				</p>
 				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
 					I'm not a specialist who goes deep on one thing. I'm

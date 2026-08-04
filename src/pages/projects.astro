@@ -1,0 +1,262 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Brand from "../components/Brand.astro";
+
+// Lifted from the `icons` map in index.astro rather than re-typed, so the
+// arrow keeps the same 24x24 stroke geometry as the featured/connect cards.
+const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
+
+// ── Projects ──
+// `linkLabel` is the destination as the reader would say it: the repo path for
+// the three public repos, plain language for the homelab (there is no repo to
+// name, and naming its parts would leak topology).
+const projects = [
+	{
+		name: "Auto-M365 Suite",
+		tag: "PowerShell · MSP Tooling",
+		body: "New tenant onboarding is the same forty steps every time, and doing them by hand is how things get missed. So I wrote three PowerShell toolkits — TenantMaster, ATP, and DLP — that take a fresh Microsoft 365 tenant to a managed, hardened baseline: security defaults, ATP policies, DLP templates. Everything is config-driven and non-destructive, so it can run against a live tenant without holding your breath. It has picked up 110+ stars from other people doing the same work.",
+		stack: ["PowerShell", "Microsoft 365", "Graph API"],
+		url: "https://github.com/Exploitacious/Auto-M365-TenantMaster",
+		linkLabel: "Exploitacious/Auto-M365-TenantMaster",
+	},
+	{
+		name: "Hatchling",
+		tag: "Desktop App · LLM Tool-Use",
+		body: "Writing a good agent personality from a blank file is hard. Hatchling turns it into a conversation: you talk to a model, and it writes the SOUL, IDENTITY, and USER files through tool calls as it works out what you are after. The output is plain markdown you own outright, no hosted account and nothing to lock into. It is a local-first Electron app, MIT licensed, and it runs against Anthropic, anything OpenAI-compatible, Ollama, or fully offline.",
+		stack: ["Electron", "React", "TypeScript", "LLM tool-use"],
+		url: "https://github.com/Exploitacious/hatchling",
+		linkLabel: "Exploitacious/hatchling",
+	},
+	{
+		name: "OPS — the Operator's Shell",
+		tag: "AI Harness · Template",
+		body: "Most people prompt. This is the operating system I built for working with the model instead. OPS is a de-identified copy of the Claude Code harness I actually run every day: foreman doctrine, where the AI orchestrates sub-agents rather than grinding through the work solo, plus persistent memory, session rituals, and the delegation patterns that keep a multi-agent run from falling apart. Public because the pattern is worth more shared than hoarded.",
+		stack: ["Claude Code", "Multi-agent", "Markdown doctrine"],
+		url: "https://github.com/Exploitacious/OPS",
+		linkLabel: "Exploitacious/OPS",
+	},
+	{
+		name: "The Homelab & AI Fleet",
+		tag: "Infrastructure · AI Fleet",
+		body: "A Proxmox estate running 18+ self-hosted services, and the reason I stay sharp on infrastructure nobody pays me to touch. On top of it sits a personal MCP gateway that gives my agents governed access to the whole thing, and a small fleet of those agents with actual day jobs: watching infrastructure, handling the household logistics nobody enjoys. No topology here, on purpose. The status page is the part worth showing.",
+		stack: ["Proxmox", "Docker", "MCP", "Self-hosted"],
+		url: "https://status.ivantsov.tech",
+		linkLabel: "See what is running right now",
+	},
+];
+---
+
+<Layout
+	title="Projects — Alex Ivantsov | Automation, AI Tooling & Homelab"
+	description="The things I build outside the day job: MSP tooling, AI agent software, an operator's harness for Claude Code, and the homelab that runs the rest of it."
+>
+	<Nav currentPath="/projects" />
+
+	<main class="px-6 pt-24 md:pt-36 pb-12">
+		<!-- ═══ 1. Hero ═══ -->
+		<section class="max-w-4xl mx-auto mb-16 text-center">
+			<div class="scroll-reveal">
+				<p
+					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-4"
+				>
+					Projects
+				</p>
+				<h1
+					class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5"
+				>
+					I don't collect side projects. I <span
+						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+						>use</span
+					> them.
+				</h1>
+				<p
+					class="text-base md:text-lg text-white/[0.56] leading-relaxed max-w-2xl mx-auto"
+				>
+					Four things I built because I needed them. Three are
+					public on GitHub. The fourth is the lab where most of
+					the experimenting happens.
+				</p>
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"></div>
+
+		<!-- ═══ 2. The work ═══ -->
+		<section class="max-w-4xl mx-auto mb-16">
+			<div class="space-y-5">
+				{
+					projects.map((project, i) => (
+						<a
+							href={project.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
+							data-tilt
+							style={`--stagger: ${i + 1}`}
+						>
+							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
+								{project.tag}
+							</p>
+							<h2 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
+								{project.name}
+							</h2>
+							<p class="text-sm text-white/[0.50] leading-relaxed mb-5">
+								{project.body}
+							</p>
+
+							<div class="flex flex-wrap gap-1.5 mb-5">
+								{project.stack.map((item, j) => (
+									<span
+										class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80"
+										style={`--pill-i: ${j}`}
+									>
+										{item}
+									</span>
+								))}
+							</div>
+
+							<div class="flex items-center gap-2">
+								<span class="text-xs font-mono text-white/[0.32] group-hover:text-cyan-400/70 transition-colors break-all">
+									{project.linkLabel}
+								</span>
+								<svg
+									width="15"
+									height="15"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+								>
+									<path d={arrowUpRight} />
+								</svg>
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</section>
+
+		<!-- ═══ 3. CTA ═══ -->
+		<section class="scroll-reveal max-w-4xl mx-auto text-center pb-4">
+			<div class="section-divider w-full mb-12"></div>
+			<p class="text-sm text-white/[0.38] mb-5">
+				Want to talk about any of it, or build something together?
+			</p>
+			<div class="flex justify-center gap-3 flex-wrap">
+				<a
+					href="mailto:alex@ivantsov.tech"
+					class="btn-magnetic text-sm font-medium bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full"
+				>
+					Get in Touch
+				</a>
+				<a
+					href="/about"
+					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/[0.78] hover:text-white px-6 py-2.5 rounded-full"
+				>
+					More About Me
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer
+		class="mt-8 rounded-t-[2.5rem] bg-[#080b11] border-t border-white/[0.03] px-6 py-12"
+	>
+		<div class="max-w-4xl mx-auto">
+			<div
+				class="flex flex-col md:flex-row items-center justify-between gap-6"
+			>
+				<div class="text-center md:text-left">
+					<a href="/" aria-label="ivantsov.tech">
+						<Brand markId="footer" class="mb-1.5" />
+					</a>
+					<p class="text-[0.65rem] font-mono text-white/[0.32]">
+						&copy; {new Date().getFullYear()} Alex Ivantsov
+					</p>
+				</div>
+				<div class="flex items-center gap-5 text-[0.65rem] font-mono">
+					<a
+						href="https://github.com/Exploitacious"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
+						>GitHub</a
+					>
+					<a
+						href="https://www.linkedin.com/in/alex-ivan-sov/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
+						>LinkedIn</a
+					>
+					<span class="text-white/[0.16]">|</span>
+					<a
+						href="https://status.ivantsov.tech"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center gap-1.5 text-white/[0.38] hover:text-white/[0.64] transition-colors"
+					>
+						<span class="relative flex h-1.5 w-1.5">
+							<span
+								class="status-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+							></span>
+							<span
+								class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+							></span>
+						</span>
+						Operational
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<script>
+	function initProjects() {
+		const revealObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("visible");
+					}
+				});
+			},
+			{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
+		);
+
+		document
+			.querySelectorAll(".scroll-reveal, .divider-reveal")
+			.forEach((el) => {
+				revealObserver.observe(el);
+			});
+
+		// Card 3D tilt (desktop only) — same handler as index.astro's featured
+		// cards, which is where this card treatment comes from.
+		if (window.matchMedia("(hover: hover)").matches) {
+			document
+				.querySelectorAll<HTMLElement>("[data-tilt]")
+				.forEach((el) => {
+					el.addEventListener("mousemove", (e) => {
+						const rect = el.getBoundingClientRect();
+						const x =
+							(e.clientX - rect.left) / rect.width - 0.5;
+						const y =
+							(e.clientY - rect.top) / rect.height - 0.5;
+						el.style.transform = `perspective(800px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-3px)`;
+					});
+					el.addEventListener("mouseleave", () => {
+						el.style.transform = "";
+					});
+				});
+		}
+	}
+
+	initProjects();
+	document.addEventListener("astro:page-load", initProjects);
+</script>

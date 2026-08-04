@@ -2,7 +2,8 @@
 
 The personal site for Alex Ivantsov — Father, Operations Manager, SysAdmin,
 Builder. It is a hub, not an app: a hero, the links worth surfacing, a short
-manifesto, and a longer about page. Live at <https://ivantsov.tech>.
+manifesto, a projects page, and a longer about page. Live at
+<https://ivantsov.tech>.
 
 ## Stack
 
@@ -23,6 +24,7 @@ npm dependencies need a real reason.
 | Route | Source |
 | --- | --- |
 | `/` | `src/pages/index.astro` — hero, featured cards, manifesto, connect list |
+| `/projects` | `src/pages/projects.astro` — the four projects worth showing, each linking out |
 | `/about` | `src/pages/about.astro` — bio, capabilities, skills matrix, principles, selected work |
 | `/sms-privacy` | `src/pages/sms-privacy.astro` — privacy policy for the personal-assistant SMS service |
 | `/sms-terms` | `src/pages/sms-terms.astro` — terms for the same service |

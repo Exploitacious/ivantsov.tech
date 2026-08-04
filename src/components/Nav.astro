@@ -1,4 +1,6 @@
 ---
+import Brand from "./Brand.astro";
+
 interface Props {
 	currentPath?: string;
 }
@@ -22,11 +24,10 @@ const navLinks = [
 	<div
 		class="flex items-center gap-7 rounded-full border border-white/[0.06] bg-[#0a0d14]/40 px-5 py-2.5 backdrop-blur-xl"
 	>
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90 hover:text-white transition-colors whitespace-nowrap"
-		>
-			ivantsov.tech
+		{/* aria-label keeps the accessible name the bare-text wordmark used to
+		    give this link; the lockup itself reads as "IVANTSOV TECH". */}
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-desktop" size={18} wordmark={11} gap={8} />
 		</a>
 		<div class="flex items-center gap-5">
 			{
@@ -37,7 +38,7 @@ const navLinks = [
 							"text-[0.65rem] font-medium transition-colors uppercase tracking-[0.18em]",
 							currentPath === link.href
 								? "text-cyan-400/70"
-								: "text-white/40 hover:text-white/80",
+								: "text-white/[0.56] hover:text-white/[0.78]",
 						]}
 					>
 						{link.label}
@@ -61,15 +62,12 @@ const navLinks = [
 	class="md:hidden fixed top-0 left-0 right-0 z-50 px-5 py-3.5 bg-[#0a0d14]/80 backdrop-blur-xl border-b border-white/[0.04]"
 >
 	<div class="flex items-center justify-between">
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90"
-		>
-			ivantsov.tech
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-mobile-bar" size={18} wordmark={11} gap={8} />
 		</a>
 		<button
 			id="menu-toggle"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/50 active:text-white/80 transition-colors"
+			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
 			aria-label="Open menu"
 		>
 			<svg
@@ -94,15 +92,12 @@ const navLinks = [
 >
 	<!-- Close bar -->
 	<div class="flex items-center justify-between px-5 py-3.5">
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90"
-		>
-			ivantsov.tech
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-mobile-menu" size={18} wordmark={11} gap={8} />
 		</a>
 		<button
 			id="menu-close"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/50 active:text-white/80 transition-colors"
+			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
 			aria-label="Close menu"
 		>
 			<svg
@@ -131,7 +126,7 @@ const navLinks = [
 						"text-2xl font-semibold transition-colors",
 						currentPath === link.href
 							? "text-cyan-400"
-							: "text-white/70",
+							: "text-white/[0.78]",
 					]}
 				>
 					{link.label}
@@ -149,7 +144,7 @@ const navLinks = [
 		</a>
 		<a
 			href="mailto:alex@ivantsov.tech"
-			class="text-sm text-white/25 transition-colors"
+			class="text-sm text-white/[0.38] transition-colors"
 		>
 			alex@ivantsov.tech
 		</a>

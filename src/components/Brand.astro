@@ -1,0 +1,118 @@
+---
+/**
+ * Brand lockup — the IVA mark plus the IVANTSOV · TECH wordmark.
+ * Ported from Exploitacious/design-system components/layout/Brand.jsx and
+ * guidelines/wordmark.card.html. Plain markup on purpose: the site ships no
+ * UI framework and the design system is not worth a React runtime.
+ */
+interface Props {
+	/** Mark height in px. Design system minimum is 16. */
+	size?: number;
+	/** Wordmark font size in px. Design system Lockup sets it at 0.66x the mark. */
+	wordmark?: number;
+	/** Space between mark and wordmark, in px. */
+	gap?: number;
+	/**
+	 * Suffix for this instance's clip-path id. SVG ids are document-global, so
+	 * two lockups on one page sharing an id is invalid HTML and every clip
+	 * resolves against the first definition — each call site passes its own.
+	 */
+	markId: string;
+	class?: string;
+}
+
+const {
+	size = 20,
+	wordmark = size * 0.66,
+	gap = size * 0.5,
+	markId,
+	class: className,
+} = Astro.props;
+
+const clipId = `iva-clip-${markId}`;
+// Trim binary-float tails (20 * 0.66 = 13.200000000000001) out of the markup.
+const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+---
+
+<span
+	class:list={["brand-lockup", className]}
+	style={`--brand-mark-size: ${px(size)}; --brand-wordmark-size: ${px(wordmark)}; --brand-gap: ${px(gap)};`}
+>
+	<svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+		<defs>
+			{/* Terminals are cut flat to the cap line and baseline; the strokes
+			    are drawn past both and clipped here. */}
+			<clipPath id={clipId}>
+				<rect x="0" y="6" width="32" height="20"></rect>
+			</clipPath>
+		</defs>
+		<g clip-path={`url(#${clipId})`}>
+			<path
+				d="M4.2 4 V28"
+				stroke="#22d3ee"
+				stroke-width="3"
+				stroke-linecap="butt"
+				stroke-linejoin="miter"></path>
+			<path
+				d="M9 3.5 L20 24.5 L31 3.5"
+				stroke="#22d3ee"
+				stroke-width="3"
+				stroke-linecap="butt"
+				stroke-linejoin="miter"></path>
+			<path
+				d="M9 28.5 L17.77 9.6 L22.23 9.6 L31 28.5"
+				stroke="#dfeaf2"
+				stroke-width="1.8"
+				stroke-linecap="butt"
+				stroke-linejoin="miter"></path>
+			<rect x="19.1" y="15.8" width="2" height="2" fill="#dfeaf2"></rect>
+		</g>
+	</svg>
+	<span class="brand-wordmark"
+		><span>IVANTSOV</span><span class="brand-sep" aria-hidden="true"
+		></span><span class="brand-suffix">TECH</span></span
+	>
+</span>
+
+<style>
+	.brand-lockup {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--brand-gap);
+	}
+
+	.brand-mark {
+		display: block;
+		flex-shrink: 0;
+		width: var(--brand-mark-size);
+		height: var(--brand-mark-size);
+	}
+
+	.brand-wordmark {
+		display: inline-flex;
+		align-items: center;
+		font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+		font-weight: 500;
+		font-size: var(--brand-wordmark-size);
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		white-space: nowrap;
+		color: #ffffff;
+	}
+
+	/* The mark's own 2px square, re-set on the baseline as the separator. Sizes
+	   are em-relative so the lockup scales from one font-size. */
+	.brand-sep {
+		display: inline-block;
+		width: 0.22em;
+		height: 0.22em;
+		margin: 0 0.42em 0 0.2em;
+		background: #ffffff;
+		align-self: center;
+		transform: translateY(0.27em);
+	}
+
+	.brand-suffix {
+		color: #22d3ee;
+	}
+</style>

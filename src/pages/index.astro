@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
+import Brand from "../components/Brand.astro";
 import ilianaImage from "../assets/images/Iliana.jpg";
 import familyImage from "../assets/images/Family.jpg";
 import profileImage from "../assets/images/Alex.jpg";
@@ -125,7 +126,7 @@ const connectLinks = [
 							></span>
 						</span>
 						<span
-							class="text-[0.65rem] font-mono text-white/35"
+							class="text-[0.65rem] font-mono text-white/[0.50]"
 							>Operations Manager @ Umbrella IT</span
 						>
 					</div>
@@ -150,7 +151,7 @@ const connectLinks = [
 				<!-- Tagline -->
 				<div class="hero-animate mb-8" style="--delay: 650">
 					<p
-						class="text-[0.7rem] md:text-xs font-mono text-white/30 tracking-[0.25em] uppercase"
+						class="text-[0.7rem] md:text-xs font-mono text-white/[0.45] tracking-[0.25em] uppercase"
 					>
 						Father &middot; Operations Manager &middot; SysAdmin
 						&middot; Builder
@@ -161,7 +162,7 @@ const connectLinks = [
 				<div class="hero-animate flex gap-3" style="--delay: 800">
 					<a
 						href="#featured"
-						class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/70 hover:text-white px-6 py-2.5 rounded-full"
+						class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/[0.78] hover:text-white px-6 py-2.5 rounded-full"
 					>
 						Explore
 					</a>
@@ -191,7 +192,7 @@ const connectLinks = [
 				class="absolute bottom-6 left-1/2 -translate-x-1/2 hero-animate"
 				style="--delay: 1200"
 			>
-				<div class="scroll-indicator text-white/20">
+				<div class="scroll-indicator text-white/[0.32]">
 					<svg
 						width="20"
 						height="20"
@@ -218,7 +219,7 @@ const connectLinks = [
 			<div class="max-w-4xl mx-auto">
 				<div class="scroll-reveal mb-8">
 					<p
-						class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em] mb-3"
+						class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
 					>
 						Featured
 					</p>
@@ -282,7 +283,7 @@ const connectLinks = [
 										</svg>
 									</div>
 									<h3
-										class="text-lg md:text-xl font-bold text-white/90 group-hover:text-cyan-300 transition-colors truncate"
+										class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors truncate"
 									>
 										{donationLink.title}
 									</h3>
@@ -295,7 +296,7 @@ const connectLinks = [
 										stroke-width="2"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										class="shrink-0 text-white/15 group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+										class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
 									>
 										<path
 											d={icons.arrowUpRight}
@@ -303,7 +304,7 @@ const connectLinks = [
 									</svg>
 								</div>
 								<p
-									class="text-sm text-white/35 leading-relaxed [&_b]:text-white/60 [&_b]:font-medium"
+									class="text-sm text-white/[0.50] leading-relaxed [&_b]:text-white/[0.64] [&_b]:font-medium"
 									set:html={donationLink.subtitle}
 								/>
 							</div>
@@ -346,7 +347,7 @@ const connectLinks = [
 										</svg>
 									</div>
 									<h3
-										class="text-lg md:text-xl font-bold text-white/90 group-hover:text-cyan-300 transition-colors truncate"
+										class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors truncate"
 									>
 										{familyLink.title}
 									</h3>
@@ -359,7 +360,7 @@ const connectLinks = [
 										stroke-width="2"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										class="shrink-0 text-white/15 group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+										class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
 									>
 										<path
 											d={icons.arrowUpRight}
@@ -367,7 +368,7 @@ const connectLinks = [
 									</svg>
 								</div>
 								<p
-									class="text-sm text-white/35 leading-relaxed [&_b]:text-white/60 [&_b]:font-medium"
+									class="text-sm text-white/[0.50] leading-relaxed [&_b]:text-white/[0.64] [&_b]:font-medium"
 									set:html={familyLink.subtitle}
 								/>
 							</div>
@@ -400,7 +401,7 @@ const connectLinks = [
 			<div class="relative max-w-4xl mx-auto text-center">
 				<div class="scroll-reveal from-scale">
 					<p
-						class="text-base md:text-lg text-white/20 font-light mb-3"
+						class="text-base md:text-lg text-white/[0.32] font-light mb-3"
 					>
 						Most people manage systems.
 					</p>
@@ -426,7 +427,7 @@ const connectLinks = [
 			<div class="max-w-4xl mx-auto">
 				<div class="scroll-reveal mb-8">
 					<p
-						class="text-[0.65rem] font-mono text-cyan-400/40 uppercase tracking-[0.3em] mb-3"
+						class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
 					>
 						Connect
 					</p>
@@ -460,23 +461,23 @@ const connectLinks = [
 										stroke-width="1.8"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										class="text-white/25 group-hover:text-cyan-400 transition-colors duration-300"
+										class="text-white/[0.38] group-hover:text-cyan-400 transition-colors duration-300"
 									>
 										<path d={icons[link.icon]} />
 									</svg>
 								</div>
 
 								<div class="flex-1 min-w-0">
-									<h3 class="text-[0.95rem] font-semibold text-white/85 group-hover:text-cyan-300 transition-colors">
+									<h3 class="text-[0.95rem] font-semibold text-white/[0.88] group-hover:text-cyan-300 transition-colors">
 										{link.title}
 									</h3>
-									<p class="text-sm text-white/30 mt-0.5">
+									<p class="text-sm text-white/[0.45] mt-0.5">
 										{link.subtitle}
 									</p>
 								</div>
 
 								<div class="hidden md:flex items-center gap-3 shrink-0">
-									<span class="text-xs font-mono text-white/15 group-hover:text-white/30 transition-colors">
+									<span class="text-xs font-mono text-white/[0.24] group-hover:text-white/[0.45] transition-colors">
 										{link.domain}
 									</span>
 								</div>
@@ -490,7 +491,7 @@ const connectLinks = [
 									stroke-width="2"
 									stroke-linecap="round"
 									stroke-linejoin="round"
-									class="shrink-0 text-white/10 group-hover:text-cyan-400/60 transition-all duration-300 group-hover:translate-x-1"
+									class="shrink-0 text-white/[0.16] group-hover:text-cyan-400/60 transition-all duration-300 group-hover:translate-x-1"
 								>
 									<path d={icons.arrowUpRight} />
 								</svg>
@@ -510,13 +511,11 @@ const connectLinks = [
 					class="flex flex-col md:flex-row items-center justify-between gap-6"
 				>
 					<div class="text-center md:text-left">
+						<a href="/" aria-label="ivantsov.tech">
+							<Brand markId="footer" class="mb-1.5" />
+						</a>
 						<p
-							class="text-base font-bold tracking-tight text-white/70 mb-1"
-						>
-							ivantsov.tech
-						</p>
-						<p
-							class="text-[0.65rem] font-mono text-white/20"
+							class="text-[0.65rem] font-mono text-white/[0.32]"
 						>
 							&copy; {new Date().getFullYear()} Alex Ivantsov
 						</p>
@@ -527,29 +526,29 @@ const connectLinks = [
 					>
 						<a
 							href="/about"
-							class="text-white/20 hover:text-white/50 transition-colors"
+							class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
 							>About</a
 						>
 						<a
 							href="https://github.com/Exploitacious"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="text-white/20 hover:text-white/50 transition-colors"
+							class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
 							>GitHub</a
 						>
 						<a
 							href="https://www.linkedin.com/in/alex-ivan-sov/"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="text-white/20 hover:text-white/50 transition-colors"
+							class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
 							>LinkedIn</a
 						>
-						<span class="text-white/10">|</span>
+						<span class="text-white/[0.16]">|</span>
 						<a
 							href="https://status.ivantsov.tech"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="flex items-center gap-1.5 text-white/25 hover:text-white/50 transition-colors"
+							class="flex items-center gap-1.5 text-white/[0.38] hover:text-white/[0.64] transition-colors"
 						>
 							<span class="relative flex h-1.5 w-1.5">
 								<span

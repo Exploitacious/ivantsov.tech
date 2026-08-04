@@ -11,11 +11,20 @@ const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
 // `linkLabel` is the destination as the reader would say it: the repo path for
 // the three public repos, plain language for the homelab (there is no repo to
 // name, and naming its parts would leak topology).
+//
+// Two claims here are deliberately narrower than they could be, because the
+// only readers who matter can check them:
+//  - Auto-M365 does NOT enable Security Defaults; TenantMaster's published
+//    config.json ships "DisableSecurityDefaults": true and the toolkit turns
+//    them off, so the baseline is described as Exchange/Entra hardening.
+//  - The public status page publishes only the Home Assistant group, not the
+//    whole 18+ fleet, so the copy and the link promise the household-facing
+//    pieces. Widen this only if the page's public group is widened first.
 const projects = [
 	{
 		name: "Auto-M365 Suite",
 		tag: "PowerShell · MSP Tooling",
-		body: "New tenant onboarding is the same forty steps every time, and doing them by hand is how things get missed. So I wrote three PowerShell toolkits — TenantMaster, ATP, and DLP — that take a fresh Microsoft 365 tenant to a managed, hardened baseline: security defaults, ATP policies, DLP templates. Everything is config-driven and non-destructive, so it can run against a live tenant without holding your breath. It has picked up 110+ stars from other people doing the same work.",
+		body: "New tenant onboarding is the same forty steps every time, and doing them by hand is how things get missed. So I wrote three PowerShell toolkits — TenantMaster, ATP, and DLP — that take a fresh Microsoft 365 tenant to a managed, hardened baseline: Exchange and Entra hardening, ATP policies, DLP templates. Everything is config-driven and non-destructive, so it can run against a live tenant without holding your breath. It has picked up 110+ stars from other people doing the same work.",
 		stack: ["PowerShell", "Microsoft 365", "Graph API"],
 		url: "https://github.com/Exploitacious/Auto-M365-TenantMaster",
 		linkLabel: "Exploitacious/Auto-M365-TenantMaster",
@@ -39,10 +48,10 @@ const projects = [
 	{
 		name: "The Homelab & AI Fleet",
 		tag: "Infrastructure · AI Fleet",
-		body: "A Proxmox estate running 18+ self-hosted services, and the reason I stay sharp on infrastructure nobody pays me to touch. On top of it sits a personal MCP gateway that gives my agents governed access to the whole thing, and a small fleet of those agents with actual day jobs: watching infrastructure, handling the household logistics nobody enjoys. No topology here, on purpose. The status page is the part worth showing.",
+		body: "A Proxmox estate running 18+ self-hosted services, and the reason I stay sharp on infrastructure nobody pays me to touch. On top of it sits a personal MCP gateway that gives my agents governed access to the whole thing, and a small fleet of those agents with actual day jobs: watching infrastructure, handling the household logistics nobody enjoys. No topology here, on purpose. The household-facing pieces have a public status page.",
 		stack: ["Proxmox", "Docker", "MCP", "Self-hosted"],
 		url: "https://status.ivantsov.tech",
-		linkLabel: "See what is running right now",
+		linkLabel: "See the public status page",
 	},
 ];
 ---

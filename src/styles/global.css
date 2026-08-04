@@ -51,6 +51,26 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Horizontal overflow guard ──
+   The pre-animation state of `.scroll-reveal.from-right` parks full-width
+   cards 48px to the right of the viewport, which made both pages 24px wider
+   than the screen at 390px and let the whole layout be dragged sideways.
+   `clip` rather than `hidden` on purpose: `hidden` still creates a scroll
+   container, so the page stayed scrollable to the dead space (that is exactly
+   what the body `overflow-x-hidden` utility failed to prevent) — `clip` has
+   no scrollport, so the offset simply cannot be reached. It is set on `html`
+   because only the root's value is what clamps documentElement.scrollWidth;
+   the same declaration on `body` alone measured no change. Repeating it on
+   `body` keeps that element's overflow-y at `visible`; leaving the utility's
+   `hidden` there would compute overflow-y to `auto` and make body a second
+   scroll container, which breaks the window.scrollY progress bar.
+   Remove this and the reveal animations re-introduce sideways drag on
+   mobile. */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* ── Scroll Reveal (base + directional variants) ── */
 .scroll-reveal {
   opacity: 0;

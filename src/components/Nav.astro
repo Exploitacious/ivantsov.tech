@@ -1,4 +1,6 @@
 ---
+import Brand from "./Brand.astro";
+
 interface Props {
 	currentPath?: string;
 }
@@ -22,11 +24,10 @@ const navLinks = [
 	<div
 		class="flex items-center gap-7 rounded-full border border-white/[0.06] bg-[#0a0d14]/40 px-5 py-2.5 backdrop-blur-xl"
 	>
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90 hover:text-white transition-colors whitespace-nowrap"
-		>
-			ivantsov.tech
+		{/* aria-label keeps the accessible name the bare-text wordmark used to
+		    give this link; the lockup itself reads as "IVANTSOV TECH". */}
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-desktop" size={18} wordmark={11} gap={8} />
 		</a>
 		<div class="flex items-center gap-5">
 			{
@@ -61,11 +62,8 @@ const navLinks = [
 	class="md:hidden fixed top-0 left-0 right-0 z-50 px-5 py-3.5 bg-[#0a0d14]/80 backdrop-blur-xl border-b border-white/[0.04]"
 >
 	<div class="flex items-center justify-between">
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90"
-		>
-			ivantsov.tech
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-mobile-bar" size={18} wordmark={11} gap={8} />
 		</a>
 		<button
 			id="menu-toggle"
@@ -94,11 +92,8 @@ const navLinks = [
 >
 	<!-- Close bar -->
 	<div class="flex items-center justify-between px-5 py-3.5">
-		<a
-			href="/"
-			class="text-sm font-semibold tracking-tight text-white/90"
-		>
-			ivantsov.tech
+		<a href="/" aria-label="ivantsov.tech">
+			<Brand markId="nav-mobile-menu" size={18} wordmark={11} gap={8} />
 		</a>
 		<button
 			id="menu-close"

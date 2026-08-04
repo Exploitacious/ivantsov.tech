@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
+import Brand from "../components/Brand.astro";
 import ilianaImage from "../assets/images/Iliana.jpg";
 import familyImage from "../assets/images/Family.jpg";
 import profileImage from "../assets/images/Alex.jpg";
@@ -510,11 +511,7 @@ const connectLinks = [
 					class="flex flex-col md:flex-row items-center justify-between gap-6"
 				>
 					<div class="text-center md:text-left">
-						<p
-							class="text-base font-bold tracking-tight text-white/70 mb-1"
-						>
-							ivantsov.tech
-						</p>
+						<Brand markId="footer" class="mb-1.5" />
 						<p
 							class="text-[0.65rem] font-mono text-white/20"
 						>

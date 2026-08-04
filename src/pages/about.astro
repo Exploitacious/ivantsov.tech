@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
+import Brand from "../components/Brand.astro";
 import profileImage from "../assets/images/Alex.jpg";
 
 // ── What I Do cards ──
@@ -521,11 +522,9 @@ const highlights = [
 				class="flex flex-col md:flex-row items-center justify-between gap-6"
 			>
 				<div class="text-center md:text-left">
-					<a
-						href="/"
-						class="text-base font-bold tracking-tight text-white/70 hover:text-white/90 transition-colors"
-						>ivantsov.tech</a
-					>
+					<a href="/" aria-label="ivantsov.tech">
+						<Brand markId="footer" class="mb-1.5" />
+					</a>
 					<p class="text-[0.65rem] font-mono text-white/20">
 						&copy; {new Date().getFullYear()} Alex Ivantsov
 					</p>

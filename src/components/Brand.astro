@@ -30,11 +30,13 @@ const {
 } = Astro.props;
 
 const clipId = `iva-clip-${markId}`;
+// Trim binary-float tails (20 * 0.66 = 13.200000000000001) out of the markup.
+const px = (n: number) => `${Math.round(n * 100) / 100}px`;
 ---
 
 <span
 	class:list={["brand-lockup", className]}
-	style={`--brand-mark-size: ${size}px; --brand-wordmark-size: ${wordmark}px; --brand-gap: ${gap}px;`}
+	style={`--brand-mark-size: ${px(size)}; --brand-wordmark-size: ${px(wordmark)}; --brand-gap: ${px(gap)};`}
 >
 	<svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
 		<defs>

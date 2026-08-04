@@ -62,9 +62,10 @@ the ten most recent tagged images).
 ## Brand
 
 The visual language — the IVA mark, the `IVANTSOV · TECH` lockup, the colour
-ramp, the white-alpha text ladder, the motion curve — is specified in
-**<https://github.com/Exploitacious/design-system>** (private). That repo is
-the source of truth; this one consumes it.
+ramp, the white-alpha text ladder, the motion curve — is specified in the
+`Exploitacious/design-system` project. That project is the source of truth;
+this repo consumes it. It is not published anywhere yet, so no link is given
+here — a URL written before the repo exists is a dead link on a public site.
 
 What that means in practice:
 

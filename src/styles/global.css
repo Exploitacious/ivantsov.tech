@@ -6,6 +6,47 @@
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
+/* ── Categorical accent palette (Exploitacious/design-system tokens/accents.css) ──
+   Declared in :root rather than @theme on purpose: these are reference tokens,
+   not utilities. Cyan still owns every interactive state and emerald owns
+   status, so generating `text-amber` etc. would only invite drift. Use one
+   categorical hue per view — never a rainbow — for tags, chart series and
+   one-off highlights. */
+:root {
+  --amber: #f59e0b;
+  --amber-light: #fbbf24;
+  --amber-soft: rgba(245, 158, 11, 0.12);
+  --amber-edge: rgba(245, 158, 11, 0.28);
+  --orange: #f97316;
+  --orange-light: #fb923c;
+  --orange-soft: rgba(249, 115, 22, 0.12);
+  --orange-edge: rgba(249, 115, 22, 0.28);
+  --coral: #fb7185;
+  --coral-light: #fda4af;
+  --coral-soft: rgba(251, 113, 133, 0.12);
+  --coral-edge: rgba(251, 113, 133, 0.28);
+  --magenta: #e879f9;
+  --magenta-light: #f0abfc;
+  --magenta-soft: rgba(232, 121, 249, 0.12);
+  --magenta-edge: rgba(232, 121, 249, 0.28);
+  --violet: #a78bfa;
+  --violet-light: #c4b5fd;
+  --violet-soft: rgba(167, 139, 250, 0.12);
+  --violet-edge: rgba(167, 139, 250, 0.28);
+  --indigo: #818cf8;
+  --indigo-light: #a5b4fc;
+  --indigo-soft: rgba(129, 140, 248, 0.12);
+  --indigo-edge: rgba(129, 140, 248, 0.28);
+  --lime: #a3e635;
+  --lime-light: #bef264;
+  --lime-soft: rgba(163, 230, 53, 0.12);
+  --lime-edge: rgba(163, 230, 53, 0.28);
+  --sand: #e2c795;
+  --sand-light: #efdcb8;
+  --sand-soft: rgba(226, 199, 149, 0.12);
+  --sand-edge: rgba(226, 199, 149, 0.28);
+}
+
 html {
   scroll-behavior: smooth;
 }

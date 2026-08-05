@@ -17,6 +17,11 @@ const icons = {
 		"M12 2v20 M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z",
 	heart: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z",
 	arrowUpRight: "M7 17L17 7M17 7H7M17 7V17",
+	// Lucide `arrow-right`, same 24x24 / 2px stroke family as the paths above.
+	// The up-right arrow means "this leaves the site" — every card that carries
+	// it links off-domain — so on-site navigation gets a horizontal arrow
+	// instead rather than borrowing the external affordance.
+	arrowRight: "M5 12h14M12 5l7 7-7 7",
 	chevronDown: "M6 9l6 6 6-6",
 	mail: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
 };
@@ -389,6 +394,74 @@ const connectLinks = [
 						</div>
 					</a>
 				</div>
+			</div>
+		</section>
+
+		<!-- ─── Projects ─── -->
+		<section class="relative px-6 pb-12 md:pb-16">
+			<div class="max-w-4xl mx-auto">
+				<a
+					href="/projects"
+					class="scroll-reveal from-left card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+					data-tilt
+					style="--stagger: 1"
+				>
+					<div class="relative p-7 md:p-10">
+						<!-- The IVA mark stands in for the photograph the two
+						     cards above carry. Decorative only, so it is hidden
+						     from assistive tech and dropped on mobile, where it
+						     would sit underneath the copy. -->
+						<img
+							src="/brand/logo.svg"
+							alt=""
+							aria-hidden="true"
+							class="hidden md:block pointer-events-none absolute right-8 top-1/2 -translate-y-1/2 w-36 opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-500"
+						/>
+
+						<div class="relative">
+							<p
+								class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
+							>
+								Projects
+							</p>
+							<h2
+								class="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+							>
+								Not a portfolio. A <span
+									class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+									>workshop.</span
+								>
+							</h2>
+							<p
+								class="text-sm md:text-base text-white/[0.50] leading-relaxed max-w-[34rem] mb-6"
+							>
+								PowerShell toolkits, an agent-authoring desktop
+								app, the AI harness I run every day, and the
+								homelab underneath it all.
+							</p>
+
+							<div class="flex items-center gap-2">
+								<span
+									class="text-xs font-mono text-white/[0.32] group-hover:text-cyan-400/70 transition-colors"
+									>See all four projects</span
+								>
+								<svg
+									width="15"
+									height="15"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-1"
+								>
+									<path d={icons.arrowRight}></path>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</a>
 			</div>
 		</section>
 

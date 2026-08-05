@@ -4,6 +4,11 @@ import Nav from "../components/Nav.astro";
 import Brand from "../components/Brand.astro";
 import profileImage from "../assets/images/Alex.jpg";
 
+// Lucide `arrow-right`, matched to the 24x24 / 2px stroke geometry of the
+// `icons` map in index.astro. The site's up-right arrow means "this leaves the
+// site"; /projects does not, so on-site navigation gets a horizontal arrow.
+const arrowRight = "M5 12h14M12 5l7 7-7 7";
+
 // ── What I Do cards ──
 const roles = [
 	{
@@ -478,6 +483,28 @@ const highlights = [
 						</div>
 					))
 				}
+			</div>
+
+			<div class="scroll-reveal mt-8" style={`--stagger: ${highlights.length + 1}`}>
+				<a
+					href="/projects"
+					class="group inline-flex items-center gap-2 text-xs font-mono text-white/[0.45] hover:text-cyan-300 transition-colors"
+				>
+					See what I build outside the day job
+					<svg
+						width="15"
+						height="15"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-1"
+					>
+						<path d={arrowRight}></path>
+					</svg>
+				</a>
 			</div>
 		</section>
 

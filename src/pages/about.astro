@@ -1,13 +1,28 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
-import Brand from "../components/Brand.astro";
+import Footer from "../components/Footer.astro";
 import profileImage from "../assets/images/Alex.jpg";
 
-// Lucide `arrow-right`, matched to the 24x24 / 2px stroke geometry of the
-// `icons` map in index.astro. The site's up-right arrow means "this leaves the
-// site"; /projects does not, so on-site navigation gets a horizontal arrow.
-const arrowRight = "M5 12h14M12 5l7 7-7 7";
+// Copy pass 2026-11-21: prose rewritten shorter (first draft by Gemini 4
+// Neon, edited for accuracy, then fact-checked against the previous copy).
+// Every number, metric, role, principle, and highlight is still here and the
+// skill lists are byte-identical; some phrasing and minor asides were cut.
+
+const copy = {
+	headline: "I run operations at a growing MSP, and I build the systems it runs on.",
+	sub: "Automation, cloud infrastructure, data pipelines, and governed AI tooling, from strategy and schema design down to the container and the alert rule.",
+	aboutMe: [
+		"I started as an MSP engineer fixing technical problems and grew into leading operations for a growing MSP. My week crosses engineering, sales, compliance, and client strategy. Because MSPs sit at the workflow layer across finance, operations, compliance, and IT, I can draw a direct line from technology choices to business outcomes.",
+		"I work as a generalist who goes deep on whichever constraint is holding an operation back, and I fix that bottleneck first. Day to day I wire our tools together with automation, run client relationships, build compliance programs, train engineers, and ship governed AI agents that work directly on live operational tools.",
+		"Over the past few years that work expanded into full-stack engineering and AI infrastructure. In a given week I ship Python FastMCP servers, extend a cross-vendor PostgreSQL entity graph, maintain an open-source MCP gateway, provision Terraform infrastructure, or deploy TypeScript edge services with OAuth 2.1 and Durable Objects. I like owning the whole line, schema through alert rule.",
+		"Outside work I build financial signals intelligence software, run a multi-agent Proxmox homelab, publish open-source tooling for other operators, and volunteer hands-on AI adoption and custom connector engineering for a local nonprofit.",
+	],
+	skillsIntro: "I operate across a wide technical surface. Here is where I go deepest.",
+	beyond: "Father first, engineer second. Outside family time I run a Proxmox homelab with 18+ services and a fleet of containerized AI agents, alongside a 2,500+ commit financial signals and options-analytics platform, a personal design system, cross-platform dotfiles, and pro-bono AI work for a local nonprofit. I learn best by running real systems in production and living with the consequences.",
+	cta: "Want to talk shop or work together? Send me a note.",
+};
 
 // ── Proof / Scale Metrics ──
 // Every number here is checked against a source before it ships:
@@ -20,51 +35,51 @@ const arrowRight = "M5 12h14M12 5l7 7-7 7";
 const scaleMetrics = [
 	{
 		value: "30+",
-		label: "Custom MCP Servers",
-		detail: "Python FastMCP & edge Workers",
+		label: "Custom MCP servers",
+		detail: "Python FastMCP and edge Workers",
 	},
 	{
 		value: "8+",
-		label: "Vendor Platforms Unified",
-		detail: "One entity graph, one record",
+		label: "Vendor platforms unified",
+		detail: "Merged in one PostgreSQL entity graph",
 	},
 	{
 		value: "260+",
-		label: "Production PowerShell Scripts",
+		label: "Production PowerShell scripts",
 		detail: "Endpoint automation library",
 	},
 	{
 		value: "19",
-		label: "Merged Upstream PRs",
+		label: "Merged upstream CIPP PRs",
 		detail: "Open-source M365 management",
 	},
 ];
 
-// ── What I Do cards ──
+// ── What I Do ──
 const roles = [
 	{
-		title: "Automation & Integration Engineering",
-		body: "I design and build the connective tissue between business tools. Webhook-driven workflows, API integrations, AI-augmented processes, whatever it takes to eliminate manual handoffs and make systems talk to each other. My primary platform is N8n, backed by PowerShell scripting and REST APIs across the entire MSP stack. These days I also build MCP servers, the layer that gives AI agents direct, governed access to that same stack.",
+		title: "Automation and integration engineering",
+		body: "I wire business tools together with N8n workflows, PowerShell, webhooks, and REST APIs to cut out manual handoffs across the MSP stack. I also build the MCP servers that give AI agents direct, governed access to those same systems.",
 	},
 	{
-		title: "IT Strategy & Client Engagement",
-		body: "I serve as the strategic IT advisor for our clients, running quarterly business reviews, building technology roadmaps, and translating business goals into actionable IT plans. I also design our sales process, build proposals, and create client-facing materials. The approach is always the same: start with the client's constraints and goals, then draw a direct line from IT to outcomes.",
+		title: "IT strategy and client engagement",
+		body: "I advise clients through quarterly business reviews and technology roadmaps, and I design our sales process, proposals, and client materials. Every engagement starts with the client's constraints and goals, then draws a direct line from IT work to business outcomes.",
 	},
 	{
-		title: "Cybersecurity & Compliance",
-		body: "I build and manage compliance programs grounded in real security, not checkbox exercises. My work spans CMMC frameworks, incident response planning, secure configuration management, and security tooling deployment. I care about red team / blue team thinking and making compliance meaningful rather than performative.",
+		title: "Cybersecurity and compliance",
+		body: "I build and run compliance programs grounded in real security: CMMC frameworks, incident response planning, secure configuration management, and security tooling rollouts. I care about red team and blue team thinking, and about making compliance meaningful rather than performative.",
 	},
 	{
-		title: "Operations & Process Design",
-		body: "I architect internal operations from dispatch workflows to change management processes, drawing on Theory of Constraints and continuous improvement principles. The goal is always the same: make the work visible, eliminate bottlenecks, and build systems the team actually follows.",
+		title: "Operations and process design",
+		body: "I design internal operations, from dispatch workflows to change management, using Theory of Constraints and continuous improvement. The goal stays the same: make the work visible, clear the bottlenecks, and write processes the team actually follows.",
 	},
 	{
-		title: "AI Platform & MCP Architecture",
-		body: "I build the production layer that connects language models to live operational tools: 30+ custom FastMCP servers, a self-hosted MCP gateway I maintain as an open-source fork, OAuth 2.1 connectors on Cloudflare Workers, and an AI teammate that works inside Microsoft Teams. Every write tool previews the change before it touches live state, reads back what actually landed, and leaves an audit trail.",
+		title: "AI platform and MCP architecture",
+		body: "I connect language models to live tools through 30+ custom FastMCP servers, a self-hosted MCP gateway I maintain as an open-source fork, OAuth 2.1 connectors on Cloudflare Workers, and an AI teammate in Microsoft Teams. Every write tool previews the change, reads back what landed, and leaves an audit trail.",
 	},
 	{
-		title: "Full-Stack Software & Cloud Infrastructure",
-		body: "I take internal platforms, web apps, and cloud environments from architecture through production. My stack spans Terraform and GitOps deployment, PostgreSQL entity graphs, FastAPI backends, Astro and React frontends, Electron desktop apps, and Grafana/Loki observability. There is no handoff wall between the application code and the infrastructure it runs on.",
+		title: "Full-stack software and cloud infrastructure",
+		body: "I take internal platforms, web apps, Electron desktop software, and cloud environments from architecture to production: Terraform and GitOps, PostgreSQL entity graphs, FastAPI, Astro and React, Grafana and Loki. No handoff wall between the application and the infrastructure under it.",
 	},
 ];
 
@@ -288,573 +303,327 @@ const skillCategories = [
 	},
 ];
 
+// Split for the skills layout: the expert tier reads in ink, advanced in
+// muted, each as run-in text rather than a wall of pills.
+const levels = [
+	{ key: "sme", label: "Expert" },
+	{ key: "advanced", label: "Advanced" },
+] as const;
+
 // ── How I Think ──
 const philosophy = [
 	{
 		headline: "Find the constraint first.",
-		body: "Every system has a bottleneck. The Theory of Constraints teaches that unless you're directly addressing the thing that's actually limiting throughput, every other improvement is an illusion. I apply this to everything: client IT strategy, internal operations, sales conversations, and my own prioritization. The first question is always the same. What's the one thing holding this back?",
+		body: "Every system has a bottleneck. Under the Theory of Constraints, improving anything other than the thing limiting throughput is an illusion. I run client IT strategy, internal operations, sales conversations, and my own task list through the same filter: what is the one thing holding this back?",
 	},
 	{
 		headline: "Make the work visible.",
-		body: "Unplanned work is the silent killer of IT operations. I'm influenced heavily by The Phoenix Project and improvement kata, the idea that every task should be visible, tracked, and intentional. When work is invisible, priorities are imaginary. I build systems and processes that force clarity: what are we doing, why, and what's blocked.",
+		body: "Unplanned work is the silent killer of IT operations. The Phoenix Project and improvement kata shaped how I work: every task should be visible, tracked, and intentional. When work is invisible, priorities are imaginary. The systems I build answer three questions: what are we doing, why, and what is blocked.",
 	},
 	{
-		headline: "Build when it gives you control. Buy when it saves your sanity.",
-		body: "I'm not dogmatic about building everything in-house. If a vendor solves the problem well and shifts the maintenance burden off my team, that's often the right call. But when control and long-term ROI matter, when the integration layer is the product, I build it myself. The automation platform I've built on N8n exists because no off-the-shelf tool could tie our stack together the way we needed. Knowing when to build and when to buy is one of the most important judgment calls in operations.",
+		headline: "Build for control. Buy for sanity.",
+		body: "If a vendor solves the problem well and takes the maintenance off my team, buying is often the right call. When control and long-term ROI matter, and the integration layer is the product, I build. The automation platform I built on N8n exists because no off-the-shelf tool could tie our stack together the way we needed.",
 	},
 	{
 		headline: "Unknown is never okay.",
-		body: "In production automation and AI tooling, silent assumptions break things fast. When a cross-vendor diagnostic checks three network platforms and one does not answer, the tool reports the coverage gap honestly instead of returning green. Every write tool I ship separates plan from execute, reads back what actually landed, and logs the mutation to an audit ledger. Safety comes from mechanisms enforced in code, never from hoping a prompt behaves.",
+		body: "Silent assumptions break production automation. When a cross-vendor diagnostic checks three network platforms and one does not answer, it reports the gap instead of returning green. Every write tool I ship separates plan from execute, reads back what landed, and logs to an audit ledger. Safety lives in code, not in a hopeful prompt.",
 	},
 	{
-		headline: "Orchestrate the work, don't grind through it solo.",
-		body: "The same discipline that scales an operations team scales AI-assisted engineering. Lock down the architecture and invariants before writing code, isolate parallel streams in git worktrees, gate merges behind real automated tests and CI checks, and review every diff. Software and operations fail for the exact same reason: when durable state lives in someone's head instead of tracked files on disk.",
+		headline: "Orchestrate the work. Keep state on disk.",
+		body: "AI-assisted engineering scales the way an operations team does. Lock the architecture and invariants first, isolate parallel streams in git worktrees, gate merges behind real tests and CI, and review every diff. Software and operations fail for the same reason: durable state living in someone's head instead of tracked files.",
 	},
 ];
 
 // ── Highlighted Work ──
+// "scoped access keys" is gone from the AI and MCP items on purpose: it
+// describes how the employer's access is gated.
 const highlights = [
 	{
-		label: "The Automation Layer",
-		title: "Built an automation platform that replaced our entire integration stack.",
-		body: "I designed and built a workflow engine on N8n that processes PSA ticket webhooks, routes security alerts through conditional logic based on JSON payload structure, enriches ticket data with AI, and syncs billing information across systems. It replaced multiple Zapier workflows, reduced manual intervention, and gave us full control over how our tools communicate. It's not pretty code. It's effective code, and it runs every day without complaint.",
+		label: "Automation platform",
+		title: "Replaced our Zapier workflows with an N8n integration engine.",
+		body: "It processes PSA ticket webhooks, routes security alerts on the structure of their JSON payloads, enriches tickets with AI, and syncs billing data across systems. It replaced multiple Zapier workflows, cut manual handoffs, and gave us full control over how our tools talk. Not pretty code. Effective code, and it runs every day without complaint.",
 	},
 	{
-		label: "Constraint-Based Sales",
-		title: "Redesigned our entire sales approach around one question: what's your constraint?",
-		body: 'I rebuilt our sales deck and discovery process around three core business metrics: financial accuracy, operational efficiency, and legal compliance, all anchored by the Theory of Constraints. Instead of leading with a feature list and hoping something sticks, we ask prospects about their business goals and constraints, then draw a direct line from IT to outcomes. It repositioned us from "IT support company" to "strategic business partner" in every conversation.',
+		label: "Constraint-based sales",
+		title: "Rebuilt our sales discovery around one question: what's your constraint?",
+		body: "I rebuilt the sales deck and discovery process around three business metrics (financial accuracy, operational efficiency, legal compliance), anchored by the Theory of Constraints. We ask prospects about their goals and constraints, then draw a direct line from IT to outcomes. It moved us from IT support company to strategic partner in every conversation.",
 	},
 	{
-		label: "Full-Stack Operations Buildout",
-		title: "Built the operational backbone of a growing MSP from scratch.",
-		body: "SOPs for helpdesk, dispatch, escalation, and project management. Legal frameworks including MSA and services guide. Vendor stack evaluation and deployment, from RMM to PSA to compliance tooling. Technical documentation library. Engineer training programs. Sales process. I didn't inherit a playbook. I wrote one, and then trained the team to run it. Most of it was built solo, under pressure, with shifting priorities. And it works.",
+		label: "Operations buildout",
+		title: "Wrote a growing MSP's operational playbook from scratch.",
+		body: "SOPs for helpdesk, dispatch, escalation, and project management. The MSA and services guide. Vendor evaluation and rollout from RMM to PSA to compliance tooling. The technical documentation library, engineer training, and the sales process. I didn't inherit a playbook. I wrote one, mostly solo under shifting priorities, then trained the team to run it.",
 	},
 	{
-		label: "AI Operations",
+		label: "AI operations",
 		title: "Gave AI real hands on the MSP stack, then put it to work.",
-		body: "I built MCP servers across our PSA, RMM, documentation, M365, and voice systems, then unified them behind a white-labeled gateway with scoped access keys. On top of that: a production AI teammate that lives in Teams, and a multi-agent orchestration harness that runs my daily operations. The AI doesn't advise from the sidelines. It reads tickets, files documentation, and executes runbooks. Governed, logged, and reviewed.",
+		body: "I built MCP servers across our PSA, RMM, documentation, M365, and voice systems behind a white-labeled gateway. On top of it run a production AI teammate in Microsoft Teams and the multi-agent orchestration harness that runs my daily operations. They read tickets, file documentation, and execute runbooks: governed, logged, and reviewed.",
 	},
 	{
-		label: "MCP & Entity Graph Architecture",
+		label: "MCP and entity graph",
 		title: "Unified 8+ vendor platforms into one entity graph and 30+ MCP servers.",
-		body: "I architected a monorepo of isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and voice, all routed through a self-hosted MCP gateway with scoped access. Underneath sits a PostgreSQL entity graph that merges users, endpoints, cameras, network gear, and inventory from 8+ vendor platforms through MAC address and identity resolution. Engineers and AI agents query one record instead of tabbing across ten vendor portals.",
+		body: "A monorepo of isolated FastMCP servers covers PSA, RMM, documentation, M365, security, billing, networking, and voice behind a self-hosted gateway. Underneath, a PostgreSQL entity graph merges users, endpoints, cameras, network gear, and inventory from 8+ vendor platforms through MAC address and identity resolution. Engineers and agents query one record instead of ten portals.",
 	},
 	{
-		label: "M365 Policy-as-Code & Open Source",
-		title: "Turned a 70+ hour Microsoft 365 tenant buildout into repeatable baselines.",
-		body: "I redesigned multi-tenant Microsoft 365 onboarding from a manual senior-engineer project into versioned Conditional Access, Intune, and Purview baseline templates that apply cleanly to a fresh tenant. When the open-source tools I depend on hit gaps, I fix them upstream: 19 merged pull requests to CIPP, the open-source M365 management platform, covering baselines, alerting, identity templates, and SharePoint.",
+		label: "M365 policy-as-code",
+		title: "Turned a 70+ hour Microsoft 365 buildout into versioned baselines.",
+		body: "Multi-tenant Microsoft 365 onboarding used to be a manual senior-engineer project. Now it is versioned Conditional Access, Intune, and Purview baseline templates that apply cleanly to a fresh tenant. When the open-source tools I depend on have gaps, I fix them upstream: 19 merged pull requests to CIPP covering baselines, alerting, identity templates, and SharePoint.",
 	},
 	{
-		label: "Pro-Bono Nonprofit AI Rollout",
-		title: "Led a local nonprofit's AI rollout and built the connectors it was missing.",
-		body: "I volunteered technical leadership to roll out Claude across a local nonprofit: org instructions, shared skills, and a staff governance playbook. Their volunteer management platform had no AI integration, so I built an OAuth 2.1 MCP connector suite on Cloudflare Workers that signs staff in through their existing Microsoft identity. Every write is previewed, confirmed, read back, and logged.",
+		label: "Pro-bono nonprofit AI",
+		title: "Led a local nonprofit's Claude rollout and built the connectors it lacked.",
+		body: "I volunteered to lead a local nonprofit's rollout of Claude: org instructions, shared skills, and a staff governance playbook. Their volunteer management platform had no AI integration, so I built an OAuth 2.1 MCP connector suite on Cloudflare Workers that signs staff in with their existing Microsoft identity. Every write is previewed, confirmed, read back, and logged.",
 	},
+];
+
+// ── One client, eight names ──
+// EXAMPLE DATA. Northwind Traders is Microsoft's long-standing fictional
+// sample company; every ID below is invented. The table shows the shape of
+// the entity-resolution problem without exposing a real client, a real
+// vendor tenant, or how the production graph is secured.
+const resolution = [
+	{ system: "PSA", id: "29184", name: "Northwind Traders, Inc." },
+	{ system: "RMM", id: "org-0412", name: "NORTHWIND-TRADERS" },
+	{ system: "Documentation", id: "1180457", name: "Northwind Traders" },
+	{ system: "Microsoft 365", id: "6f1c…08e2", name: "northwindtraders.onmicrosoft.com" },
+	{ system: "Endpoint security", id: "grp-77", name: "Northwind" },
+	{ system: "Billing", id: "CUST-00913", name: "NORTHWIND TRADERS INC" },
+	{ system: "Network", id: "site-3", name: "NWT-Main-Office" },
+	{ system: "Voice", id: "nwt", name: "northwind.voice" },
 ];
 ---
 
 <Layout
-	title="About — Alex Ivantsov | Operations Manager & Systems Engineer"
-	description="Operations Manager and Systems Engineer specializing in MSP operations, automation, cybersecurity, and IT strategy. Building systems that make technology serve the people who depend on it."
+	title="About | Alex Ivantsov, operations manager and systems engineer"
+	description="Operations manager and systems engineer: MSP operations, automation, AI tooling, cybersecurity, and IT strategy."
 >
 	<Nav currentPath="/about" />
 
-	<main class="px-6 pt-24 md:pt-36 pb-12">
-		<!-- ═══ 1. Hero ═══ -->
-		<section class="max-w-4xl mx-auto mb-16 text-center">
-			<div class="about-fade" style="--delay: 0">
-				<div
-					class="w-44 h-44 mx-auto mb-6 rounded-full overflow-hidden border-2 border-white/10 shadow-lg shadow-cyan-900/10"
-				>
-					<img
-						src={profileImage.src}
-						alt="Alex Ivantsov"
-						class="w-full h-full object-cover"
-					transition:name="profile"
-					/>
-				</div>
-			</div>
-
-			<div class="about-fade" style="--delay: 80">
-				<h1
-					class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3"
-				>
-					<span class="font-sans text-white">Alex </span><span
-						class="font-serif italic text-shimmer"
-						transition:name="name-accent"
-						>Ivantsov</span
-					>
+	<main id="main">
+		<!-- Hero -->
+		<section class="mx-auto max-w-6xl px-5 md:px-8 pt-12 md:pt-20 pb-14 grid md:grid-cols-12 gap-10 md:gap-12 items-end">
+			<div class="md:col-span-8">
+				<p class="text-sm text-muted mb-5">Alex Ivantsov, about and experience</p>
+				<h1 class="display text-[clamp(2.4rem,5.2vw,4.25rem)] font-semibold leading-[1.02]">
+					{copy.headline}
 				</h1>
+				<p class="mt-6 text-lg md:text-xl text-muted prose-measure">{copy.sub}</p>
 			</div>
-
-			<div class="about-fade" style="--delay: 160">
-				<p
-					class="text-lg md:text-xl font-bold text-white/[0.64]"
-				>
-					Operations Manager. Systems Engineer. Builder of Things
-					That Work.
-				</p>
-			</div>
-
-			<!-- Scale / Proof strip -->
-			<div
-				class="about-fade grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 text-left"
-				style="--delay: 240"
-			>
-				{
-					scaleMetrics.map((metric) => (
-						<div class="rounded-2xl bg-[#0f1420] border border-white/[0.05] px-4 py-4">
-							<p class="text-2xl md:text-3xl font-extrabold font-mono text-cyan-400 tracking-tight mb-1">
-								{metric.value}
-							</p>
-							<p class="text-xs font-semibold text-white/[0.78]">
-								{metric.label}
-							</p>
-							<p class="text-[0.65rem] font-mono text-white/[0.38] mt-0.5">
-								{metric.detail}
-							</p>
-						</div>
-					))
-				}
-			</div>
-
-			<!-- Quick section jump links -->
-			<div
-				class="about-fade flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-7 text-[0.65rem] font-mono uppercase tracking-[0.18em]"
-				style="--delay: 300"
-			>
-				<a
-					href="#about"
-					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-					>About</a
-				>
-				<a
-					href="#capabilities"
-					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-					>What I Do</a
-				>
-				<a
-					href="#expertise"
-					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-					>Technical Expertise</a
-				>
-				<a
-					href="#principles"
-					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-					>How I Think</a
-				>
-				<a
-					href="#work"
-					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-					>Shipped Work</a
-				>
-				<a
-					href="/projects"
-					class="text-cyan-400/70 hover:text-cyan-300 transition-colors"
-					>Projects &rarr;</a
-				>
+			<div class="md:col-span-4">
+				<Image
+					src={profileImage}
+					alt="Alex Ivantsov"
+					widths={[300, 600]}
+					sizes="(min-width: 768px) 30vw, 60vw"
+					loading="eager"
+					transition:name="profile"
+					class="w-48 md:w-full md:max-w-[17rem] md:ml-auto rounded-md"
+				/>
 			</div>
 		</section>
 
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 2. About Me ═══ -->
-		<section id="about" class="max-w-3xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-6"
-				>
-					About Me
-				</h2>
-			</div>
-
-			<div class="space-y-5">
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					I've spent my career in the managed services space,
-					where IT meets real business operations. Started out
-					as an engineer solving technical problems, and
-					somewhere along the way I became the person solving
-					business problems with technology.
-				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					Today I lead operations at a growing MSP. My role
-					crosses engineering, sales, compliance, and strategy,
-					often in the same afternoon. I build the automation
-					workflows that connect our tools, run the client
-					relationships, design the compliance programs, and
-					train the team that delivers it all. Lately I've
-					been building the AI layer that works alongside
-					them: agents with real access to our tools, doing
-					real work under real governance.
-				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					I'm not a specialist who goes deep on one thing. I'm
-					a generalist who goes deep on whatever matters most at
-					the time. I've gotten comfortable operating where
-					technical execution meets business strategy, and the
-					work I care about most is finding the constraint: the
-					one thing actually holding an operation back, and
-					solving that before anything else.
-				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					I think the MSP model is underrated. We sit at the
-					workflow layer, not the feature layer. We see the whole
-					picture: finance, operations, compliance, IT. We can
-					draw direct lines between technology decisions and
-					business outcomes. That perspective shapes everything
-					I do.
-				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					Over the past few years that builder streak pulled me
-					deep into full-stack platform engineering and AI
-					infrastructure. On any given week I might ship Python
-					FastMCP servers, evolve a cross-vendor PostgreSQL
-					entity graph, maintain an open-source MCP gateway,
-					provision cloud infrastructure in Terraform, or deploy
-					TypeScript services to the edge with OAuth 2.1 and
-					Durable Objects. I like owning the whole line from
-					strategy and schema design down to the container and
-					the alert rule.
-				</p>
-				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
-					That work doesn't stop at the office door. Outside the
-					day job I build financial signals intelligence software,
-					run a multi-agent Proxmox homelab, publish open-source
-					tooling for other operators, and volunteer hands-on AI
-					adoption and custom connector engineering for a local
-					nonprofit.
-				</p>
-			</div>
-		</section>
-
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 3. What I Do ═══ -->
-		<section id="capabilities" class="max-w-5xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-8">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
-				>
-					What I Do
-				</h2>
-			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+		<!-- Metrics -->
+		<section class="mx-auto max-w-6xl px-5 md:px-8">
+			<dl class="grid grid-cols-2 md:grid-cols-4 border-y border-rule">
 				{
-					roles.map((role, i) => (
+					scaleMetrics.map((m, i) => (
 						<div
-							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6`}
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
+							class:list={[
+								"py-6 md:py-8 pr-4 md:px-6",
+								i % 2 === 1 && "pl-4 border-l border-rule",
+								i >= 2 && "border-t border-rule md:border-t-0",
+								i === 2 && "md:border-l",
+								i === 0 && "md:pl-0",
+							]}
 						>
-							<div class="w-8 h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent rounded-full mb-4" />
-							<h3 class="text-sm font-bold text-white/[0.88] mb-3">
-								{role.title}
-							</h3>
-							<p class="text-sm text-white/[0.45] leading-relaxed">
-								{role.body}
-							</p>
+							<dt class="sr-only">{m.label}</dt>
+							<dd class="font-mono text-4xl md:text-5xl font-medium tracking-tight text-ink">{m.value}</dd>
+							<dd class="mt-2 font-semibold leading-snug">{m.label}</dd>
+							<dd class="mt-1 text-sm text-muted">{m.detail}</dd>
 						</div>
 					))
 				}
+			</dl>
+
+			<nav aria-label="On this page" class="flex flex-wrap gap-x-6 gap-y-2 py-6 text-sm">
+				<a href="#about" class="link">About</a>
+				<a href="#capabilities" class="link">What I do</a>
+				<a href="#one-record" class="link">One record</a>
+				<a href="#expertise" class="link">Technical expertise</a>
+				<a href="#principles" class="link">How I think</a>
+				<a href="#work" class="link">Shipped work</a>
+				<a href="/projects" class="link">Projects</a>
+			</nav>
+		</section>
+
+		<!-- About me -->
+		<section id="about" class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12 scroll-mt-20">
+			<h2 class="md:col-span-4 display text-3xl md:text-4xl font-semibold">About</h2>
+			<div class="md:col-span-8 space-y-5 text-lg leading-relaxed">
+				{copy.aboutMe.map((p, i) => <p class:list={["prose-measure", i === 0 ? "text-ink" : "text-muted"]}>{p}</p>)}
 			</div>
 		</section>
 
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 4. Technical Expertise ═══ -->
-		<section id="expertise" class="max-w-5xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-4">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
-				>
-					Technical Expertise
-				</h2>
-			</div>
-
-			<div class="scroll-reveal mb-6">
-				<p class="text-sm text-white/[0.45] mb-3">
-					I operate across a wide technical surface area. Here's
-					where I go deepest.
-				</p>
-				<div
-					class="flex items-center gap-4 text-[0.65rem] text-white/[0.38] font-mono"
-				>
-					<span class="flex items-center gap-1.5">
-						<span
-							class="inline-block w-2.5 h-2.5 rounded-sm bg-cyan-500/20 border border-cyan-500/30"
-						></span>
-						Subject Matter Expert
-					</span>
-					<span class="flex items-center gap-1.5">
-						<span
-							class="inline-block w-2.5 h-2.5 rounded-sm border border-white/15"
-						></span>
-						Advanced
-					</span>
+		<!-- What I do -->
+		<section id="capabilities" class="border-t border-rule scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<h2 class="md:col-span-4 display text-3xl md:text-4xl font-semibold">What I do</h2>
+				<div class="md:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-10">
+					{
+						roles.map((role) => (
+							<div>
+								<h3 class="text-lg font-semibold leading-snug">{role.title}</h3>
+								<p class="mt-2 text-muted leading-relaxed">{role.body}</p>
+							</div>
+						))
+					}
 				</div>
 			</div>
+		</section>
 
-			<div class="space-y-5">
-				{
-					skillCategories.map((cat, i) => (
-						<div
-							class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-5"
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
-						>
-							<h3 class="text-xs font-semibold text-white/[0.64] mb-3">
-								{cat.name}
-							</h3>
-							<div class="flex flex-wrap gap-1.5">
-								{cat.sme.map((skill, j) => (
-									<span class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80" style={`--pill-i: ${j}`}>
-										{skill}
-									</span>
-								))}
-								{cat.advanced.map((skill, j) => (
-									<span class="skill-pill px-2.5 py-1 rounded-md border border-white/[0.08] text-[0.7rem] text-white/[0.50]" style={`--pill-i: ${cat.sme.length + j}`}>
-										{skill}
-									</span>
-								))}
+		<!-- One record: the signature piece. Example data, labeled as such. -->
+		<section id="one-record" class="bg-surface scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<div class="md:col-span-4">
+					<h2 class="display text-3xl md:text-4xl font-semibold">One client, eight names</h2>
+					<p class="mt-4 text-muted leading-relaxed">
+						Every vendor platform knows the same client by a different ID and a
+						different spelling. The entity graph resolves them into one record,
+						so an engineer or an AI agent asks one question instead of opening a
+						portal per vendor.
+					</p>
+				</div>
+				<div class="md:col-span-8">
+					{/* Phones keep only the system and its name for the client, the two
+					    columns that make the point; IDs appear from sm up. There is no
+					    "matched on" column on purpose: per-system match keys would
+					    describe the production graph's design, which stays private. */}
+					<table class="w-full text-left text-sm">
+						<caption class="caption-top text-left pb-3 text-sm text-muted">
+							<span class="font-semibold text-ink">Example data.</span> Northwind Traders is a fictional company and every ID is invented.
+						</caption>
+						<thead>
+							<tr class="border-b border-ink/25 text-muted">
+								<th scope="col" class="py-2.5 pr-4 font-medium">System</th>
+								<th scope="col" class="hidden sm:table-cell py-2.5 pr-4 font-medium">Its ID</th>
+								<th scope="col" class="py-2.5 font-medium">Its name for the client</th>
+							</tr>
+						</thead>
+						<tbody class="font-mono text-[0.8rem]">
+							{
+								resolution.map((r) => (
+									<tr class="border-b border-rule">
+										<th scope="row" class="py-2.5 pr-4 font-sans text-sm font-medium text-ink">{r.system}</th>
+										<td class="hidden sm:table-cell py-2.5 pr-4 text-muted">{r.id}</td>
+										<td class="py-2.5 text-ink break-all">{r.name}</td>
+									</tr>
+								))
+							}
+						</tbody>
+						<tfoot>
+							<tr>
+								<th scope="row" class="pt-4 pr-4 font-sans text-sm font-semibold text-accent align-top">Entity graph</th>
+								<td class="hidden sm:table-cell pt-4 pr-4 font-mono text-[0.8rem] text-accent align-top">ent_7f3a91</td>
+								<td class="pt-4 align-top">
+									<span class="font-semibold text-base text-ink">Northwind Traders</span>
+									<span class="block text-sm text-muted mt-0.5">One record for its users, endpoints, cameras, network gear, and inventory</span>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</section>
+
+		<!-- Technical expertise -->
+		<section id="expertise" class="scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<div class="md:col-span-4">
+					<h2 class="display text-3xl md:text-4xl font-semibold">Technical expertise</h2>
+					<p class="mt-4 text-muted leading-relaxed">{copy.skillsIntro}</p>
+					<p class="mt-4 text-sm text-muted">
+						Each category lists two depths: <span class="text-ink font-semibold">Expert</span>,
+						where I am the subject matter expert, then <span class="text-ink font-semibold">Advanced</span>.
+					</p>
+				</div>
+				<dl class="md:col-span-8 border-t border-rule">
+					{
+						skillCategories.map((cat) => (
+							<div class="grid sm:grid-cols-8 gap-2 sm:gap-6 py-5 border-b border-rule">
+								<dt class="sm:col-span-2 font-semibold leading-snug">{cat.name}</dt>
+								<dd class="sm:col-span-6 space-y-2 leading-relaxed">
+									{levels.map((lvl) =>
+										cat[lvl.key].length > 0 && (
+											<p class:list={[lvl.key === "sme" ? "text-ink" : "text-muted"]}>
+												<span class="mr-2 text-xs font-semibold text-muted">{lvl.label}</span>
+												{cat[lvl.key].join(", ")}
+											</p>
+										)
+									)}
+								</dd>
 							</div>
-						</div>
-					))
-				}
+						))
+					}
+				</dl>
 			</div>
 		</section>
 
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 5. How I Think ═══ -->
-		<section id="principles" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-8">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
-				>
-					How I Think
-				</h2>
-			</div>
-
-			<div class="space-y-8">
-				{
-					philosophy.map((block, i) => (
-						<div
-							class="scroll-reveal from-left border-l-2 border-cyan-500/20 pl-6"
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
-						>
-							<p class="text-lg md:text-xl font-bold text-white/[0.78] mb-3">
-								"{block.headline}"
-							</p>
-							<p class="text-sm text-white/[0.45] leading-relaxed max-w-[42rem]">
-								{block.body}
-							</p>
-						</div>
-					))
-				}
+		<!-- How I think -->
+		<section id="principles" class="border-t border-rule scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<h2 class="md:col-span-4 display text-3xl md:text-4xl font-semibold">How I think</h2>
+				<div class="md:col-span-8 space-y-10">
+					{
+						philosophy.map((block) => (
+							<div>
+								<p class="display text-2xl md:text-[1.75rem] font-semibold leading-tight">{block.headline}</p>
+								<p class="mt-3 text-muted leading-relaxed prose-measure">{block.body}</p>
+							</div>
+						))
+					}
+				</div>
 			</div>
 		</section>
 
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 6. Highlighted Work ═══ -->
-		<section id="work" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-8">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
-				>
-					Work I'm Proud Of
-				</h2>
-			</div>
-
-			<div class="space-y-5">
-				{
-					highlights.map((item, i) => (
-						<div
-							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
-						>
-							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
-								{item.label}
-							</p>
-							<h3 class="text-base md:text-lg font-bold text-white/[0.78] mb-3">
-								{item.title}
-							</h3>
-							<p class="text-sm text-white/[0.45] leading-relaxed">
-								{item.body}
-							</p>
-						</div>
-					))
-				}
-			</div>
-
-			<div class="scroll-reveal mt-8" style="--stagger: 2">
-				<a
-					href="/projects"
-					class="group inline-flex items-center gap-2 text-xs font-mono text-white/[0.45] hover:text-cyan-300 transition-colors"
-				>
-					See what I build outside the day job
-					<svg
-						width="15"
-						height="15"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-1"
-					>
-						<path d={arrowRight}></path>
-					</svg>
-				</a>
+		<!-- Shipped work -->
+		<section id="work" class="border-t border-rule scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<div class="md:col-span-4">
+					<h2 class="display text-3xl md:text-4xl font-semibold">Work I'm proud of</h2>
+					<a href="/projects" class="link mt-4 inline-block text-sm font-medium">What I build outside the day job</a>
+				</div>
+				<ol class="md:col-span-8">
+					{
+						highlights.map((item, i) => (
+							<li class:list={["py-8", i > 0 && "border-t border-rule", i === 0 && "pt-0"]}>
+								<p class="text-sm font-semibold text-accent">{item.label}</p>
+								<h3 class="mt-2 text-xl md:text-2xl font-semibold leading-snug">{item.title}</h3>
+								<p class="mt-3 text-muted leading-relaxed prose-measure">{item.body}</p>
+							</li>
+						))
+					}
+				</ol>
 			</div>
 		</section>
 
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
-		></div>
-
-		<!-- ═══ 7. Beyond Work ═══ -->
-		<section id="beyond" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-6">
-				<h2
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
-				>
-					Beyond Work
-				</h2>
-			</div>
-
-			<div
-				class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6 space-y-4"
-			>
-				<p class="text-sm text-white/[0.50] leading-relaxed">
-					Father first, engineer second. When I'm not building
-					systems or chasing constraints, I'm spending time with
-					my family, tinkering in my home lab, or finding
-					something new to learn. I run a Proxmox server with 18+
-					services because I genuinely enjoy the problem-solving —
-					it doesn't stop being fun just because the workday ends.
-					I'm a lifelong tech nerd who still gets excited about
-					cool hardware, clever automation, and elegant solutions
-					to messy problems.
-				</p>
-				<p class="text-sm text-white/[0.50] leading-relaxed">
-					That lab now hosts my own fleet of containerized AI
-					agents, alongside a 2,500+ commit financial signals and
-					options-analytics platform, a personal design system,
-					cross-platform dotfiles, and pro-bono AI engineering for
-					a local nonprofit. I learn
-					best by putting real systems into production and living
-					with the consequences.
-				</p>
+		<!-- Beyond work -->
+		<section id="beyond" class="border-t border-rule scroll-mt-20">
+			<div class="mx-auto max-w-6xl px-5 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12">
+				<h2 class="md:col-span-4 display text-3xl md:text-4xl font-semibold">Beyond work</h2>
+				<p class="md:col-span-8 text-lg text-muted leading-relaxed prose-measure">{copy.beyond}</p>
 			</div>
 		</section>
 
-		<!-- ═══ 8. CTA ═══ -->
-		<section class="scroll-reveal max-w-4xl mx-auto text-center pb-4">
-			<div class="section-divider w-full mb-12"></div>
-			<p class="text-sm text-white/[0.38] mb-5">
-				Want to work together, talk shop, or just say hello?
-			</p>
-			<div class="flex justify-center gap-3 flex-wrap">
-				<a
-					href="mailto:alex@ivantsov.tech"
-					class="btn-magnetic text-sm font-medium bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full"
-				>
-					Get in Touch
-				</a>
-				<a
-					href="/"
-					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/[0.78] hover:text-white px-6 py-2.5 rounded-full"
-				>
-					Back Home
-				</a>
+		<!-- CTA -->
+		<section class="mx-auto max-w-6xl px-5 md:px-8">
+			<div class="border-t border-ink pt-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+				<p class="display text-2xl md:text-3xl font-semibold">{copy.cta}</p>
+				<div class="flex flex-wrap gap-3">
+					<a href="mailto:alex@ivantsov.tech" class="btn btn-solid">Email me</a>
+					<a href="/projects" class="btn btn-quiet">See the projects</a>
+				</div>
 			</div>
 		</section>
 	</main>
 
-	<!-- Footer -->
-	<footer
-		class="mt-8 rounded-t-[2.5rem] bg-[#080b11] border-t border-white/[0.03] px-6 py-12"
-	>
-		<div class="max-w-4xl mx-auto">
-			<div
-				class="flex flex-col md:flex-row items-center justify-between gap-6"
-			>
-				<div class="text-center md:text-left">
-					<a href="/" aria-label="ivantsov.tech">
-						<Brand markId="footer" class="mb-1.5" />
-					</a>
-					<p class="text-[0.65rem] font-mono text-white/[0.32]">
-						&copy; {new Date().getFullYear()} Alex Ivantsov
-					</p>
-				</div>
-				<div
-					class="flex items-center gap-5 text-[0.65rem] font-mono"
-				>
-					<a
-						href="/projects"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>Projects</a
-					>
-					<a
-						href="https://github.com/Exploitacious"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>GitHub</a
-					>
-					<a
-						href="https://www.linkedin.com/in/alex-ivan-sov/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>LinkedIn</a
-					>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<Footer />
 </Layout>
-
-<style>
-	.about-fade {
-		opacity: 0;
-		transform: translateY(16px);
-		animation: aboutIn 0.6s ease-out forwards;
-		animation-delay: calc(var(--delay, 0) * 1ms);
-	}
-
-	@keyframes aboutIn {
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>
-
-<script>
-	function initAbout() {
-		const revealObserver = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add("visible");
-					}
-				});
-			},
-			{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
-		);
-
-		document
-			.querySelectorAll(".scroll-reveal, .divider-reveal")
-			.forEach((el) => {
-				revealObserver.observe(el);
-			});
-	}
-
-	initAbout();
-	document.addEventListener("astro:page-load", initAbout);
-</script>

@@ -1,16 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
-import Brand from "../components/Brand.astro";
-
-// Lifted from the `icons` map in index.astro rather than re-typed, so the
-// arrow keeps the same 24x24 stroke geometry as the featured/connect cards.
-const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
+import Footer from "../components/Footer.astro";
 
 // ── Projects ──
 // `linkLabel` is the destination as the reader would say it: the repo path for
 // public GitHub repos. Private platforms and homelab infrastructure carry no
-// external CTA so public visitors never hit a 404 or Cloudflare Access login.
+// external link so public visitors never hit a 404 or an access login.
 //
 // Claims here stay strictly verifiable against the code and public repos:
 //  - Auto-M365 does NOT enable Security Defaults; TenantMaster's published
@@ -21,14 +17,20 @@ const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
 //  - Employer work is described at capability level, in first person, with no
 //    employer name, repo link, or security architecture (access gating, secret
 //    storage, network layout). The MetaMCP fork lives under the employer's
-//    GitHub org, so its card carries no link.
-//  - The list is curated, not exhaustive: a project earns a card when it shows
-//    something no other card does. Dropped on 2026-11-21: the dotfiles repo,
+//    GitHub org, so its row carries no link. "Scoped access keys" was cut
+//    from the MCP platform for the same reason (2026-11-21 copy pass).
+//  - The list is curated, not exhaustive: a project earns a row when it shows
+//    something no other row does. Dropped on 2026-11-21: the dotfiles repo,
 //    the early scripts repo, internal quoting apps, the design system, and the
 //    seat-rotation tooling (it reads as usage-limit evasion on a resume).
+//
+// Copy pass 2026-11-21: bodies rewritten shorter and each project gained a
+// one-line `hook` (first draft by Gemini 4 Neon, edited for accuracy). Names
+// and stacks are unchanged, except the OPS name, which lost its em dash.
 type ProjectItem = {
 	name: string;
 	tag: string;
+	hook: string;
 	body: string;
 	stack: string[];
 	url?: string;
@@ -38,388 +40,203 @@ type ProjectItem = {
 const openSourceProjects: ProjectItem[] = [
 	{
 		name: "Auto-M365 Suite",
-		tag: "PowerShell · MSP Tooling",
-		body: "New tenant onboarding is the same forty steps every time, and doing them by hand is how things get missed. So I wrote three PowerShell toolkits — TenantMaster, ATP, and DLP — that take a fresh Microsoft 365 tenant to a managed, hardened baseline: Exchange and Entra hardening, ATP policies, DLP templates. Everything is config-driven and non-destructive, so it can run against a live tenant without holding your breath. The suite has picked up 100+ stars from other people doing the same work.",
+		tag: "PowerShell, MSP tooling",
+		hook: "Forty steps of Microsoft 365 tenant onboarding, done by config instead of by hand.",
+		body: "Three PowerShell toolkits (TenantMaster, ATP, and DLP) take a fresh Microsoft 365 tenant to a managed, hardened baseline: Exchange and Entra hardening, ATP policies, DLP templates. Everything is config-driven and non-destructive, so it runs against a live tenant without holding your breath. 100+ stars from other people doing the same work.",
 		stack: ["PowerShell", "Microsoft 365", "Graph API"],
 		url: "https://github.com/Exploitacious/Auto-M365-TenantMaster",
 		linkLabel: "Exploitacious/Auto-M365-TenantMaster",
 	},
 	{
 		name: "Hatchling",
-		tag: "Desktop App · LLM Tool-Use",
-		body: "Writing a good agent personality from a blank file is hard. Hatchling turns it into a conversation: you talk to a model, and it writes the SOUL, IDENTITY, and USER files through tool calls as it works out what you are after. The output is plain markdown you own outright, no hosted account and nothing to lock into. It is a local-first Electron app, MIT licensed, and it runs against Anthropic, anything OpenAI-compatible, Ollama, or fully offline.",
+		tag: "Desktop app, LLM tool-use",
+		hook: "Write an AI agent's personality by talking to it, not by staring at a blank file.",
+		body: "You talk through what you want, and the model writes the SOUL, IDENTITY, and USER files through tool calls as it works out what you are after. The output is plain markdown you own outright, no hosted account. Local-first Electron, MIT licensed, and it runs against Anthropic, anything OpenAI-compatible, Ollama, or fully offline.",
 		stack: ["Electron", "React", "TypeScript", "LLM tool-use"],
 		url: "https://github.com/Exploitacious/hatchling",
 		linkLabel: "Exploitacious/hatchling",
 	},
 	{
-		name: "OPS — the Operator's Shell",
-		tag: "AI Harness · Template",
-		body: "Most people prompt. This is the operating system I built for working with the model instead. OPS is a de-identified copy of the Claude Code harness I actually run every day: foreman doctrine, where the AI orchestrates sub-agents rather than grinding through the work solo, plus persistent memory, session rituals, and the delegation patterns that keep a multi-agent run from falling apart. Public because the pattern is worth more shared than hoarded.",
+		name: "OPS: the Operator's Shell",
+		tag: "AI harness, template",
+		hook: "A de-identified copy of the Claude Code harness I run every day.",
+		body: "Foreman doctrine, where the AI orchestrates sub-agents instead of grinding through the work solo, plus persistent memory, session rituals, and the delegation patterns that keep a multi-agent run from falling apart. Public because the pattern is worth more shared than hoarded.",
 		stack: ["Claude Code", "Multi-agent", "Markdown doctrine"],
 		url: "https://github.com/Exploitacious/OPS",
 		linkLabel: "Exploitacious/OPS",
 	},
 	{
 		name: "CIPP Upstream Contributions",
-		tag: "Open Source · M365 Management",
-		body: "CIPP is the open-source platform a lot of MSPs use to manage Microsoft 365 tenants at scale. When I hit a defect in it, I fix it upstream instead of working around it locally: 19 merged pull requests so far, covering baseline overrides and imports, Conditional Access templates, alert delivery retries, Defender incident handling, per-tenant identity templates, and SharePoint recycle bin and access reporting.",
+		tag: "Open source, M365 management",
+		hook: "19 merged pull requests to the open-source platform many MSPs use to manage Microsoft 365.",
+		body: "When I hit a defect in CIPP, I fix it upstream instead of working around it locally. The merged work covers baseline overrides and imports, Conditional Access templates, alert delivery retries, Defender incident handling, per-tenant identity templates, and SharePoint recycle bin and access reporting.",
 		stack: ["PowerShell", "React", "Microsoft Graph", "Azure Functions"],
 		url: "https://github.com/CyberDrain/CIPP/pulls?q=is%3Apr+author%3AExploitacious+is%3Amerged",
 		linkLabel: "CyberDrain/CIPP merged PRs",
 	},
 	{
 		name: "MetaMCP Gateway (Maintained Fork)",
-		tag: "MCP Proxy · Open Source Fork",
-		body: "When the upstream MetaMCP gateway stalled for months, a production AI tool layer I run depended on it. Rather than wait, I maintain a public downstream fork that carries community pull requests plus my own hardening: deterministic tool ordering, connection-pool reliability, session recovery, error-gated server visibility, and structured tool-call audit logging. It has 35+ stars and automated container builds.",
+		tag: "MCP proxy, open-source fork",
+		hook: "Upstream stalled for months. A production AI tool layer couldn't wait, so I forked it.",
+		body: "A public downstream fork that carries community pull requests plus my own hardening: deterministic tool ordering, connection-pool reliability, session recovery, error-gated server visibility, and structured tool-call audit logging. 35+ stars and automated container builds.",
 		stack: ["TypeScript", "Next.js", "Turborepo", "MCP", "Docker"],
 	},
 	{
 		name: "OneNote to Obsidian Migration Toolkit",
-		tag: "Migration Utility · Python",
-		body: "Moving years of operational documentation out of OneNote usually destroys formatting and strands embedded screenshots. I wrote a Python converter and PowerShell vault bootstrapper that turns exported .mht notebooks into clean Obsidian markdown with preserved images and searchable OCR text. Tested in production against 5 real notebooks covering 560+ pages and 585+ images at 99.7 to 100% word fidelity.",
+		tag: "Migration utility, Python",
+		hook: "Years of OneNote documentation out, with the screenshots and formatting intact.",
+		body: "A Python converter and PowerShell vault bootstrapper turn exported .mht notebooks into clean Obsidian markdown with preserved images and searchable OCR text. Tested in production on 5 real notebooks: 560+ pages and 585+ images at 99.7 to 100% word fidelity.",
 		stack: ["Python", "PowerShell", "OCR", "Obsidian"],
 		url: "https://github.com/Exploitacious/OneNote-to-Obsidian",
 		linkLabel: "Exploitacious/OneNote-to-Obsidian",
 	},
 	{
 		name: "agentfarm",
-		tag: "Agent Provisioning · Proxmox",
-		body: "Spinning up a self-hosted AI agent shouldn't take an afternoon of boilerplate. agentfarm packages the deployment scripts and container templates I use to stand up autonomous agents on Proxmox LXC or any Debian/Ubuntu host with a single command: tiered model routing, messaging bridges, Tailscale connectivity, persistent memory plugins, and initial hatching setup.",
+		tag: "Agent provisioning, Proxmox",
+		hook: "A self-hosted AI agent from one command instead of an afternoon of boilerplate.",
+		body: "The deployment scripts and container templates I use to stand up autonomous agents on Proxmox LXC or any Debian or Ubuntu host: tiered model routing, messaging bridges, Tailscale connectivity, persistent memory plugins, and initial hatching setup.",
 		stack: ["Shell", "Proxmox LXC", "Tailscale", "Docker"],
 		url: "https://github.com/Exploitacious/agentfarm",
 		linkLabel: "Exploitacious/agentfarm",
 	},
 ];
 
+// The flagship leads the private list.
 const productionBuilds: ProjectItem[] = [
 	{
-		name: "The Homelab & AI Fleet",
-		tag: "Infrastructure · AI Fleet",
-		// No external CTA: the status page is private now (Cloudflare Access).
-		body: "A Proxmox estate running 18+ self-hosted services, and the reason I stay sharp on infrastructure nobody pays me to touch. On top of it sits a personal MCP gateway that gives my agents governed access to the whole thing, and a small fleet of those agents with actual day jobs: watching infrastructure, handling the household logistics nobody enjoys. No topology here, on purpose. The household-facing pieces have their own uptime monitoring, kept private.",
-		stack: ["Proxmox", "Docker", "MCP", "Self-hosted"],
-	},
-	{
-		name: "Financial Signals & Market Intelligence Platform",
-		tag: "Full-Stack · Signals Intelligence",
-		body: "Over 2,500 commits of continuous engineering on a multi-service market analytics platform. A FastAPI backend pulls live brokerage options chains (GEX, ZGL, PCR), macro liquidity feeds, dark pool positioning, price technicals, and AI-scored news sentiment on tiered 5-minute, 15-minute, and overnight schedules. It classifies market regimes, computes composite health scores, fires threshold alerts, serves an Astro SSR dashboard, exposes 13 task-oriented MCP tools for AI trading agents, and monitors itself with an isolated crash-loop watchdog sidecar.",
-		stack: ["Python", "FastAPI", "Astro SSR", "MCP", "Options Analytics", "Macro Data"],
-	},
-	{
 		name: "Enterprise MCP Platform & Cross-Vendor Entity Graph",
-		tag: "Production AI Infra · Data Engineering",
-		body: "A monorepo of 30+ isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and voice, all behind a self-hosted MCP gateway with scoped access keys. Underneath runs a PostgreSQL entity graph with 130+ schema migrations and scheduled sync workers that unify people, devices, cameras, network gear, and inventory across 8+ vendor platforms through MAC address and identity resolution.",
+		tag: "Production AI infrastructure, data engineering",
+		hook: "30+ MCP servers, and one PostgreSQL graph that unifies 8+ vendor platforms.",
+		body: "A monorepo of isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and voice, behind a self-hosted MCP gateway. Underneath runs a PostgreSQL entity graph with 130+ schema migrations and scheduled sync workers that unify people, devices, cameras, network gear, and inventory across platforms through MAC address and identity resolution.",
 		stack: ["Python 3.12", "FastMCP", "PostgreSQL 16", "Alembic", "Terraform", "Docker"],
 	},
 	{
+		name: "Financial Signals & Market Intelligence Platform",
+		tag: "Full-stack, signals intelligence",
+		hook: "2,500+ commits of market analytics, with 13 MCP tools for AI trading agents.",
+		body: "A FastAPI backend pulls live brokerage options chains (GEX, ZGL, PCR), macro liquidity feeds, dark pool positioning, price technicals, and AI-scored news sentiment on 5-minute, 15-minute, and overnight schedules. It classifies market regimes, computes composite health scores, fires threshold alerts, serves an Astro SSR dashboard, and watches itself with an isolated crash-loop watchdog sidecar.",
+		stack: ["Python", "FastAPI", "Astro SSR", "MCP", "Options Analytics", "Macro Data"],
+	},
+	{
 		name: "Client-Facing AI Discovery Platform",
-		tag: "Cloudflare Workers · Full-Stack",
-		body: "I took the conversation engine from Hatchling and rebuilt it for the edge on Cloudflare Workers, Hono, D1, and Durable Objects. Staff send a client a unique link or a short entry code; the client works through a guided Theory-of-Constraints interview while the model writes structured discovery notes through tool calls. Each session runs in its own Durable Object, which keeps turns in order and enforces a budget.",
+		tag: "Cloudflare Workers, full-stack",
+		hook: "Hatchling's conversation engine, rebuilt at the edge to run client discovery interviews.",
+		body: "Built on Cloudflare Workers, Hono, D1, and Durable Objects. Staff send a client a unique link or a short entry code; the client works through a guided Theory-of-Constraints interview while the model writes structured discovery notes through tool calls. Each session runs in its own Durable Object, which keeps turns in order and enforces a budget.",
 		stack: ["TypeScript", "Hono", "Cloudflare Workers", "D1", "Durable Objects", "React"],
 	},
 	{
 		name: "Nonprofit OAuth 2.1 MCP Connector Suite",
-		tag: "Pro-Bono · Cloudflare Workers",
-		body: "Built for a local nonprofit's AI rollout, to connect staff to a volunteer management platform that had no AI connector of its own. A shared OAuth 2.1 authorization service fronts per-platform connectors, and staff sign in with the Microsoft identity they already have. Every write is previewed, confirmed, read back, and recorded in an audit ledger, and one switch can shut the whole suite off.",
+		tag: "Pro-bono, Cloudflare Workers",
+		hook: "AI connectors a local nonprofit's volunteer platform never had, signed in with Microsoft.",
+		body: "Built for a local nonprofit's AI rollout. A shared OAuth 2.1 authorization service fronts per-platform connectors, and staff sign in with the Microsoft identity they already have. Every write is previewed, confirmed, read back, and recorded in an audit ledger, and one switch can shut the whole suite off.",
 		stack: ["TypeScript", "Cloudflare Workers", "OAuth 2.1", "Microsoft Entra ID", "MCP", "D1"],
+	},
+	{
+		name: "The Homelab & AI Fleet",
+		tag: "Infrastructure, AI fleet",
+		// No external link: the status page is private now.
+		hook: "18+ self-hosted services and a small fleet of AI agents with actual day jobs.",
+		body: "A Proxmox estate, and the reason I stay sharp on infrastructure nobody pays me to touch. A personal MCP gateway gives my agents governed access to the whole thing, and they work it: watching infrastructure and handling the household logistics nobody enjoys. The household-facing pieces have their own uptime monitoring, kept private.",
+		stack: ["Proxmox", "Docker", "MCP", "Self-hosted"],
 	},
 ];
 
 const totalProjects = openSourceProjects.length + productionBuilds.length;
+
+const sections = [
+	{
+		id: "open-source",
+		heading: "Open source",
+		sub: "Public repos, upstream fixes, and a maintained fork.",
+		items: openSourceProjects,
+	},
+	{
+		id: "production-builds",
+		heading: "Private production builds",
+		sub: "Production platforms and private builds with no public repo.",
+		items: productionBuilds,
+	},
+];
 ---
 
 <Layout
-	title="Projects — Alex Ivantsov | Automation, AI Tooling & Homelab"
-	description="The things I build outside the day job: MSP tooling, AI agent software, an operator's harness for Claude Code, and the homelab that runs the rest of it."
+	title="Projects | Alex Ivantsov"
+	description="What I build outside the day job: MSP tooling, AI agent software, an operator's harness for Claude Code, and the homelab that runs the rest of it."
 >
 	<Nav currentPath="/projects" />
 
-	<main class="px-6 pt-24 md:pt-36 pb-12">
-		<!-- ═══ 1. Hero ═══ -->
-		<section class="max-w-4xl mx-auto mb-16 text-center">
-			<div class="scroll-reveal">
-				<p
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-4"
-				>
-					Projects
-				</p>
-				<h1
-					class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5"
-				>
-					I don't collect side projects. I <span
-						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
-						>use</span
-					> them.
-				</h1>
-				<p
-					class="text-base md:text-lg text-white/[0.56] leading-relaxed max-w-2xl mx-auto"
-				>
-					{totalProjects} systems I built because I needed them:
-					{openSourceProjects.length} public open-source repos on
-					GitHub and {productionBuilds.length} production platforms
-					and private builds running across cloud, edge, and homelab
-					infrastructure.
-				</p>
-				<div
-					class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7 text-[0.65rem] font-mono uppercase tracking-[0.18em]"
-				>
-					<a
-						href="#open-source"
-						class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-						>Open Source ({openSourceProjects.length})</a
-					>
-					<a
-						href="#production-builds"
-						class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
-						>Production &amp; Private Builds ({productionBuilds.length})</a
-					>
-				</div>
-			</div>
-		</section>
-
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"></div>
-
-		<!-- ═══ 2. Open Source & Public Repos ═══ -->
-		<section id="open-source" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-8">
-				<p
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
-				>
-					Open Source
-				</p>
-				<h2 class="text-2xl md:text-3xl font-bold tracking-tight">
-					Public tools and <span
-						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
-						>maintained forks.</span
-					>
-				</h2>
-			</div>
-
-			<div class="space-y-5">
-				{
-					openSourceProjects.map((project, i) => {
-						const CardTag = project.url ? "a" : "div";
-						return (
-						<CardTag
-							href={project.url}
-							target={project.url ? "_blank" : undefined}
-							rel={project.url ? "noopener noreferrer" : undefined}
-							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
-							data-tilt
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
-						>
-							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
-								{project.tag}
-							</p>
-							<h3 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
-								{project.name}
-							</h3>
-							<p class="text-sm text-white/[0.50] leading-relaxed mb-5">
-								{project.body}
-							</p>
-
-							<div class="flex flex-wrap gap-1.5 mb-5">
-								{project.stack.map((item, j) => (
-									<span
-										class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80"
-										style={`--pill-i: ${j}`}
-									>
-										{item}
-									</span>
-								))}
-							</div>
-
-							{project.url && (
-							<div class="flex items-center gap-2">
-								<span class="text-xs font-mono text-white/[0.32] group-hover:text-cyan-400/70 transition-colors break-all">
-									{project.linkLabel}
-								</span>
-								<svg
-									width="15"
-									height="15"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-								>
-									<path d={arrowUpRight} />
-								</svg>
-							</div>
-							)}
-						</CardTag>
-						);
-					})
-				}
-			</div>
-		</section>
-
-		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"></div>
-
-		<!-- ═══ 3. Production Platforms & Private Builds ═══ -->
-		<section id="production-builds" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
-			<div class="scroll-reveal mb-8">
-				<p
-					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
-				>
-					Production &amp; Private Builds
-				</p>
-				<h2 class="text-2xl md:text-3xl font-bold tracking-tight">
-					Systems running <span
-						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
-						>under the hood.</span
-					>
-				</h2>
-			</div>
-
-			<div class="space-y-5">
-				{
-					productionBuilds.map((project, i) => {
-						const CardTag = project.url ? "a" : "div";
-						return (
-						<CardTag
-							href={project.url}
-							target={project.url ? "_blank" : undefined}
-							rel={project.url ? "noopener noreferrer" : undefined}
-							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
-							data-tilt
-							style={`--stagger: ${Math.min(i + 1, 4)}`}
-						>
-							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
-								{project.tag}
-							</p>
-							<h3 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
-								{project.name}
-							</h3>
-							<p class="text-sm text-white/[0.50] leading-relaxed mb-5">
-								{project.body}
-							</p>
-
-							<div class="flex flex-wrap gap-1.5">
-								{project.stack.map((item, j) => (
-									<span
-										class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80"
-										style={`--pill-i: ${j}`}
-									>
-										{item}
-									</span>
-								))}
-							</div>
-						</CardTag>
-						);
-					})
-				}
-			</div>
-		</section>
-
-		<!-- ═══ 3. CTA ═══ -->
-		<section class="scroll-reveal max-w-4xl mx-auto text-center pb-4">
-			<div class="section-divider w-full mb-12"></div>
-			<p class="text-sm text-white/[0.38] mb-5">
-				Want to talk about any of it, or build something together?
+	<main id="main">
+		<!-- Hero -->
+		<section class="mx-auto max-w-6xl px-5 md:px-8 pt-12 md:pt-20 pb-12">
+			<p class="text-sm text-muted mb-5">Projects</p>
+			<h1 class="display text-[clamp(2.4rem,5.2vw,4.25rem)] font-semibold leading-[1.02] max-w-[18ch]">
+				Things I built because I needed them.
+			</h1>
+			<p class="mt-6 text-lg md:text-xl text-muted prose-measure">
+				{totalProjects} systems: {openSourceProjects.length} public repos,
+				upstream contributions, and forks, and {productionBuilds.length} production
+				platforms and private builds running across cloud, edge, and homelab
+				infrastructure.
 			</p>
-			<div class="flex justify-center gap-3 flex-wrap">
-				<a
-					href="mailto:alex@ivantsov.tech"
-					class="btn-magnetic text-sm font-medium bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full"
-				>
-					Get in Touch
-				</a>
-				<a
-					href="/about"
-					class="btn-magnetic text-sm font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-white/[0.78] hover:text-white px-6 py-2.5 rounded-full"
-				>
-					More About Me
-				</a>
+			<nav aria-label="On this page" class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+				{sections.map((s) => (
+					<a href={`#${s.id}`} class="link">{s.heading} ({s.items.length})</a>
+				))}
+			</nav>
+		</section>
+
+		{
+			sections.map((section) => (
+				<section id={section.id} class="border-t border-rule scroll-mt-20">
+					<div class="mx-auto max-w-6xl px-5 md:px-8 pt-14 md:pt-16">
+						<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-8 mb-6">
+							<h2 class="display text-3xl md:text-4xl font-semibold">{section.heading}</h2>
+							<p class="text-muted md:text-right">{section.sub}</p>
+						</div>
+						<ul>
+							{section.items.map((p) => (
+								<li class="grid md:grid-cols-12 gap-3 md:gap-12 py-9 border-t border-rule">
+									<div class="md:col-span-4">
+										<h3 class="display text-2xl font-semibold leading-tight">
+											{p.url ? (
+												<a href={p.url} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">{p.name}</a>
+											) : (
+												p.name
+											)}
+										</h3>
+										<p class="mt-2 text-sm text-muted">{p.tag}</p>
+									</div>
+									<div class="md:col-span-8">
+										<p class="text-lg md:text-xl font-medium leading-snug text-ink prose-measure">{p.hook}</p>
+										<p class="mt-3 text-muted leading-relaxed prose-measure">{p.body}</p>
+										<p class="mt-4 font-mono text-xs text-muted">{p.stack.join("  /  ")}</p>
+										{p.url ? (
+											<a href={p.url} target="_blank" rel="noopener noreferrer" class="link mt-3 inline-block text-sm font-medium break-all">
+												{p.linkLabel}
+											</a>
+										) : section.id === "production-builds" ? (
+											<p class="mt-3 text-sm text-muted">Private, no public repo</p>
+										) : null}
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				</section>
+			))
+		}
+
+		<!-- CTA -->
+		<section class="mx-auto max-w-6xl px-5 md:px-8 mt-10">
+			<div class="border-t border-ink pt-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+				<p class="display text-2xl md:text-3xl font-semibold">Want to talk about any of these builds?</p>
+				<div class="flex flex-wrap gap-3">
+					<a href="mailto:alex@ivantsov.tech" class="btn btn-solid">Email me</a>
+					<a href="/about" class="btn btn-quiet">Read my background</a>
+				</div>
 			</div>
 		</section>
 	</main>
 
-	<!-- Footer -->
-	<footer
-		class="mt-8 rounded-t-[2.5rem] bg-[#080b11] border-t border-white/[0.03] px-6 py-12"
-	>
-		<div class="max-w-4xl mx-auto">
-			<div
-				class="flex flex-col md:flex-row items-center justify-between gap-6"
-			>
-				<div class="text-center md:text-left">
-					<a href="/" aria-label="ivantsov.tech">
-						<Brand markId="footer" class="mb-1.5" />
-					</a>
-					<p class="text-[0.65rem] font-mono text-white/[0.32]">
-						&copy; {new Date().getFullYear()} Alex Ivantsov
-					</p>
-				</div>
-				<div class="flex items-center gap-5 text-[0.65rem] font-mono">
-					<a
-						href="/about"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>About</a
-					>
-					<a
-						href="https://github.com/Exploitacious"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>GitHub</a
-					>
-					<a
-						href="https://www.linkedin.com/in/alex-ivan-sov/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
-						>LinkedIn</a
-					>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<Footer />
 </Layout>
-
-<script>
-	function initProjects() {
-		const revealObserver = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add("visible");
-					}
-				});
-			},
-			{ threshold: 0.06, rootMargin: "0px 0px -30px 0px" }
-		);
-
-		document
-			.querySelectorAll(".scroll-reveal, .divider-reveal")
-			.forEach((el) => {
-				revealObserver.observe(el);
-			});
-
-		// Card 3D tilt (desktop only) — same handler as index.astro's featured
-		// cards, which is where this card treatment comes from.
-		if (window.matchMedia("(hover: hover)").matches) {
-			document
-				.querySelectorAll<HTMLElement>("[data-tilt]")
-				.forEach((el) => {
-					el.addEventListener("mousemove", (e) => {
-						const rect = el.getBoundingClientRect();
-						const x =
-							(e.clientX - rect.left) / rect.width - 0.5;
-						const y =
-							(e.clientY - rect.top) / rect.height - 0.5;
-						el.style.transform = `perspective(800px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-3px)`;
-					});
-					el.addEventListener("mouseleave", () => {
-						el.style.transform = "";
-					});
-				});
-		}
-	}
-
-	initProjects();
-	document.addEventListener("astro:page-load", initProjects);
-</script>

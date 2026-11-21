@@ -9,22 +9,25 @@ const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
 
 // ── Projects ──
 // `linkLabel` is the destination as the reader would say it: the repo path for
-// the three public repos. The homelab card carries no CTA now that its status
-// page is private (behind Cloudflare Access).
+// public GitHub repos. Private platforms and homelab infrastructure carry no
+// external CTA so public visitors never hit a 404 or Cloudflare Access login.
 //
-// One claim here is deliberately narrower than it could be, because the only
-// readers who matter can check it:
+// Claims here stay strictly verifiable against the code and public repos:
 //  - Auto-M365 does NOT enable Security Defaults; TenantMaster's published
 //    config.json ships "DisableSecurityDefaults": true and the toolkit turns
 //    them off, so the baseline is described as Exchange/Entra hardening.
-const projects: {
+//  - Private client names, internal hostnames, and unreleased upstream drafts
+//    stay out of public copy.
+type ProjectItem = {
 	name: string;
 	tag: string;
 	body: string;
 	stack: string[];
 	url?: string;
 	linkLabel?: string;
-}[] = [
+};
+
+const openSourceProjects: ProjectItem[] = [
 	{
 		name: "Auto-M365 Suite",
 		tag: "PowerShell · MSP Tooling",
@@ -50,13 +53,100 @@ const projects: {
 		linkLabel: "Exploitacious/OPS",
 	},
 	{
+		name: "MetaMCP Gateway (Maintained Fork)",
+		tag: "MCP Proxy · Open Source Fork",
+		body: "When the upstream MetaMCP gateway stalled for months, our entire production AI tool layer depended on it. Rather than wait, I maintained a public downstream fork carrying community pull requests plus our own hardening: deterministic tool ordering, connection pool reliability, session recovery, error-gated server visibility, and structured tool-call audit logging. Built to survive as a long-running self-hosted MCP gateway, now backed by 35+ stars and automated GHCR builds.",
+		stack: ["TypeScript", "Next.js", "Turborepo", "MCP", "Docker"],
+		url: "https://github.com/Umbrella-IT-Group/metamcp",
+		linkLabel: "Umbrella-IT-Group/metamcp",
+	},
+	{
+		name: "OneNote to Obsidian Migration Toolkit",
+		tag: "Migration Utility · Python",
+		body: "Moving years of operational documentation out of OneNote usually destroys formatting and strands embedded screenshots. I wrote a Python converter and PowerShell vault bootstrapper that turns exported .mht notebooks into clean Obsidian markdown with preserved images and searchable OCR text. Tested in production against 5 real notebooks covering 560+ pages and 585+ images at 99.7 to 100% word fidelity.",
+		stack: ["Python", "PowerShell", "OCR", "Obsidian"],
+		url: "https://github.com/Exploitacious/OneNote-to-Obsidian",
+		linkLabel: "Exploitacious/OneNote-to-Obsidian",
+	},
+	{
+		name: "agentfarm",
+		tag: "Agent Provisioning · Proxmox",
+		body: "Spinning up a self-hosted AI agent shouldn't take an afternoon of boilerplate. agentfarm packages the deployment scripts and container templates I use to stand up autonomous agents on Proxmox LXC or any Debian/Ubuntu host with a single command: tiered model routing, messaging bridges, Tailscale connectivity, persistent memory plugins, and initial hatching setup.",
+		stack: ["Shell", "Proxmox LXC", "Tailscale", "Docker"],
+		url: "https://github.com/Exploitacious/agentfarm",
+		linkLabel: "Exploitacious/agentfarm",
+	},
+	{
+		name: "linuxploitacious",
+		tag: "Dotfiles · Cross-Platform Bootstrap",
+		body: "Every server, container, and workstation I touch gets the exact same shell environment in one run. This repository holds my symlinked zsh, bash, tmux, git, and security-tool configs alongside Linux and Windows provisioning scripts so a fresh machine lands with familiar muscle memory in minutes.",
+		stack: ["Shell", "PowerShell", "Zsh", "Tmux"],
+		url: "https://github.com/Exploitacious/linuxploitacious",
+		linkLabel: "Exploitacious/linuxploitacious",
+	},
+	{
+		name: "Windows_Toolz",
+		tag: "PowerShell · Endpoint Automation",
+		body: "My early open-source collection of Windows administration and MSP maintenance scripts (16 stars). It started as a way to stop repeating the same remediation steps across client endpoints and grew into the foundation for an internal RMM library now holding 260+ production PowerShell scripts.",
+		stack: ["PowerShell", "Windows Server", "RMM Automation"],
+		url: "https://github.com/Exploitacious/Windows_Toolz",
+		linkLabel: "Exploitacious/Windows_Toolz",
+	},
+];
+
+const productionBuilds: ProjectItem[] = [
+	{
 		name: "The Homelab & AI Fleet",
 		tag: "Infrastructure · AI Fleet",
 		// No external CTA: the status page is private now (Cloudflare Access).
 		body: "A Proxmox estate running 18+ self-hosted services, and the reason I stay sharp on infrastructure nobody pays me to touch. On top of it sits a personal MCP gateway that gives my agents governed access to the whole thing, and a small fleet of those agents with actual day jobs: watching infrastructure, handling the household logistics nobody enjoys. No topology here, on purpose. The household-facing pieces have their own uptime monitoring, kept private.",
 		stack: ["Proxmox", "Docker", "MCP", "Self-hosted"],
 	},
+	{
+		name: "Financial Signals & Market Intelligence Platform",
+		tag: "Full-Stack · Signals Intelligence",
+		body: "Over 2,500 commits of continuous engineering on a multi-service market analytics platform. A FastAPI backend pulls Schwab options chains (GEX, ZGL, PCR), FRED macro liquidity, dark pool DIX, price technicals, and AI-scored news sentiment on tiered 5-minute, 15-minute, and overnight schedules. It classifies market regimes, computes composite health scores, fires threshold alerts, serves an Astro SSR dashboard, exposes 13 task-oriented MCP tools for AI trading agents, and monitors itself with an isolated crash-loop watchdog sidecar.",
+		stack: ["Python", "FastAPI", "Astro SSR", "MCP", "Schwab API", "FRED"],
+	},
+	{
+		name: "Enterprise MCP Platform & Cross-Vendor Entity Graph",
+		tag: "Production AI Infra · Data Engineering",
+		body: "A production monorepo of 34 isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and VoIP, fronted by our MetaMCP gateway on a Terraform-provisioned, zero-SSH cloud stack. Underneath runs a PostgreSQL 16 entity graph with 130+ Alembic migrations and scheduled API workers that unify people, devices, cameras, network gear, and inventory across 8+ vendor platforms via MAC and identity resolution.",
+		stack: ["Python 3.12", "FastMCP", "PostgreSQL 16", "Alembic", "Terraform", "Docker"],
+	},
+	{
+		name: "Keystone: Client AI Discovery Platform",
+		tag: "Cloudflare Workers · Full-Stack",
+		body: "Took the local conversation engine from Hatchling and rebuilt it for the edge on Cloudflare Workers, Hono, D1, and Durable Objects. Staff issue unique links or phone-readable entry codes from an Access-gated React/Vite admin portal; clients complete guided Theory-of-Constraints interviews while the model writes structured intelligence files via tool calls. Per-session Durable Objects serialize turns and enforce budgets, while Turnstile and rate limits protect public entry.",
+		stack: ["TypeScript", "Hono", "Cloudflare Workers", "D1", "Durable Objects", "React"],
+	},
+	{
+		name: "Nonprofit OAuth 2.1 MCP Connector Suite",
+		tag: "Pro-Bono Volunteer · Cloudflare Workers",
+		body: "Built for a regional nonprofit's Claude Team rollout to connect staff directly to a volunteer management platform with no native AI connector. Uses a split OAuth 2.1 authorization hub and per-platform resource Workers communicating over private Cloudflare Service Bindings, strictly federated to their Microsoft Entra ID tenant. Every write passes through a preview, confirmation, read-back, and Durable Object write ledger, paired with a D1 audit trail and an Access-gated admin kill-switch dashboard.",
+		stack: ["TypeScript", "Cloudflare Workers", "OAuth 2.1", "Microsoft Entra ID", "MCP", "D1"],
+	},
+	{
+		name: "Claude Fleet & Multi-Session Steering Stack",
+		tag: "Developer Tooling · Orchestration",
+		body: "Guardrailed account-rotation tooling for running heavy multi-agent Claude Code workloads without interrupting active sessions. Rotates independent work and personal seat fleets across 5-hour and 7-day usage windows using advisory credential locks and structural scope isolation so work and personal accounts can never cross, paired with a Tailscale-backed web session dashboard for steering active agent runs from a phone.",
+		stack: ["Python", "TypeScript", "Linux", "Tailscale", "Claude Code"],
+	},
+	{
+		name: "VoIP CPQ Engine & Constraint Analytics Dashboard",
+		tag: "Internal Web Apps · Astro & React",
+		body: "Two focused operational web apps built to replace brittle spreadsheets and slow legacy PSA reports. The VoIP Configure-Price-Quote SPA pairs Astro 6, React 19, and a strict TypeScript pricing engine (42 Vitest unit tests) to calculate tiered MRC/NRC quotes and post directly to n8n webhooks. Alongside it, an Astro and Chart.js operational dashboard surfaces Theory-of-Constraints metrics directly from Autotask.",
+		stack: ["Astro", "React 19", "TypeScript", "Tailwind CSS", "Vitest", "Chart.js"],
+	},
+	{
+		name: "Personal Design System & Brand Architecture",
+		tag: "Design Engineering · Brand Tokens",
+		body: "The single source of truth behind ivantsov.tech and my personal tools. Defines the geometric IVA mark, wordmark lockups, dark surface ramp, white-alpha text hierarchy, categorical accent tokens, and motion curves as reusable CSS tokens, SVG assets, and React primitives so every personal project shares one coherent visual language.",
+		stack: ["Design Tokens", "CSS", "SVG", "React"],
+	},
 ];
+
+const totalProjects = openSourceProjects.length + productionBuilds.length;
 ---
 
 <Layout
@@ -85,20 +175,50 @@ const projects: {
 				<p
 					class="text-base md:text-lg text-white/[0.56] leading-relaxed max-w-2xl mx-auto"
 				>
-					Four things I built because I needed them. Three are
-					public on GitHub. The fourth is the lab where most of
-					the experimenting happens.
+					{totalProjects} systems I built because I needed them:
+					{openSourceProjects.length} public open-source repos on
+					GitHub and {productionBuilds.length} production platforms
+					and private builds running across cloud, edge, and homelab
+					infrastructure.
 				</p>
+				<div
+					class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7 text-[0.65rem] font-mono uppercase tracking-[0.18em]"
+				>
+					<a
+						href="#open-source"
+						class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+						>Open Source ({openSourceProjects.length})</a
+					>
+					<a
+						href="#production-builds"
+						class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+						>Production &amp; Private Builds ({productionBuilds.length})</a
+					>
+				</div>
 			</div>
 		</section>
 
 		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"></div>
 
-		<!-- ═══ 2. The work ═══ -->
-		<section class="max-w-4xl mx-auto mb-16">
+		<!-- ═══ 2. Open Source & Public Repos ═══ -->
+		<section id="open-source" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
+			<div class="scroll-reveal mb-8">
+				<p
+					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
+				>
+					Open Source
+				</p>
+				<h2 class="text-2xl md:text-3xl font-bold tracking-tight">
+					Public tools and <span
+						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+						>maintained forks.</span
+					>
+				</h2>
+			</div>
+
 			<div class="space-y-5">
 				{
-					projects.map((project, i) => {
+					openSourceProjects.map((project, i) => {
 						const CardTag = project.url ? "a" : "div";
 						return (
 						<CardTag
@@ -107,14 +227,14 @@ const projects: {
 							rel={project.url ? "noopener noreferrer" : undefined}
 							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
 							data-tilt
-							style={`--stagger: ${i + 1}`}
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
 						>
 							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
 								{project.tag}
 							</p>
-							<h2 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
+							<h3 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
 								{project.name}
-							</h2>
+							</h3>
 							<p class="text-sm text-white/[0.50] leading-relaxed mb-5">
 								{project.body}
 							</p>
@@ -150,6 +270,64 @@ const projects: {
 								</svg>
 							</div>
 							)}
+						</CardTag>
+						);
+					})
+				}
+			</div>
+		</section>
+
+		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"></div>
+
+		<!-- ═══ 3. Production Platforms & Private Builds ═══ -->
+		<section id="production-builds" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
+			<div class="scroll-reveal mb-8">
+				<p
+					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
+				>
+					Production &amp; Private Builds
+				</p>
+				<h2 class="text-2xl md:text-3xl font-bold tracking-tight">
+					Systems running <span
+						class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+						>under the hood.</span
+					>
+				</h2>
+			</div>
+
+			<div class="space-y-5">
+				{
+					productionBuilds.map((project, i) => {
+						const CardTag = project.url ? "a" : "div";
+						return (
+						<CardTag
+							href={project.url}
+							target={project.url ? "_blank" : undefined}
+							rel={project.url ? "noopener noreferrer" : undefined}
+							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} card-glow group block rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
+							data-tilt
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
+						>
+							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
+								{project.tag}
+							</p>
+							<h3 class="text-lg md:text-xl font-bold text-white/[0.92] group-hover:text-cyan-300 transition-colors mb-3">
+								{project.name}
+							</h3>
+							<p class="text-sm text-white/[0.50] leading-relaxed mb-5">
+								{project.body}
+							</p>
+
+							<div class="flex flex-wrap gap-1.5">
+								{project.stack.map((item, j) => (
+									<span
+										class="skill-pill px-2.5 py-1 rounded-md bg-cyan-500/[0.12] border border-cyan-500/20 text-[0.7rem] text-cyan-300/80"
+										style={`--pill-i: ${j}`}
+									>
+										{item}
+									</span>
+								))}
+							</div>
 						</CardTag>
 						);
 					})
@@ -197,6 +375,11 @@ const projects: {
 					</p>
 				</div>
 				<div class="flex items-center gap-5 text-[0.65rem] font-mono">
+					<a
+						href="/about"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
+						>About</a
+					>
 					<a
 						href="https://github.com/Exploitacious"
 						target="_blank"

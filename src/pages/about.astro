@@ -9,6 +9,30 @@ import profileImage from "../assets/images/Alex.jpg";
 // site"; /projects does not, so on-site navigation gets a horizontal arrow.
 const arrowRight = "M5 12h14M12 5l7 7-7 7";
 
+// ── Proof / Scale Metrics ──
+const scaleMetrics = [
+	{
+		value: "30+",
+		label: "Custom MCP Servers",
+		detail: "FastMCP & Cloudflare Workers",
+	},
+	{
+		value: "130+",
+		label: "Entity Graph Migrations",
+		detail: "PostgreSQL 16 across 8+ APIs",
+	},
+	{
+		value: "260+",
+		label: "Production RMM Scripts",
+		detail: "PowerShell & zero-touch ops",
+	},
+	{
+		value: "150+",
+		label: "Open-Source GitHub Stars",
+		detail: "MSP toolkits & maintained forks",
+	},
+];
+
 // ── What I Do cards ──
 const roles = [
 	{
@@ -26,6 +50,14 @@ const roles = [
 	{
 		title: "Operations & Process Design",
 		body: "I architect internal operations from dispatch workflows to change management processes, drawing on Theory of Constraints and continuous improvement principles. The goal is always the same: make the work visible, eliminate bottlenecks, and build systems the team actually follows.",
+	},
+	{
+		title: "AI Platform & MCP Architecture",
+		body: "I build the production layer that connects language models to live operational tools. That includes over 30 custom FastMCP servers, a maintained open-source MetaMCP gateway fork, OAuth 2.1 Microsoft Entra connectors on Cloudflare Workers, and an autonomous Teams AI teammate backed by an immutable container safety floor and a git-synced brain repo. Every write tool previews changes before touching live state, verifies what landed with a read-back, and records an audit trail.",
+	},
+	{
+		title: "Full-Stack Software & Cloud Infrastructure",
+		body: "I take internal platforms, web apps, and cloud environments from architecture through production deployment. My stack spans Terraform and SOPS/age GitOps on Linode and Cloudflare, PostgreSQL 16 entity graphs with 130+ migrations, FastAPI backends, Astro and React frontends, Electron desktop apps, and Grafana/Loki observability. There is no handoff wall between the application code and the infrastructure it runs on.",
 	},
 ];
 
@@ -55,11 +87,14 @@ const skillCategories = [
 			"Pax8",
 			"Datagate",
 			"Nutshell CRM",
+			"WatchGuard",
 		],
 		advanced: [
 			"Nerdio Manager",
 			"ConnectBooster",
 			"VPS/VPC Management",
+			"QuickBooks Online API",
+			"Rosterfy",
 		],
 	},
 	{
@@ -75,9 +110,13 @@ const skillCategories = [
 			"SharePoint / OneDrive",
 			"Teams Administration",
 			"Enterprise App Registration",
+			"CIPP Baselines & Policy-as-Code",
+			"Microsoft Graph API",
 		],
 		advanced: [
 			"Information Protection / DLP",
+			"Microsoft Purview",
+			"OAuth 2.1 / OIDC Federation",
 		],
 	},
 	{
@@ -98,12 +137,82 @@ const skillCategories = [
 			"Docker & GitOps Deployment (GHCR)",
 			"Cloudflare Tunnels & Access",
 			"SOPS / age Secrets Management",
+			"Cloudflare Workers / D1 / Durable Objects",
+			"Linode / Akamai Cloud",
+			"Grafana & Loki Observability",
+			"Watchtower & Systemd GitOps",
+			"Tailscale / WireGuard Mesh",
+			"Nginx & Reverse Proxying",
 		],
 		advanced: [
 			"Linux SysAdmin (Ubuntu / Debian / Major Distros)",
 			"Database Administration",
 			"Terraform",
 			"PostgreSQL",
+			"Cloud-Init & Infrastructure-as-Code",
+			"Alembic & SQLite",
+		],
+	},
+	{
+		name: "Software & Full-Stack Engineering",
+		sme: [
+			"PowerShell 5.1 / 7",
+			"Python 3.12 (FastAPI / Pydantic)",
+			"TypeScript",
+			"REST APIs & Webhooks",
+			"Astro",
+			"Tailwind CSS",
+			"Git & GitHub Actions CI/CD",
+			"Bash / Shell Automation",
+		],
+		advanced: [
+			"React 19",
+			"Hono",
+			"Electron",
+			"Node.js / Express",
+			"SQLAlchemy & Alembic",
+			"Vitest & Pytest",
+			"PHP (WordPress Plugins)",
+			"C# / .NET",
+		],
+	},
+	{
+		name: "AI Engineering & Automation",
+		sme: [
+			"MCP Server Development (Python / FastMCP)",
+			"Claude Code & Multi-Agent Orchestration",
+			"Production AI Agents (Teams + Homelab Fleet)",
+			"AI-Augmented Automation Pipelines",
+			"Claude API / LLM Integration",
+			"MetaMCP Gateway Architecture",
+			"OAuth 2.1 Remote MCP Connectors",
+			"Nous Research Hermes Agents",
+			"Foreman / Worktree Sub-Agent Orchestration",
+			"Structured Tool-Use & Write Governance",
+			"Claude Team Enterprise Rollouts",
+		],
+		advanced: [
+			"OpenCode Zen",
+			"Gemini",
+			"ChatGPT",
+			"Ollama / Local Models",
+			"Multi-Model Routing & Fallback",
+			"Cloudflare Turnstile & Rate-Limited AI Portals",
+		],
+	},
+	{
+		name: "Data Engineering & Observability",
+		sme: [
+			"Cross-Vendor Entity Graphs (PostgreSQL)",
+			"Scheduled ETL & API Sync Workers",
+			"LogQL & Alert Provisioning",
+			"Operational & Constraint Analytics",
+		],
+		advanced: [
+			"Market & Options Data Pipelines (Schwab / FRED)",
+			"Signals Intelligence & Regime Scoring",
+			"pg_trgm Fuzzy Resolution",
+			"SQLite & Cloudflare D1 State Ledgers",
 		],
 	},
 	{
@@ -115,12 +224,17 @@ const skillCategories = [
 			"Web Content Filtering",
 			"Incident Response",
 			"Security Hardening",
+			"Zero Trust Architecture (Cloudflare Access)",
+			"CMMC / GRC Program Design",
+			"Secrets Governance & Audit Logging",
+			"Write-Safety & Preview/Readback Controls",
 		],
 		advanced: [
 			"Security Incident Investigation",
 			"Penetration Testing",
 			"Reverse Engineering",
 			"Threat Hunting",
+			"Automated External Attack Surface Review",
 		],
 	},
 	{
@@ -167,22 +281,6 @@ const skillCategories = [
 		],
 		advanced: [] as string[],
 	},
-	{
-		name: "AI Engineering & Automation",
-		sme: [
-			"MCP Server Development (Python / FastMCP)",
-			"Claude Code & Multi-Agent Orchestration",
-			"Production AI Agents (Teams + Homelab Fleet)",
-			"AI-Augmented Automation Pipelines",
-			"Claude API / LLM Integration",
-		],
-		advanced: [
-			"OpenCode Zen",
-			"Gemini",
-			"ChatGPT",
-			"Ollama / Local Models",
-		],
-	},
 ];
 
 // ── How I Think ──
@@ -198,6 +296,14 @@ const philosophy = [
 	{
 		headline: "Build when it gives you control. Buy when it saves your sanity.",
 		body: "I'm not dogmatic about building everything in-house. If a vendor solves the problem well and shifts the maintenance burden off my team, that's often the right call. But when control and long-term ROI matter, when the integration layer is the product, I build it myself. The automation platform I've built on N8n exists because no off-the-shelf tool could tie our stack together the way we needed. Knowing when to build and when to buy is one of the most important judgment calls in operations.",
+	},
+	{
+		headline: "Unknown is never okay.",
+		body: "In production automation and AI tooling, silent assumptions break things fast. When a cross-vendor diagnostic checks three network platforms and one does not answer, the tool reports the coverage gap honestly instead of returning green. Every write tool I ship separates plan from execute, reads back what actually landed, and logs the mutation to an audit ledger. Safety comes from mechanisms enforced in code, never from hoping a prompt behaves.",
+	},
+	{
+		headline: "Orchestrate the work, don't grind through it solo.",
+		body: "The same discipline that scales an operations team scales AI-assisted engineering. Lock down the architecture and invariants before writing code, isolate parallel streams in git worktrees, gate merges behind real automated tests and CI checks, and review every diff. Software and operations fail for the exact same reason: when durable state lives in someone's head instead of tracked files on disk.",
 	},
 ];
 
@@ -222,6 +328,41 @@ const highlights = [
 		label: "AI Operations",
 		title: "Gave AI real hands on the MSP stack, then put it to work.",
 		body: "I built MCP servers across our PSA, RMM, documentation, M365, and voice systems, then unified them behind a white-labeled gateway with scoped access keys. On top of that: a production AI teammate that lives in Teams, and a multi-agent orchestration harness that runs my daily operations. The AI doesn't advise from the sidelines. It reads tickets, files documentation, and executes runbooks. Governed, logged, and reviewed.",
+	},
+	{
+		label: "MCP & Entity Graph Architecture",
+		title: "Unified 8+ vendor platforms into one PostgreSQL entity graph and 30+ MCP servers.",
+		body: "I architected a production monorepo of 34 isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and VoIP, all routed behind our maintained open-source fork of the MetaMCP gateway. Underneath sits a PostgreSQL 16 entity graph spanning 130+ Alembic migrations that ingests and merges users, endpoints, cameras, network gear, and inventory across Autotask, IT Glue, NinjaRMM, CIPP/Intune, UniFi, Meraki, WatchGuard, and Domotz via MAC and identity resolution. Engineers and AI agents query one unified record instead of tabbing across ten vendor portals.",
+	},
+	{
+		label: "Autonomous Agents & v2 Alerting",
+		title: "Shipped a Teams-native AI teammate and a Postgres-backed alert pipeline.",
+		body: "I deployed an isolated production Hermes AI agent integrated directly into Microsoft Teams with tenant-gated message validation, an immutable safety floor baked into its container image, and a two-way git-synced brain repository for skills and institutional memory. Alongside it runs a v2 alerting and ticket-writing pipeline backed by a dedicated operational Postgres schema for alert deduplication, ticket memory, AI-assisted classification, and human-in-the-loop rule grading.",
+	},
+	{
+		label: "Edge AI Platform",
+		title: "Built Keystone, a client-facing AI discovery portal on Cloudflare Workers.",
+		body: "Ported my open-source Hatchling conversation engine to the edge as a single Cloudflare Worker serving a public client portal and an Access-gated admin SPA. Staff generate unique links or phone-readable entry codes; clients complete guided Theory-of-Constraints discovery interviews while the model writes structured intelligence files through tool calls. Per-session Durable Objects serialize turns and enforce budgets, D1 stores every artifact, and Turnstile plus rate limiting guard the unauthenticated entry points.",
+	},
+	{
+		label: "Cloud & GitOps Infrastructure",
+		title: "Provisioned a zero-SSH production cloud with Terraform, SOPS/age, and Grafana.",
+		body: "I defined our multi-host Linode cloud environment in Terraform and cloud-init, fronted entirely by Cloudflare Tunnels and Access with SOPS/age-encrypted secrets stored in a separate vault repository. Pull-based systemd GitOps timers and Watchtower keep containers current straight from GHCR with no CI SSH keys anywhere. Paired it with a Grafana and Loki observability stack, provisioned LogQL alerts, and a 260+ script PowerShell RMM library for endpoint automation.",
+	},
+	{
+		label: "M365 Policy-as-Code & Open Source",
+		title: "Turned a 70+ hour Microsoft 365 tenant buildout into repeatable CIPP baselines.",
+		body: "Redesigned multi-tenant Microsoft 365 onboarding from a manual senior-engineer project into versioned, two-tier Conditional Access, Intune, Purview, and CIPP baseline templates that push cleanly to fresh tenants. When the open-source tools we depend on hit gaps, I ship fixes back upstream: maintaining our public MetaMCP fork with 37+ stars and contributing anti-phishing baseline improvements to CyberDrain's CIPP.",
+	},
+	{
+		label: "Pro-Bono Nonprofit AI Rollout",
+		title: "Led a regional nonprofit's Claude Team rollout and built Entra-backed OAuth 2.1 connectors.",
+		body: "Volunteered end-to-end technical leadership to roll out Claude Team across a local nonprofit, authoring their org instructions, shared skills, and staff governance playbook. Because their volunteer management platform had no native Claude integration, I engineered a split OAuth 2.1 authorization hub and Cloudflare Workers MCP connector suite federated to their Microsoft Entra ID tenant over private Service Bindings, complete with hourly refresh revocation, Durable Object write ledgers, preview-and-readback safety, D1 audit trails, and an admin kill-switch dashboard.",
+	},
+	{
+		label: "Internal Web Applications",
+		title: "Replaced legacy reports and spreadsheet quoting with custom Astro and React apps.",
+		body: "Built purpose-built web applications where off-the-shelf MSP tooling fell short: a VoIP Configure-Price-Quote SPA in Astro, React 19, and TypeScript with real-time seat tier bundling, margin math backed by 42 Vitest unit tests, and direct n8n webhook submission; a Theory-of-Constraints operational reporting dashboard replacing legacy PSA reports; and a custom WordPress connector plugin giving programmatic control over our marketing site.",
 	},
 ];
 ---
@@ -268,13 +409,72 @@ const highlights = [
 					That Work.
 				</p>
 			</div>
+
+			<!-- Scale / Proof strip -->
+			<div
+				class="about-fade grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 text-left"
+				style="--delay: 240"
+			>
+				{
+					scaleMetrics.map((metric) => (
+						<div class="rounded-2xl bg-[#0f1420] border border-white/[0.05] px-4 py-4">
+							<p class="text-2xl md:text-3xl font-extrabold font-mono text-cyan-400 tracking-tight mb-1">
+								{metric.value}
+							</p>
+							<p class="text-xs font-semibold text-white/[0.78]">
+								{metric.label}
+							</p>
+							<p class="text-[0.65rem] font-mono text-white/[0.38] mt-0.5">
+								{metric.detail}
+							</p>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Quick section jump links -->
+			<div
+				class="about-fade flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-7 text-[0.65rem] font-mono uppercase tracking-[0.18em]"
+				style="--delay: 300"
+			>
+				<a
+					href="#about"
+					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+					>About</a
+				>
+				<a
+					href="#capabilities"
+					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+					>What I Do</a
+				>
+				<a
+					href="#expertise"
+					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+					>Technical Expertise</a
+				>
+				<a
+					href="#principles"
+					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+					>How I Think</a
+				>
+				<a
+					href="#work"
+					class="text-white/[0.38] hover:text-cyan-400/80 transition-colors"
+					>Shipped Work</a
+				>
+				<a
+					href="/projects"
+					class="text-cyan-400/70 hover:text-cyan-300 transition-colors"
+					>Projects &rarr;</a
+				>
+			</div>
 		</section>
 
 		<div class="section-divider divider-reveal max-w-5xl mx-auto mb-16"
 		></div>
 
 		<!-- ═══ 2. About Me ═══ -->
-		<section class="max-w-3xl mx-auto mb-16">
+		<section id="about" class="max-w-3xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-6"
@@ -319,6 +519,27 @@ const highlights = [
 					business outcomes. That perspective shapes everything
 					I do.
 				</p>
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
+					Over the past few years that builder streak pulled me
+					deep into full-stack platform engineering and AI
+					infrastructure. On any given week I might ship Python
+					FastMCP servers, write Alembic migrations for a
+					cross-vendor PostgreSQL entity graph, maintain an
+					open-source MCP gateway fork, provision Linode and
+					Cloudflare infrastructure in Terraform, or deploy
+					TypeScript Workers with OAuth 2.1 federation and
+					Durable Objects. I like owning the whole line from
+					strategy and schema design down to the container and
+					the alert rule.
+				</p>
+				<p class="scroll-reveal text-base md:text-lg text-white/[0.56] leading-relaxed">
+					That work doesn't stop at the office door. Outside the
+					day job I build financial signals intelligence software,
+					run a multi-agent Proxmox homelab, publish open-source
+					tooling for other operators, and volunteer hands-on AI
+					adoption and custom connector engineering for a local
+					nonprofit.
+				</p>
 			</div>
 		</section>
 
@@ -326,7 +547,7 @@ const highlights = [
 		></div>
 
 		<!-- ═══ 3. What I Do ═══ -->
-		<section class="max-w-5xl mx-auto mb-16">
+		<section id="capabilities" class="max-w-5xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal mb-8">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
@@ -340,7 +561,7 @@ const highlights = [
 					roles.map((role, i) => (
 						<div
 							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6`}
-							style={`--stagger: ${i + 1}`}
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
 						>
 							<div class="w-8 h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent rounded-full mb-4" />
 							<h3 class="text-sm font-bold text-white/[0.88] mb-3">
@@ -359,7 +580,7 @@ const highlights = [
 		></div>
 
 		<!-- ═══ 4. Technical Expertise ═══ -->
-		<section class="max-w-5xl mx-auto mb-16">
+		<section id="expertise" class="max-w-5xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal mb-4">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
@@ -423,7 +644,7 @@ const highlights = [
 		></div>
 
 		<!-- ═══ 5. How I Think ═══ -->
-		<section class="max-w-4xl mx-auto mb-16">
+		<section id="principles" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal mb-8">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
@@ -437,7 +658,7 @@ const highlights = [
 					philosophy.map((block, i) => (
 						<div
 							class="scroll-reveal from-left border-l-2 border-cyan-500/20 pl-6"
-							style={`--stagger: ${i + 1}`}
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
 						>
 							<p class="text-lg md:text-xl font-bold text-white/[0.78] mb-3">
 								"{block.headline}"
@@ -455,7 +676,7 @@ const highlights = [
 		></div>
 
 		<!-- ═══ 6. Highlighted Work ═══ -->
-		<section class="max-w-4xl mx-auto mb-16">
+		<section id="work" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal mb-8">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
@@ -469,7 +690,7 @@ const highlights = [
 					highlights.map((item, i) => (
 						<div
 							class={`scroll-reveal ${i % 2 === 0 ? "from-left" : "from-right"} rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6 md:p-8`}
-							style={`--stagger: ${i + 1}`}
+							style={`--stagger: ${Math.min(i + 1, 4)}`}
 						>
 							<p class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.2em] mb-2">
 								{item.label}
@@ -485,7 +706,7 @@ const highlights = [
 				}
 			</div>
 
-			<div class="scroll-reveal mt-8" style={`--stagger: ${highlights.length + 1}`}>
+			<div class="scroll-reveal mt-8" style="--stagger: 2">
 				<a
 					href="/projects"
 					class="group inline-flex items-center gap-2 text-xs font-mono text-white/[0.45] hover:text-cyan-300 transition-colors"
@@ -512,7 +733,7 @@ const highlights = [
 		></div>
 
 		<!-- ═══ 7. Beyond Work ═══ -->
-		<section class="max-w-4xl mx-auto mb-16">
+		<section id="beyond" class="max-w-4xl mx-auto mb-16 scroll-mt-24">
 			<div class="scroll-reveal mb-6">
 				<h2
 					class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em]"
@@ -522,7 +743,7 @@ const highlights = [
 			</div>
 
 			<div
-				class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6"
+				class="scroll-reveal rounded-2xl bg-[#0f1420] border border-white/[0.05] p-6 space-y-4"
 			>
 				<p class="text-sm text-white/[0.50] leading-relaxed">
 					Father first, engineer second. When I'm not building
@@ -534,6 +755,15 @@ const highlights = [
 					I'm a lifelong tech nerd who still gets excited about
 					cool hardware, clever automation, and elegant solutions
 					to messy problems.
+				</p>
+				<p class="text-sm text-white/[0.50] leading-relaxed">
+					That lab has grown into 30+ documented self-hosted
+					services and containerized agents, alongside a 2,500+
+					commit financial signals and options-analytics platform,
+					a personal design system, cross-platform dotfiles, and
+					pro-bono AI engineering for a local nonprofit. I learn
+					best by putting real systems into production and living
+					with the consequences.
 				</p>
 			</div>
 		</section>
@@ -580,6 +810,11 @@ const highlights = [
 				<div
 					class="flex items-center gap-5 text-[0.65rem] font-mono"
 				>
+					<a
+						href="/projects"
+						class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
+						>Projects</a
+					>
 					<a
 						href="https://github.com/Exploitacious"
 						target="_blank"

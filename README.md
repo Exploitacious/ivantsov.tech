@@ -24,7 +24,7 @@ npm dependencies need a real reason.
 | Route | Source |
 | --- | --- |
 | `/` | `src/pages/index.astro` — hero, featured cards, manifesto, connect list |
-| `/projects` | `src/pages/projects.astro` — the four projects worth showing, each linking out |
+| `/projects` | `src/pages/projects.astro` — public open-source repos and private production builds |
 | `/about` | `src/pages/about.astro` — bio, capabilities, skills matrix, principles, selected work |
 | `/sms-privacy` | `src/pages/sms-privacy.astro` — privacy policy for the personal-assistant SMS service |
 | `/sms-terms` | `src/pages/sms-terms.astro` — terms for the same service |

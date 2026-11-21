@@ -426,17 +426,75 @@ const connectLinks = [
 								>
 							</h2>
 							<p
-								class="text-sm md:text-base text-white/[0.50] leading-relaxed max-w-[34rem] mb-6"
+								class="text-sm md:text-base text-white/[0.50] leading-relaxed max-w-[38rem] mb-6"
 							>
 								PowerShell toolkits, an agent-authoring desktop
-								app, the AI harness I run every day, and the
-								homelab underneath it all.
+								app, the AI harness I run every day, plus 30+
+								MCP servers, a maintained gateway fork,
+								Cloudflare Workers AI platforms, financial
+								signals software, and the homelab underneath it
+								all.
 							</p>
 
 							<div class="flex items-center gap-2">
 								<span
 									class="text-xs font-mono text-white/[0.32] group-hover:text-cyan-400/70 transition-colors"
-									>See all four projects</span
+									>Explore all 16 projects</span
+								>
+								<svg
+									width="15"
+									height="15"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="shrink-0 text-white/[0.24] group-hover:text-cyan-400/70 transition-all duration-300 group-hover:translate-x-1"
+								>
+									<path d={icons.arrowRight}></path>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<!-- Background & Resume card -->
+				<a
+					href="/about"
+					class="scroll-reveal from-right card-glow group block mt-5 rounded-[1.75rem] bg-[#0f1420] border border-white/[0.05] overflow-hidden"
+					data-tilt
+					style="--stagger: 2"
+				>
+					<div class="relative p-7 md:p-10">
+						<div class="relative">
+							<p
+								class="text-[0.65rem] font-mono text-cyan-400/[0.55] uppercase tracking-[0.3em] mb-3"
+							>
+								About & Experience
+							</p>
+							<h2
+								class="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+							>
+								Operations, architecture, and the <span
+									class="font-serif italic text-gradient bg-gradient-to-r from-cyan-400 to-blue-400"
+									>full stack.</span
+								>
+							</h2>
+							<p
+								class="text-sm md:text-base text-white/[0.50] leading-relaxed max-w-[38rem] mb-6"
+							>
+								From MSP operations, cybersecurity, and
+								Theory-of-Constraints strategy to PostgreSQL
+								entity graphs, Terraform cloud stacks,
+								production AI agents, and pro-bono nonprofit
+								rollouts.
+							</p>
+
+							<div class="flex items-center gap-2">
+								<span
+									class="text-xs font-mono text-white/[0.32] group-hover:text-cyan-400/70 transition-colors"
+									>Read my background, skills & shipped work</span
 								>
 								<svg
 									width="15"
@@ -590,6 +648,11 @@ const connectLinks = [
 					<div
 						class="flex items-center gap-5 text-[0.65rem] font-mono"
 					>
+						<a
+							href="/projects"
+							class="text-white/[0.32] hover:text-white/[0.64] transition-colors"
+							>Projects</a
+						>
 						<a
 							href="/about"
 							class="text-white/[0.32] hover:text-white/[0.64] transition-colors"

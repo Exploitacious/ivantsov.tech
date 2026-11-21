@@ -14,7 +14,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,18 +29,17 @@ const {
 			rel="stylesheet"
 		/>
 
-		{/* Theme before first paint, so a dark-mode visitor never sees a light
-		    flash. A saved choice wins; otherwise the OS preference decides. */}
+		{/* Theme before first paint, so nobody sees a flash of the wrong theme.
+		    Dark is the default (Alex, 2026-11-21: "Dark mode for sure") and is
+		    set on <html> in the markup, so it holds without JavaScript too; only
+		    a saved "light" choice from the nav toggle removes it. */}
 		<script is:inline>
 			(function () {
 				var saved = null;
 				try {
 					saved = localStorage.getItem("theme");
 				} catch (e) {}
-				var dark = saved
-					? saved === "dark"
-					: window.matchMedia("(prefers-color-scheme: dark)").matches;
-				if (dark) document.documentElement.dataset.theme = "dark";
+				if (saved === "light") delete document.documentElement.dataset.theme;
 			})();
 		</script>
 
@@ -63,9 +62,7 @@ const {
 				try {
 					saved = localStorage.getItem("theme");
 				} catch (e) {}
-				var dark = saved
-					? saved === "dark"
-					: window.matchMedia("(prefers-color-scheme: dark)").matches;
+				var dark = saved !== "light";
 				if (dark) document.documentElement.dataset.theme = "dark";
 				else delete document.documentElement.dataset.theme;
 			});

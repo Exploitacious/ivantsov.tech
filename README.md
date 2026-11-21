@@ -94,8 +94,8 @@ What that means in practice:
   they only ever sit on the dark band (nav, home hero, footer). The band is a
   neutral `#151515` sampled from the portrait's backdrop so the masked photo
   blends into the hero; change one and check the other.
-- The first visit follows the OS color scheme; the nav toggle saves a choice
-  to `localStorage`.
+- Dark is the default theme (Alex's call, 2026-11-21). The nav toggle can
+  switch to light and saves that choice to `localStorage`.
 - The categorical accent palette at the top of `src/styles/global.css` is
   declared but deliberately unused, kept for future tags and charts, one hue
   per view.

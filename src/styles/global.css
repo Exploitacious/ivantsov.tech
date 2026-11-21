@@ -6,8 +6,9 @@
    generated, so the site moved to a light paper ground with ink type and one
    deep-teal accent. The cyan brand mark keeps its own colors by living on the
    dark nav and footer bands, where #22d3ee and #dfeaf2 were designed to sit.
-   A dark theme ships beside it on the same tokens: the toggle in the nav sets
-   data-theme on <html>, and the first visit follows the OS preference.
+   A dark theme ships beside it on the same tokens and is the default
+   (Alex, 2026-11-21): Layout.astro sets data-theme="dark" before first
+   paint unless the nav toggle saved "light".
 
    Contrast, measured against --paper / dark --paper:
      --ink    ~15:1   body and headings

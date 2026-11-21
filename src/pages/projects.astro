@@ -105,8 +105,8 @@ const productionBuilds: ProjectItem[] = [
 	{
 		name: "Financial Signals & Market Intelligence Platform",
 		tag: "Full-Stack · Signals Intelligence",
-		body: "Over 2,500 commits of continuous engineering on a multi-service market analytics platform. A FastAPI backend pulls Schwab options chains (GEX, ZGL, PCR), FRED macro liquidity, dark pool DIX, price technicals, and AI-scored news sentiment on tiered 5-minute, 15-minute, and overnight schedules. It classifies market regimes, computes composite health scores, fires threshold alerts, serves an Astro SSR dashboard, exposes 13 task-oriented MCP tools for AI trading agents, and monitors itself with an isolated crash-loop watchdog sidecar.",
-		stack: ["Python", "FastAPI", "Astro SSR", "MCP", "Schwab API", "FRED"],
+		body: "Over 2,500 commits of continuous engineering on a multi-service market analytics platform. A FastAPI backend pulls live brokerage options chains (GEX, ZGL, PCR), macro liquidity feeds, dark pool positioning, price technicals, and AI-scored news sentiment on tiered 5-minute, 15-minute, and overnight schedules. It classifies market regimes, computes composite health scores, fires threshold alerts, serves an Astro SSR dashboard, exposes 13 task-oriented MCP tools for AI trading agents, and monitors itself with an isolated crash-loop watchdog sidecar.",
+		stack: ["Python", "FastAPI", "Astro SSR", "MCP", "Options Analytics", "Macro Data"],
 	},
 	{
 		name: "Enterprise MCP Platform & Cross-Vendor Entity Graph",
@@ -115,7 +115,7 @@ const productionBuilds: ProjectItem[] = [
 		stack: ["Python 3.12", "FastMCP", "PostgreSQL 16", "Alembic", "Terraform", "Docker"],
 	},
 	{
-		name: "Keystone: Client AI Discovery Platform",
+		name: "Client-Facing AI Discovery Platform",
 		tag: "Cloudflare Workers · Full-Stack",
 		body: "Took the local conversation engine from Hatchling and rebuilt it for the edge on Cloudflare Workers, Hono, D1, and Durable Objects. Staff issue unique links or phone-readable entry codes from an Access-gated React/Vite admin portal; clients complete guided Theory-of-Constraints interviews while the model writes structured intelligence files via tool calls. Per-session Durable Objects serialize turns and enforce budgets, while Turnstile and rate limits protect public entry.",
 		stack: ["TypeScript", "Hono", "Cloudflare Workers", "D1", "Durable Objects", "React"],
@@ -127,7 +127,7 @@ const productionBuilds: ProjectItem[] = [
 		stack: ["TypeScript", "Cloudflare Workers", "OAuth 2.1", "Microsoft Entra ID", "MCP", "D1"],
 	},
 	{
-		name: "Claude Fleet & Multi-Session Steering Stack",
+		name: "Multi-Account AI Fleet & Session Steering Stack",
 		tag: "Developer Tooling · Orchestration",
 		body: "Guardrailed account-rotation tooling for running heavy multi-agent Claude Code workloads without interrupting active sessions. Rotates independent work and personal seat fleets across 5-hour and 7-day usage windows using advisory credential locks and structural scope isolation so work and personal accounts can never cross, paired with a Tailscale-backed web session dashboard for steering active agent runs from a phone.",
 		stack: ["Python", "TypeScript", "Linux", "Tailscale", "Claude Code"],

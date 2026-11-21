@@ -1,17 +1,71 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
+/* ── Theme tokens ──
+   2026-11-21 redesign. The old look (blue-black ground, cyan shimmer on a
+   serif italic surname, floating orbs, glow rings, tilt cards) read as
+   generated, so the site moved to a light paper ground with ink type and one
+   deep-teal accent. The cyan brand mark keeps its own colors by living on the
+   dark nav and footer bands, where #22d3ee and #dfeaf2 were designed to sit.
+   A dark theme ships beside it on the same tokens and is the default
+   (Alex, 2026-11-21): Layout.astro sets data-theme="dark" before first
+   paint unless the nav toggle saved "light".
+
+   Contrast, measured against --paper / dark --paper:
+     --ink    ~15:1   body and headings
+     --muted  ~6.3:1  secondary prose, the "Advanced" skill tier
+     --accent ~4.8:1  links (light), cyan in dark
+     --faint  ~3.6:1  only large text or non-essential labels, never body */
+:root {
+  --paper: #f4f3ef;
+  --surface: #eae8e2;
+  --ink: #16181b;
+  --muted: #565a60;
+  --faint: #7b7f85;
+  --rule: #d5d2ca;
+  --accent: #0e7490;
+  /* Neutral, not blue-black: sampled from the studio portrait's backdrop
+     (#131313 to #1f1f1e) so the masked photo melts into the hero band. */
+  --band: #151515;
+  --band-ink: #e9e8e3;
+  --band-muted: #9a9e9c;
+  --band-rule: #2a2a2a;
+  --brand-cyan: #22d3ee;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --paper: #0f1112;
+  --surface: #171a1c;
+  --ink: #ecebe6;
+  --muted: #a3a6a3;
+  --faint: #7d817f;
+  --rule: #2a2e31;
+  --accent: #22d3ee;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-muted: var(--band-muted);
+  --color-band-rule: var(--band-rule);
+  --color-brand-cyan: var(--brand-cyan);
 }
 
 /* ── Categorical accent palette (Exploitacious/design-system tokens/accents.css) ──
    Declared in :root rather than @theme on purpose: these are reference tokens,
-   not utilities. Cyan still owns every interactive state and emerald owns
-   status, so generating `text-amber` etc. would only invite drift. Use one
-   categorical hue per view — never a rainbow — for tags, chart series and
-   one-off highlights. */
+   not utilities. Use one categorical hue per view, never a rainbow, for tags,
+   chart series and one-off highlights. */
 :root {
   --amber: #f59e0b;
   --amber-light: #fbbf24;
@@ -49,363 +103,172 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--paper);
 }
 
 /* ── Horizontal overflow guard ──
-   The pre-animation state of `.scroll-reveal.from-right` parks full-width
-   cards 48px to the right of the viewport, which made both pages 24px wider
-   than the screen at 390px and let the whole layout be dragged sideways.
    `clip` rather than `hidden` on purpose: `hidden` still creates a scroll
-   container, so the page stayed scrollable to the dead space (that is exactly
-   what the body `overflow-x-hidden` utility failed to prevent) — `clip` has
-   no scrollport, so the offset simply cannot be reached. It is set on `html`
-   because only the root's value is what clamps documentElement.scrollWidth;
-   the same declaration on `body` alone measured no change. Repeating it on
-   `body` keeps that element's overflow-y at `visible`; leaving the utility's
-   `hidden` there would compute overflow-y to `auto` and make body a second
-   scroll container, which breaks the window.scrollY progress bar.
-   Remove this and the reveal animations re-introduce sideways drag on
-   mobile. */
+   container, `clip` has no scrollport. Set on `html` because only the root's
+   value clamps documentElement.scrollWidth; repeated on `body` so body's
+   overflow-y stays `visible` and body never becomes a second scroll
+   container. Kept from the previous design: wide tables and long repo paths
+   must not let the page drag sideways on a 390px phone. */
 html,
 body {
   overflow-x: clip;
 }
 
-/* ── Scroll Reveal (base + directional variants) ── */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(28px);
+body {
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings run slightly condensed. Instrument Sans has a width axis
+   (75 to 100); 90 tightens long headings without the poster look of a
+   giant expanded wordmark. */
+.display {
+  font-variation-settings: "wdth" 90;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.prose-measure {
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+/* Links in running text: accent color, underline that thickens on hover. */
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-thickness 0.15s ease;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Visible keyboard focus everywhere, in the accent color. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Buttons: one solid, one quiet. Square-ish corners on purpose, the old
+   site's full pills were part of the generated look. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.15rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
   transition:
-    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition-delay: calc(var(--stagger, 0) * 100ms);
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.scroll-reveal.from-left {
-  transform: translateX(-48px);
+.btn-solid {
+  background: var(--ink);
+  color: var(--paper);
 }
 
-.scroll-reveal.from-right {
-  transform: translateX(48px);
+.btn-solid:hover {
+  background: var(--accent);
+  color: #ffffff;
 }
 
-.scroll-reveal.from-scale {
-  transform: scale(0.92);
+[data-theme="dark"] .btn-solid:hover {
+  color: #08090a;
 }
 
-.scroll-reveal.visible {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
+.btn-quiet {
+  border: 1px solid var(--rule);
+  color: var(--ink);
 }
 
-/* ── Divider Reveal ── */
-.divider-reveal {
-  transform: scaleX(0);
-  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.btn-quiet:hover {
+  border-color: var(--ink);
 }
 
-.divider-reveal.visible {
-  transform: scaleX(1);
+/* Buttons on the dark hero band. Cyan with near-black text measures about
+   11:1; the quiet one is an outline in the band's own rule color. */
+.btn-cyan {
+  background: var(--brand-cyan);
+  color: #08090a;
 }
 
-/* ── Hero Entrance ── */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(36px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-cyan:hover {
+  background: #67e8f9;
 }
 
-.hero-animate {
-  opacity: 0;
-  animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: calc(var(--delay, 0) * 1ms);
+.btn-band {
+  border: 1px solid #3a3f43;
+  color: var(--band-ink);
 }
 
-/* ── Profile Glow ── */
-@keyframes glowPulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 30px rgba(6, 182, 212, 0.2),
-      0 0 60px rgba(6, 182, 212, 0.06);
-  }
-  50% {
-    box-shadow:
-      0 0 45px rgba(6, 182, 212, 0.35),
-      0 0 90px rgba(6, 182, 212, 0.12);
-  }
+.btn-band:hover {
+  border-color: var(--band-ink);
 }
 
-.glow-ring {
-  animation: glowPulse 4s ease-in-out infinite;
+/* The studio portrait was shot on a dark backdrop close to --band, so its
+   edges are masked out and the photo reads as part of the band instead of
+   a framed picture. Desktop fades the left, right, and top edges and leaves the
+   bottom flush on the paper line; mobile stacks the photo above the name
+   and fades its bottom edge under the text. */
+.hero-portrait {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 98%);
 }
 
-/* ── Gradient Text Shimmer ── */
-@keyframes shimmer {
-  0%,
-  60% {
-    background-position: 200% center;
-  }
-  80%,
-  100% {
-    background-position: -200% center;
+@media (min-width: 768px) {
+  .hero-portrait {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 28%, #000 80%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 18%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 28%, #000 80%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 18%);
+    mask-composite: intersect;
   }
 }
 
-.text-shimmer {
-  background: linear-gradient(
-    90deg,
-    #22d3ee,
-    #7dd3fc,
-    #e0f2fe,
-    #7dd3fc,
-    #3b82f6,
-    #22d3ee,
-    #7dd3fc
-  );
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 8s ease-in-out infinite;
+/* Rows in the project index and connect list: the whole row answers the
+   pointer with a surface tint, no lift or glow. */
+.row-hover {
+  transition: background-color 0.15s ease;
 }
 
-/* ── Floating Orbs ── */
-@keyframes orbDrift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(40px, -30px) scale(1.05);
-  }
-  66% {
-    transform: translate(-25px, 25px) scale(0.97);
-  }
-}
-
-.orb {
-  animation: orbDrift 20s ease-in-out infinite;
-}
-
-/* ── Scroll Indicator ── */
-@keyframes scrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.25;
-  }
-  50% {
-    transform: translateY(8px);
-    opacity: 0.5;
-  }
-}
-
-.scroll-indicator {
-  animation: scrollBounce 2.4s ease-in-out infinite;
-}
-
-/* ── Card Hover ── */
-.card-hover {
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 48px -12px rgba(6, 182, 212, 0.1);
-}
-
-/* ── Card 3D Tilt ── */
-[data-tilt] {
-  transition:
-    transform 0.2s ease-out,
-    box-shadow 0.4s ease;
-}
-
-[data-tilt]:hover {
-  box-shadow: 0 20px 60px -15px rgba(6, 182, 212, 0.12);
-}
-
-/* ── Button Magnetic ── */
-.btn-magnetic {
-  transition:
-    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.btn-magnetic:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px -6px rgba(6, 182, 212, 0.3);
-}
-
-/* ── Gradient Text (non-shimmer fallback) ── */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ── Skill Pill Cascade ── */
-.skill-pill {
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  transition-delay: calc(0.35s + var(--pill-i, 0) * 20ms);
-}
-
-.visible .skill-pill {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Status Pulse ── */
-@keyframes statusPulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.4;
-    transform: scale(1.6);
-  }
-}
-
-.status-pulse {
-  animation: statusPulse 2s ease-in-out infinite;
-}
-
-/* ── Section Divider ── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(6, 182, 212, 0.15),
-    transparent
-  );
-}
-
-/* ── Navbar States ── */
-#navbar > div {
-  transition:
-    background 0.4s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-#navbar.scrolled > div {
-  background: rgba(10, 13, 20, 0.9);
-  border-color: rgba(6, 182, 212, 0.06);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(6, 182, 212, 0.03);
-}
-
-/* ── Card Glow Border ── */
-.card-glow {
-  position: relative;
-}
-
-.card-glow::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(6, 182, 212, 0.2),
-    transparent 40%,
-    transparent 60%,
-    rgba(14, 165, 233, 0.12)
-  );
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: -1;
-  filter: blur(10px);
-}
-
-.card-glow:hover::before {
-  opacity: 1;
-}
-
-/* ── Parallax image ── */
-[data-parallax] {
-  will-change: transform;
-  transition: transform 0.1s linear;
+.row-hover:hover {
+  background: var(--surface);
 }
 
 /* ── View Transitions ── */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
 }
 
-/* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal,
-  .scroll-reveal.from-left,
-  .scroll-reveal.from-right,
-  .scroll-reveal.from-scale {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  html {
+    scroll-behavior: auto;
   }
 
-  .divider-reveal {
-    transform: none;
-    transition: none;
-  }
-
-  .hero-animate {
-    opacity: 1;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none;
   }
 
-  .glow-ring {
-    animation: none;
-    box-shadow:
-      0 0 30px rgba(6, 182, 212, 0.2),
-      0 0 60px rgba(6, 182, 212, 0.06);
-  }
-
-  .text-shimmer {
-    animation: none;
-  }
-
-  .orb {
-    animation: none;
-  }
-
-  .scroll-indicator {
-    animation: none;
-  }
-
-  .card-hover,
-  .btn-magnetic,
-  [data-tilt] {
-    transition: none;
-  }
-
-  .skill-pill {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  [data-parallax] {
-    will-change: auto;
+  .link,
+  .btn,
+  .row-hover {
     transition: none;
   }
 }

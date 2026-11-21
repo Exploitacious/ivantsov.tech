@@ -5,7 +5,7 @@ interface Props {
 	currentPath?: string;
 }
 
-const { currentPath = "/" } = Astro.props;
+const { currentPath = "" } = Astro.props;
 
 const navLinks = [
 	{ label: "Home", href: "/" },
@@ -14,163 +14,141 @@ const navLinks = [
 ];
 ---
 
-<!-- Desktop nav (md+) -->
-<nav
-	id="navbar"
-	class:list={[
-		"fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 hidden md:block",
-		currentPath !== "/" && "scrolled",
-	]}
->
-	<div
-		class="flex items-center gap-7 rounded-full border border-white/[0.06] bg-[#0a0d14]/40 px-5 py-2.5 backdrop-blur-xl"
-	>
-		{/* aria-label keeps the accessible name the bare-text wordmark used to
-		    give this link; the lockup itself reads as "IVANTSOV TECH". */}
-		<a href="/" aria-label="ivantsov.tech">
-			<Brand markId="nav-desktop" size={18} wordmark={11} gap={8} />
+{/* A full-width dark band rather than the old floating glass pill. The cyan
+    IVA mark was drawn for a dark ground, so the band is where the brand
+    lives while the page itself is paper. */}
+<header class="sticky top-0 z-50 bg-band text-band-ink border-b border-band-rule">
+	<div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 md:px-8">
+		<a href="/" aria-label="ivantsov.tech home">
+			<Brand markId="nav" size={18} wordmark={11} gap={8} />
 		</a>
-		<div class="flex items-center gap-5">
+
+		<nav aria-label="Main" class="hidden md:flex items-center gap-7 text-sm">
 			{
 				navLinks.map((link) => (
 					<a
 						href={link.href}
+						aria-current={currentPath === link.href ? "page" : undefined}
 						class:list={[
-							"text-[0.65rem] font-medium transition-colors uppercase tracking-[0.18em]",
+							"py-1 transition-colors",
 							currentPath === link.href
-								? "text-cyan-400/70"
-								: "text-white/[0.56] hover:text-white/[0.78]",
+								? "text-band-ink border-b-2 border-brand-cyan"
+								: "text-band-muted hover:text-band-ink",
 						]}
 					>
 						{link.label}
 					</a>
 				))
 			}
-		</div>
-		<a
-			href="https://umbrellaitgroup.com/contact-us/"
-			target="_blank"
-			rel="noopener noreferrer"
-			class="btn-magnetic text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1.5 rounded-full whitespace-nowrap"
-		>
-			Work With Me
-		</a>
-	</div>
-</nav>
-
-<!-- Mobile top bar (<md) -->
-<header
-	class="md:hidden fixed top-0 left-0 right-0 z-50 px-5 py-3.5 bg-[#0a0d14]/80 backdrop-blur-xl border-b border-white/[0.04]"
->
-	<div class="flex items-center justify-between">
-		<a href="/" aria-label="ivantsov.tech">
-			<Brand markId="nav-mobile-bar" size={18} wordmark={11} gap={8} />
-		</a>
-		<button
-			id="menu-toggle"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
-			aria-label="Open menu"
-		>
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
+			<a
+				href="https://umbrellaitgroup.com/contact-us/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-band-muted hover:text-band-ink transition-colors"
 			>
-				<path d="M4 6h16M4 12h16M4 18h16"></path>
-			</svg>
-		</button>
+				Work with me
+			</a>
+			<button
+				type="button"
+				data-theme-toggle
+				class="w-8 h-8 -mr-1 flex items-center justify-center rounded text-band-muted hover:text-band-ink transition-colors"
+				aria-label="Switch to dark theme"
+			>
+				<svg data-icon-moon width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+				<svg data-icon-sun width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="hidden"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+			</button>
+		</nav>
+
+		<div class="flex md:hidden items-center gap-1">
+			<button
+				type="button"
+				data-theme-toggle
+				class="w-10 h-10 flex items-center justify-center rounded text-band-muted"
+				aria-label="Switch to dark theme"
+			>
+				<svg data-icon-moon width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+				<svg data-icon-sun width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="hidden"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+			</button>
+			<button
+				type="button"
+				id="menu-toggle"
+				class="w-10 h-10 flex items-center justify-center rounded text-band-ink"
+				aria-label="Open menu"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+			>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+			</button>
+		</div>
+	</div>
+
+	<div id="mobile-menu" class="md:hidden hidden border-t border-band-rule">
+		<nav aria-label="Main" class="flex flex-col px-5 py-3 text-lg">
+			{
+				navLinks.map((link) => (
+					<a
+						href={link.href}
+						aria-current={currentPath === link.href ? "page" : undefined}
+						class:list={[
+							"py-2.5",
+							currentPath === link.href ? "text-brand-cyan" : "text-band-ink",
+						]}
+					>
+						{link.label}
+					</a>
+				))
+			}
+			<a
+				href="https://umbrellaitgroup.com/contact-us/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="py-2.5 text-band-ink"
+			>
+				Work with me
+			</a>
+			<a href="mailto:alex@ivantsov.tech" class="py-2.5 text-band-muted text-base">
+				alex@ivantsov.tech
+			</a>
+		</nav>
 	</div>
 </header>
 
-<!-- Mobile fullscreen menu -->
-<div
-	id="mobile-menu"
-	class="md:hidden fixed inset-0 z-[55] bg-[#0a0d14]/[0.98] backdrop-blur-2xl opacity-0 pointer-events-none transition-opacity duration-300"
->
-	<!-- Close bar -->
-	<div class="flex items-center justify-between px-5 py-3.5">
-		<a href="/" aria-label="ivantsov.tech">
-			<Brand markId="nav-mobile-menu" size={18} wordmark={11} gap={8} />
-		</a>
-		<button
-			id="menu-close"
-			class="w-9 h-9 flex items-center justify-center rounded-lg text-white/[0.64] active:text-white/[0.78] transition-colors"
-			aria-label="Close menu"
-		>
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-			>
-				<path d="M18 6L6 18M6 6l12 12"></path>
-			</svg>
-		</button>
-	</div>
-
-	<!-- Centered links -->
-	<div
-		class="flex flex-col items-center justify-center h-[calc(100%-4rem)] gap-7"
-	>
-		{
-			navLinks.map((link) => (
-				<a
-					href={link.href}
-					class:list={[
-						"text-2xl font-semibold transition-colors",
-						currentPath === link.href
-							? "text-cyan-400"
-							: "text-white/[0.78]",
-					]}
-				>
-					{link.label}
-				</a>
-			))
-		}
-		<div class="w-10 h-px bg-white/10 my-1"></div>
-		<a
-			href="https://umbrellaitgroup.com/contact-us/"
-			target="_blank"
-			rel="noopener noreferrer"
-			class="text-sm font-semibold bg-cyan-600 text-white px-6 py-2.5 rounded-full"
-		>
-			Work With Me
-		</a>
-		<a
-			href="mailto:alex@ivantsov.tech"
-			class="text-sm text-white/[0.38] transition-colors"
-		>
-			alex@ivantsov.tech
-		</a>
-	</div>
-</div>
-
 <script>
-	const toggle = document.getElementById("menu-toggle");
-	const close = document.getElementById("menu-close");
-	const menu = document.getElementById("mobile-menu");
-
-	function openMenu() {
-		menu?.classList.remove("opacity-0", "pointer-events-none");
-		document.body.style.overflow = "hidden";
+	// Bound on astro:page-load because the ClientRouter replaces the body on
+	// every navigation, taking the old listeners with it.
+	function syncThemeButtons() {
+		const dark = document.documentElement.dataset.theme === "dark";
+		document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((btn) => {
+			btn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+			btn.querySelector("[data-icon-moon]")?.classList.toggle("hidden", dark);
+			btn.querySelector("[data-icon-sun]")?.classList.toggle("hidden", !dark);
+		});
 	}
 
-	function closeMenu() {
-		menu?.classList.add("opacity-0", "pointer-events-none");
-		document.body.style.overflow = "";
+	function initNav() {
+		syncThemeButtons();
+
+		document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const root = document.documentElement;
+				const dark = root.dataset.theme !== "dark";
+				if (dark) root.dataset.theme = "dark";
+				else delete root.dataset.theme;
+				try {
+					localStorage.setItem("theme", dark ? "dark" : "light");
+				} catch {}
+				syncThemeButtons();
+			});
+		});
+
+		const toggle = document.getElementById("menu-toggle");
+		const menu = document.getElementById("mobile-menu");
+		toggle?.addEventListener("click", () => {
+			const open = menu?.classList.toggle("hidden") === false;
+			toggle.setAttribute("aria-expanded", String(open));
+			toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+		});
 	}
 
-	toggle?.addEventListener("click", openMenu);
-	close?.addEventListener("click", closeMenu);
-
-	menu?.querySelectorAll("a").forEach((link) => {
-		link.addEventListener("click", closeMenu);
-	});
+	document.addEventListener("astro:page-load", initNav);
 </script>

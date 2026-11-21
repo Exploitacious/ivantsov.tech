@@ -1,0 +1,41 @@
+---
+import Brand from "./Brand.astro";
+
+// One footer for every page. Each page used to carry its own copy with a
+// slightly different link set; the home footer was the only one with all of
+// them.
+const links = [
+	{ label: "Projects", href: "/projects" },
+	{ label: "About", href: "/about" },
+	{ label: "GitHub", href: "https://github.com/Exploitacious", external: true },
+	{ label: "LinkedIn", href: "https://www.linkedin.com/in/alex-ivan-sov/", external: true },
+	{ label: "alex@ivantsov.tech", href: "mailto:alex@ivantsov.tech" },
+];
+---
+
+<footer class="bg-band text-band-ink mt-24">
+	<div class="mx-auto max-w-6xl px-5 md:px-8 py-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+		<div>
+			<a href="/" aria-label="ivantsov.tech home">
+				<Brand markId="footer" />
+			</a>
+			<p class="mt-3 text-sm text-band-muted">
+				&copy; {new Date().getFullYear()} Alex Ivantsov
+			</p>
+		</div>
+		<nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+			{
+				links.map((link) => (
+					<a
+						href={link.href}
+						target={link.external ? "_blank" : undefined}
+						rel={link.external ? "noopener noreferrer" : undefined}
+						class="text-band-muted hover:text-band-ink transition-colors"
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+</footer>

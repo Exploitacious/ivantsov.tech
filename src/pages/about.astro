@@ -10,26 +10,33 @@ import profileImage from "../assets/images/Alex.jpg";
 const arrowRight = "M5 12h14M12 5l7 7-7 7";
 
 // ── Proof / Scale Metrics ──
+// Every number here is checked against a source before it ships:
+//  - MCP servers: server directories in the MCP monorepo (35 on 2026-11-21).
+//  - Vendor platforms: sources merged by the entity graph's sync workers.
+//  - PowerShell scripts: .ps1 files in the RMM script library (268).
+//  - Upstream PRs: merged PRs by Exploitacious in CyberDrain/CIPP (19).
+// Star counts are left out on purpose: the most-starred public fork lives
+// under the employer's GitHub org, and counting it would name the employer.
 const scaleMetrics = [
 	{
 		value: "30+",
 		label: "Custom MCP Servers",
-		detail: "FastMCP & Cloudflare Workers",
+		detail: "Python FastMCP & edge Workers",
 	},
 	{
-		value: "130+",
-		label: "Entity Graph Migrations",
-		detail: "PostgreSQL 16 across 8+ APIs",
+		value: "8+",
+		label: "Vendor Platforms Unified",
+		detail: "One entity graph, one record",
 	},
 	{
 		value: "260+",
-		label: "Production RMM Scripts",
-		detail: "PowerShell & zero-touch ops",
+		label: "Production PowerShell Scripts",
+		detail: "Endpoint automation library",
 	},
 	{
-		value: "150+",
-		label: "Open-Source GitHub Stars",
-		detail: "MSP toolkits & maintained forks",
+		value: "19",
+		label: "Merged Upstream PRs",
+		detail: "Open-source M365 management",
 	},
 ];
 
@@ -53,11 +60,11 @@ const roles = [
 	},
 	{
 		title: "AI Platform & MCP Architecture",
-		body: "I build the production layer that connects language models to live operational tools. That includes over 30 custom FastMCP servers, a maintained open-source MetaMCP gateway fork, OAuth 2.1 Microsoft Entra connectors on Cloudflare Workers, and an autonomous Teams AI teammate backed by an immutable container safety floor and a git-synced brain repo. Every write tool previews changes before touching live state, verifies what landed with a read-back, and records an audit trail.",
+		body: "I build the production layer that connects language models to live operational tools: 30+ custom FastMCP servers, a self-hosted MCP gateway I maintain as an open-source fork, OAuth 2.1 connectors on Cloudflare Workers, and an AI teammate that works inside Microsoft Teams. Every write tool previews the change before it touches live state, reads back what actually landed, and leaves an audit trail.",
 	},
 	{
 		title: "Full-Stack Software & Cloud Infrastructure",
-		body: "I take internal platforms, web apps, and cloud environments from architecture through production deployment. My stack spans Terraform and SOPS/age GitOps on Linode and Cloudflare, PostgreSQL 16 entity graphs with 130+ migrations, FastAPI backends, Astro and React frontends, Electron desktop apps, and Grafana/Loki observability. There is no handoff wall between the application code and the infrastructure it runs on.",
+		body: "I take internal platforms, web apps, and cloud environments from architecture through production. My stack spans Terraform and GitOps deployment, PostgreSQL entity graphs, FastAPI backends, Astro and React frontends, Electron desktop apps, and Grafana/Loki observability. There is no handoff wall between the application code and the infrastructure it runs on.",
 	},
 ];
 
@@ -196,7 +203,6 @@ const skillCategories = [
 			"ChatGPT",
 			"Ollama / Local Models",
 			"Multi-Model Routing & Fallback",
-			"Cloudflare Turnstile & Rate-Limited AI Portals",
 		],
 	},
 	{
@@ -330,38 +336,18 @@ const highlights = [
 	},
 	{
 		label: "MCP & Entity Graph Architecture",
-		title: "Unified 8+ vendor platforms into one PostgreSQL entity graph and 30+ MCP servers.",
-		body: "I architected a production monorepo of 34 isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and VoIP, all routed behind our maintained open-source fork of the MetaMCP gateway. Underneath sits a PostgreSQL 16 entity graph spanning 130+ Alembic migrations that ingests and merges users, endpoints, cameras, network gear, and inventory across Autotask, IT Glue, NinjaRMM, CIPP/Intune, UniFi, Meraki, WatchGuard, and Domotz via MAC and identity resolution. Engineers and AI agents query one unified record instead of tabbing across ten vendor portals.",
-	},
-	{
-		label: "Autonomous Agents & v2 Alerting",
-		title: "Shipped a Teams-native AI teammate and a Postgres-backed alert pipeline.",
-		body: "I deployed an isolated production Hermes AI agent integrated directly into Microsoft Teams with tenant-gated message validation, an immutable safety floor baked into its container image, and a two-way git-synced brain repository for skills and institutional memory. Alongside it runs a v2 alerting and ticket-writing pipeline backed by a dedicated operational Postgres schema for alert deduplication, ticket memory, AI-assisted classification, and human-in-the-loop rule grading.",
-	},
-	{
-		label: "Edge AI Platform",
-		title: "Built a client-facing AI discovery portal on Cloudflare Workers.",
-		body: "Ported my open-source Hatchling conversation engine to the edge as a single Cloudflare Worker serving a public client portal and an Access-gated admin SPA. Staff generate unique links or phone-readable entry codes; clients complete guided Theory-of-Constraints discovery interviews while the model writes structured intelligence files through tool calls. Per-session Durable Objects serialize turns and enforce budgets, D1 stores every artifact, and Turnstile plus rate limiting guard the unauthenticated entry points.",
-	},
-	{
-		label: "Cloud & GitOps Infrastructure",
-		title: "Provisioned a zero-SSH production cloud with Terraform, SOPS/age, and Grafana.",
-		body: "I defined our multi-host Linode cloud environment in Terraform and cloud-init, fronted entirely by Cloudflare Tunnels and Access with SOPS/age-encrypted secrets stored in a separate vault repository. Pull-based systemd GitOps timers and Watchtower keep containers current straight from GHCR with no CI SSH keys anywhere. Paired it with a Grafana and Loki observability stack, provisioned LogQL alerts, and a 260+ script PowerShell RMM library for endpoint automation.",
+		title: "Unified 8+ vendor platforms into one entity graph and 30+ MCP servers.",
+		body: "I architected a monorepo of isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and voice, all routed through a self-hosted MCP gateway with scoped access. Underneath sits a PostgreSQL entity graph that merges users, endpoints, cameras, network gear, and inventory from 8+ vendor platforms through MAC address and identity resolution. Engineers and AI agents query one record instead of tabbing across ten vendor portals.",
 	},
 	{
 		label: "M365 Policy-as-Code & Open Source",
-		title: "Turned a 70+ hour Microsoft 365 tenant buildout into repeatable CIPP baselines.",
-		body: "Redesigned multi-tenant Microsoft 365 onboarding from a manual senior-engineer project into versioned, two-tier Conditional Access, Intune, Purview, and CIPP baseline templates that push cleanly to fresh tenants. When the open-source tools we depend on hit gaps, I ship fixes back upstream: maintaining our public MetaMCP fork with 37+ stars and contributing anti-phishing baseline improvements to CyberDrain's CIPP.",
+		title: "Turned a 70+ hour Microsoft 365 tenant buildout into repeatable baselines.",
+		body: "I redesigned multi-tenant Microsoft 365 onboarding from a manual senior-engineer project into versioned Conditional Access, Intune, and Purview baseline templates that apply cleanly to a fresh tenant. When the open-source tools I depend on hit gaps, I fix them upstream: 19 merged pull requests to CIPP, the open-source M365 management platform, covering baselines, alerting, identity templates, and SharePoint.",
 	},
 	{
 		label: "Pro-Bono Nonprofit AI Rollout",
-		title: "Led a regional nonprofit's Claude Team rollout and built Entra-backed OAuth 2.1 connectors.",
-		body: "Volunteered end-to-end technical leadership to roll out Claude Team across a local nonprofit, authoring their org instructions, shared skills, and staff governance playbook. Because their volunteer management platform had no native Claude integration, I engineered a split OAuth 2.1 authorization hub and Cloudflare Workers MCP connector suite federated to their Microsoft Entra ID tenant over private Service Bindings, complete with hourly refresh revocation, Durable Object write ledgers, preview-and-readback safety, D1 audit trails, and an admin kill-switch dashboard.",
-	},
-	{
-		label: "Internal Web Applications",
-		title: "Replaced legacy reports and spreadsheet quoting with custom Astro and React apps.",
-		body: "Built purpose-built web applications where off-the-shelf MSP tooling fell short: a VoIP Configure-Price-Quote SPA in Astro, React 19, and TypeScript with real-time seat tier bundling, margin math backed by 42 Vitest unit tests, and direct n8n webhook submission; a Theory-of-Constraints operational reporting dashboard replacing legacy PSA reports; and a custom WordPress connector plugin giving programmatic control over our marketing site.",
+		title: "Led a local nonprofit's AI rollout and built the connectors it was missing.",
+		body: "I volunteered technical leadership to roll out Claude across a local nonprofit: org instructions, shared skills, and a staff governance playbook. Their volunteer management platform had no AI integration, so I built an OAuth 2.1 MCP connector suite on Cloudflare Workers that signs staff in through their existing Microsoft identity. Every write is previewed, confirmed, read back, and logged.",
 	},
 ];
 ---
@@ -522,11 +508,10 @@ const highlights = [
 					Over the past few years that builder streak pulled me
 					deep into full-stack platform engineering and AI
 					infrastructure. On any given week I might ship Python
-					FastMCP servers, write Alembic migrations for a
-					cross-vendor PostgreSQL entity graph, maintain an
-					open-source MCP gateway fork, provision Linode and
-					Cloudflare infrastructure in Terraform, or deploy
-					TypeScript Workers with OAuth 2.1 federation and
+					FastMCP servers, evolve a cross-vendor PostgreSQL
+					entity graph, maintain an open-source MCP gateway,
+					provision cloud infrastructure in Terraform, or deploy
+					TypeScript services to the edge with OAuth 2.1 and
 					Durable Objects. I like owning the whole line from
 					strategy and schema design down to the container and
 					the alert rule.
@@ -756,11 +741,11 @@ const highlights = [
 					to messy problems.
 				</p>
 				<p class="text-sm text-white/[0.50] leading-relaxed">
-					That lab has grown into 30+ documented self-hosted
-					services and containerized agents, alongside a 2,500+
-					commit financial signals and options-analytics platform,
-					a personal design system, cross-platform dotfiles, and
-					pro-bono AI engineering for a local nonprofit. I learn
+					That lab now hosts my own fleet of containerized AI
+					agents, alongside a 2,500+ commit financial signals and
+					options-analytics platform, a personal design system,
+					cross-platform dotfiles, and pro-bono AI engineering for
+					a local nonprofit. I learn
 					best by putting real systems into production and living
 					with the consequences.
 				</p>

@@ -17,7 +17,15 @@ const arrowUpRight = "M7 17L17 7M17 7H7M17 7V17";
 //    config.json ships "DisableSecurityDefaults": true and the toolkit turns
 //    them off, so the baseline is described as Exchange/Entra hardening.
 //  - Private client names, internal hostnames, and unreleased upstream drafts
-//    stay out of public copy.
+//    stay out of public copy. Only merged upstream work is claimed.
+//  - Employer work is described at capability level, in first person, with no
+//    employer name, repo link, or security architecture (access gating, secret
+//    storage, network layout). The MetaMCP fork lives under the employer's
+//    GitHub org, so its card carries no link.
+//  - The list is curated, not exhaustive: a project earns a card when it shows
+//    something no other card does. Dropped on 2026-11-21: the dotfiles repo,
+//    the early scripts repo, internal quoting apps, the design system, and the
+//    seat-rotation tooling (it reads as usage-limit evasion on a resume).
 type ProjectItem = {
 	name: string;
 	tag: string;
@@ -53,12 +61,18 @@ const openSourceProjects: ProjectItem[] = [
 		linkLabel: "Exploitacious/OPS",
 	},
 	{
+		name: "CIPP Upstream Contributions",
+		tag: "Open Source · M365 Management",
+		body: "CIPP is the open-source platform a lot of MSPs use to manage Microsoft 365 tenants at scale. When I hit a defect in it, I fix it upstream instead of working around it locally: 19 merged pull requests so far, covering baseline overrides and imports, Conditional Access templates, alert delivery retries, Defender incident handling, per-tenant identity templates, and SharePoint recycle bin and access reporting.",
+		stack: ["PowerShell", "React", "Microsoft Graph", "Azure Functions"],
+		url: "https://github.com/CyberDrain/CIPP/pulls?q=is%3Apr+author%3AExploitacious+is%3Amerged",
+		linkLabel: "CyberDrain/CIPP merged PRs",
+	},
+	{
 		name: "MetaMCP Gateway (Maintained Fork)",
 		tag: "MCP Proxy · Open Source Fork",
-		body: "When the upstream MetaMCP gateway stalled for months, our entire production AI tool layer depended on it. Rather than wait, I maintained a public downstream fork carrying community pull requests plus our own hardening: deterministic tool ordering, connection pool reliability, session recovery, error-gated server visibility, and structured tool-call audit logging. Built to survive as a long-running self-hosted MCP gateway, now backed by 35+ stars and automated GHCR builds.",
+		body: "When the upstream MetaMCP gateway stalled for months, a production AI tool layer I run depended on it. Rather than wait, I maintain a public downstream fork that carries community pull requests plus my own hardening: deterministic tool ordering, connection-pool reliability, session recovery, error-gated server visibility, and structured tool-call audit logging. It has 35+ stars and automated container builds.",
 		stack: ["TypeScript", "Next.js", "Turborepo", "MCP", "Docker"],
-		url: "https://github.com/Umbrella-IT-Group/metamcp",
-		linkLabel: "Umbrella-IT-Group/metamcp",
 	},
 	{
 		name: "OneNote to Obsidian Migration Toolkit",
@@ -75,22 +89,6 @@ const openSourceProjects: ProjectItem[] = [
 		stack: ["Shell", "Proxmox LXC", "Tailscale", "Docker"],
 		url: "https://github.com/Exploitacious/agentfarm",
 		linkLabel: "Exploitacious/agentfarm",
-	},
-	{
-		name: "linuxploitacious",
-		tag: "Dotfiles · Cross-Platform Bootstrap",
-		body: "Every server, container, and workstation I touch gets the exact same shell environment in one run. This repository holds my symlinked zsh, bash, tmux, git, and security-tool configs alongside Linux and Windows provisioning scripts so a fresh machine lands with familiar muscle memory in minutes.",
-		stack: ["Shell", "PowerShell", "Zsh", "Tmux"],
-		url: "https://github.com/Exploitacious/linuxploitacious",
-		linkLabel: "Exploitacious/linuxploitacious",
-	},
-	{
-		name: "Windows_Toolz",
-		tag: "PowerShell · Endpoint Automation",
-		body: "My early open-source collection of Windows administration and MSP maintenance scripts (16 stars). It started as a way to stop repeating the same remediation steps across client endpoints and grew into the foundation for an internal RMM library now holding 260+ production PowerShell scripts.",
-		stack: ["PowerShell", "Windows Server", "RMM Automation"],
-		url: "https://github.com/Exploitacious/Windows_Toolz",
-		linkLabel: "Exploitacious/Windows_Toolz",
 	},
 ];
 
@@ -111,38 +109,20 @@ const productionBuilds: ProjectItem[] = [
 	{
 		name: "Enterprise MCP Platform & Cross-Vendor Entity Graph",
 		tag: "Production AI Infra · Data Engineering",
-		body: "A production monorepo of 34 isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and VoIP, fronted by our MetaMCP gateway on a Terraform-provisioned, zero-SSH cloud stack. Underneath runs a PostgreSQL 16 entity graph with 130+ Alembic migrations and scheduled API workers that unify people, devices, cameras, network gear, and inventory across 8+ vendor platforms via MAC and identity resolution.",
+		body: "A monorepo of 30+ isolated FastMCP servers covering PSA, RMM, documentation, M365, security, billing, networking, and voice, all behind a self-hosted MCP gateway with scoped access keys. Underneath runs a PostgreSQL entity graph with 130+ schema migrations and scheduled sync workers that unify people, devices, cameras, network gear, and inventory across 8+ vendor platforms through MAC address and identity resolution.",
 		stack: ["Python 3.12", "FastMCP", "PostgreSQL 16", "Alembic", "Terraform", "Docker"],
 	},
 	{
 		name: "Client-Facing AI Discovery Platform",
 		tag: "Cloudflare Workers · Full-Stack",
-		body: "Took the local conversation engine from Hatchling and rebuilt it for the edge on Cloudflare Workers, Hono, D1, and Durable Objects. Staff issue unique links or phone-readable entry codes from an Access-gated React/Vite admin portal; clients complete guided Theory-of-Constraints interviews while the model writes structured intelligence files via tool calls. Per-session Durable Objects serialize turns and enforce budgets, while Turnstile and rate limits protect public entry.",
+		body: "I took the conversation engine from Hatchling and rebuilt it for the edge on Cloudflare Workers, Hono, D1, and Durable Objects. Staff send a client a unique link or a short entry code; the client works through a guided Theory-of-Constraints interview while the model writes structured discovery notes through tool calls. Each session runs in its own Durable Object, which keeps turns in order and enforces a budget.",
 		stack: ["TypeScript", "Hono", "Cloudflare Workers", "D1", "Durable Objects", "React"],
 	},
 	{
 		name: "Nonprofit OAuth 2.1 MCP Connector Suite",
-		tag: "Pro-Bono Volunteer · Cloudflare Workers",
-		body: "Built for a regional nonprofit's Claude Team rollout to connect staff directly to a volunteer management platform with no native AI connector. Uses a split OAuth 2.1 authorization hub and per-platform resource Workers communicating over private Cloudflare Service Bindings, strictly federated to their Microsoft Entra ID tenant. Every write passes through a preview, confirmation, read-back, and Durable Object write ledger, paired with a D1 audit trail and an Access-gated admin kill-switch dashboard.",
+		tag: "Pro-Bono · Cloudflare Workers",
+		body: "Built for a local nonprofit's AI rollout, to connect staff to a volunteer management platform that had no AI connector of its own. A shared OAuth 2.1 authorization service fronts per-platform connectors, and staff sign in with the Microsoft identity they already have. Every write is previewed, confirmed, read back, and recorded in an audit ledger, and one switch can shut the whole suite off.",
 		stack: ["TypeScript", "Cloudflare Workers", "OAuth 2.1", "Microsoft Entra ID", "MCP", "D1"],
-	},
-	{
-		name: "Multi-Account AI Fleet & Session Steering Stack",
-		tag: "Developer Tooling · Orchestration",
-		body: "Guardrailed account-rotation tooling for running heavy multi-agent Claude Code workloads without interrupting active sessions. Rotates independent work and personal seat fleets across 5-hour and 7-day usage windows using advisory credential locks and structural scope isolation so work and personal accounts can never cross, paired with a Tailscale-backed web session dashboard for steering active agent runs from a phone.",
-		stack: ["Python", "TypeScript", "Linux", "Tailscale", "Claude Code"],
-	},
-	{
-		name: "VoIP CPQ Engine & Constraint Analytics Dashboard",
-		tag: "Internal Web Apps · Astro & React",
-		body: "Two focused operational web apps built to replace brittle spreadsheets and slow legacy PSA reports. The VoIP Configure-Price-Quote SPA pairs Astro 6, React 19, and a strict TypeScript pricing engine (42 Vitest unit tests) to calculate tiered MRC/NRC quotes and post directly to n8n webhooks. Alongside it, an Astro and Chart.js operational dashboard surfaces Theory-of-Constraints metrics directly from Autotask.",
-		stack: ["Astro", "React 19", "TypeScript", "Tailwind CSS", "Vitest", "Chart.js"],
-	},
-	{
-		name: "Personal Design System & Brand Architecture",
-		tag: "Design Engineering · Brand Tokens",
-		body: "The single source of truth behind ivantsov.tech and my personal tools. Defines the geometric IVA mark, wordmark lockups, dark surface ramp, white-alpha text hierarchy, categorical accent tokens, and motion curves as reusable CSS tokens, SVG assets, and React primitives so every personal project shares one coherent visual language.",
-		stack: ["Design Tokens", "CSS", "SVG", "React"],
 	},
 ];
 
